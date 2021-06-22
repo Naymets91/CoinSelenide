@@ -24,15 +24,18 @@ public class LotiPagePage extends Page {
     List<String> before = new ArrayList<>();
     List<String> after = new ArrayList<>();
 
+
+////////////////////////////////////////// createLot ////////////////////////////////////
+
     public void createLot() {
         $(By.id("create_lot")).click();
     }
 
 
     public void name(int ee, int en, int ru) {
-        create("title", ee);
-        create("___title[en]", en);
-        create("___title[ru]", ru);
+        createEE("title", ee);
+        createEN("___title[en]", en);
+        createRU("___title[ru]", ru);
         System.out.println();
     }
 
@@ -41,8 +44,8 @@ public class LotiPagePage extends Page {
         $(By.xpath("//div[@class='col-12']/textarea[1]")).sendKeys(randomStringEE(ee));
 //        System.out.println("Описание лота ee " + temp);
 
-        create("___description[en]", en);
-        create("___description[ru]", ru);
+        createEN("___description[en]", en);
+        createRU("___description[ru]", ru);
         System.out.println();
 
     }
@@ -118,10 +121,12 @@ public class LotiPagePage extends Page {
 
 
     public void buttonSave() {                // кнопка сохранить
+        parsName = $(By.xpath("//input[@id='article']")).getAttribute("value");
         $(By.xpath("//button[@type='submit']")).click();
-        sleep(5000);
         $(byText(parsName)).click();
     }
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -168,8 +173,6 @@ public class LotiPagePage extends Page {
 
 
     public void parsLotBefore() {
-//        $(By.xpath("//*[@id='dataTablesLot']/tbody/t")).click();
-
         before.add($(By.name("title")).getAttribute("value"));
         before.add($(By.name("___title[en]")).getAttribute("value"));
         before.add($(By.name("___title[ru]")).getAttribute("value"));
@@ -233,7 +236,7 @@ public class LotiPagePage extends Page {
         $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//a[4]")).click();
         $(By.xpath("//div[@class='modal modal-admin confirm-delete']//button")).should(visible).click();
 
-        tempBool = find(By.xpath("//*[text()='" + temp + "']"));
+        tempBool = finde(By.xpath("//*[text()='" + temp + "']"));
         // $(By.xpath("//*[text()='"+ temp +"']")).should(visible);
         if (tempBool != true) {
             System.out.println("Лот удалился");
@@ -267,13 +270,21 @@ public class LotiPagePage extends Page {
 
     ///////////////////////////////////////////////////////////////////////////////////
 
-    public void create(String name, int language) {
+    public void createEE(String name, int language) {
         $(By.name(name)).clear();
         $(By.name(name)).sendKeys(randomStringEE(language));
 //        System.out.println("Имя лота " + language + temp);
     }
-
-
+    public void createEN(String name, int language) {
+        $(By.name(name)).clear();
+        $(By.name(name)).sendKeys(randomStringEN(language));
+//        System.out.println("Имя лота " + language + temp);
+    }
+    public void createRU(String name, int language) {
+        $(By.name(name)).clear();
+        $(By.name(name)).sendKeys(randomStringRU(language));
+//        System.out.println("Имя лота " + language + temp);
+    }
     public int getRandomNumber(int a1, int b1) {
         int a = a1;
         int b = b1;

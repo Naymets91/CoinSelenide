@@ -4,12 +4,10 @@ import Pages.AdminPanelPage;
 import Pages.LotiPagePage;
 
 
+import Pages.MainPage;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import org.testng.annotations.*;
-
-import static com.codeborne.selenide.Selenide.*;
 
 
 public class Coins {
@@ -17,24 +15,26 @@ public class Coins {
     LotiPagePage lotiPg;
     AdminPanelPage adminPanelPg;
     Values values;
+    MainPage mainPg;
 
     @BeforeMethod
     public void setUp() {
         lotiPg = new LotiPagePage();
         adminPanelPg = new AdminPanelPage();
         values = new Values();
+        mainPg = new MainPage();
 
         Configuration.timeout = 6000;
        Configuration.startMaximized = true;
 //        Configuration.browserSize = "1920x1080";
         values.openHomePage();
         values.Login();
-        SwitchLanguage();
+        mainPg.SwitchLanguageRu();
     }
 
     @Test
     public void addLot() {
-        gotoAdminPanel();
+        mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
         lotiPg.createLot();
@@ -54,11 +54,12 @@ public class Coins {
         lotiPg.maxSafety();
         lotiPg.reve();
         lotiPg.safety();
+        lotiPg.parsLotAfter();
         lotiPg.buttonSave();
     }
     @Test
     public void editLot () {
-        gotoAdminPanel();
+        mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
         lotiPg.randomEditLot();
@@ -89,7 +90,7 @@ public class Coins {
 
     @Test
     public void deleteLot() {
-        gotoAdminPanel();
+        mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
         lotiPg.randomEditLot();
@@ -99,15 +100,7 @@ public class Coins {
 
 
 
-    private void SwitchLanguage() {
-        $(By.className("flag")).click();
-        $(By.xpath("//div[@class='nav-lang__list']/a[3]")).click();
-    }
 
-    private void gotoAdminPanel() {
-        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
-        $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();
-    }
 
 
 

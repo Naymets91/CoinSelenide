@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class Page {
 
-    public boolean find (By locator) {
+    public boolean finde (By locator) {
         try {
             $(locator);
             return true;
