@@ -1,1 +1,0 @@
-{"uuid":"a731b4d2-516e-402a-baaa-84ad8a8215a7","name":"Coins.setUp","children":["d6bf1fd6-43b8-4622-a978-727429a22137"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1623588162027,"stop":1623588172907}],"afters":[],"links":[],"start":1623588162026,"stop":1623588172908}
