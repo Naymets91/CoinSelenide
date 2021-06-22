@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class Values {
-    String userName = "1" ;
+    String userName = "" ;
     String pass = "";
     String homePage = "";
 
