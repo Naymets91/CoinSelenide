@@ -1,0 +1,1128 @@
+<html lang="ru" class="loaded"><head><style type="text/css" id="notify-bootstrap">.notifyjs-bootstrap-base {
+	font-weight: bold;
+	padding: 8px 15px 8px 14px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	white-space: nowrap;
+	padding-left: 25px;
+	background-repeat: no-repeat;
+	background-position: 3px 7px;
+}
+.notifyjs-bootstrap-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border-color: #EED3D7;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAtRJREFUeNqkVc1u00AQHq+dOD+0poIQfkIjalW0SEGqRMuRnHos3DjwAH0ArlyQeANOOSMeAA5VjyBxKBQhgSpVUKKQNGloFdw4cWw2jtfMOna6JOUArDTazXi/b3dm55socPqQhFka++aHBsI8GsopRJERNFlY88FCEk9Yiwf8RhgRyaHFQpPHCDmZG5oX2ui2yilkcTT1AcDsbYC1NMAyOi7zTX2Agx7A9luAl88BauiiQ/cJaZQfIpAlngDcvZZMrl8vFPK5+XktrWlx3/ehZ5r9+t6e+WVnp1pxnNIjgBe4/6dAysQc8dsmHwPcW9C0h3fW1hans1ltwJhy0GxK7XZbUlMp5Ww2eyan6+ft/f2FAqXGK4CvQk5HueFz7D6GOZtIrK+srupdx1GRBBqNBtzc2AiMr7nPplRdKhb1q6q6zjFhrklEFOUutoQ50xcX86ZlqaZpQrfbBdu2R6/G19zX6XSgh6RX5ubyHCM8nqSID6ICrGiZjGYYxojEsiw4PDwMSL5VKsC8Yf4VRYFzMzMaxwjlJSlCyAQ9l0CW44PBADzXhe7xMdi9HtTrdYjFYkDQL0cn4Xdq2/EAE+InCnvADTf2eah4Sx9vExQjkqXT6aAERICMewd/UAp/IeYANM2joxt+q5VI+ieq2i0Wg3l6DNzHwTERPgo1ko7XBXj3vdlsT2F+UuhIhYkp7u7CarkcrFOCtR3H5JiwbAIeImjT/YQKKBtGjRFCU5IUgFRe7fF4cCNVIPMYo3VKqxwjyNAXNepuopyqnld602qVsfRpEkkz+GFL1wPj6ySXBpJtWVa5xlhpcyhBNwpZHmtX8AGgfIExo0ZpzkWVTBGiXCSEaHh62/PoR0p/vHaczxXGnj4bSo+G78lELU80h1uogBwWLf5YlsPmgDEd4M236xjm+8nm4IuE/9u+/PH2JXZfbwz4zw1WbO+SQPpXfwG/BBgAhCNZiSb/pOQAAAAASUVORK5CYII=);
+}
+.notifyjs-bootstrap-success {
+	color: #468847;
+	background-color: #DFF0D8;
+	border-color: #D6E9C6;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAutJREFUeNq0lctPE0Ecx38zu/RFS1EryqtgJFA08YCiMZIAQQ4eRG8eDGdPJiYeTIwHTfwPiAcvXIwXLwoXPaDxkWgQ6islKlJLSQWLUraPLTv7Gme32zoF9KSTfLO7v53vZ3d/M7/fIth+IO6INt2jjoA7bjHCJoAlzCRw59YwHYjBnfMPqAKWQYKjGkfCJqAF0xwZjipQtA3MxeSG87VhOOYegVrUCy7UZM9S6TLIdAamySTclZdYhFhRHloGYg7mgZv1Zzztvgud7V1tbQ2twYA34LJmF4p5dXF1KTufnE+SxeJtuCZNsLDCQU0+RyKTF27Unw101l8e6hns3u0PBalORVVVkcaEKBJDgV3+cGM4tKKmI+ohlIGnygKX00rSBfszz/n2uXv81wd6+rt1orsZCHRdr1Imk2F2Kob3hutSxW8thsd8AXNaln9D7CTfA6O+0UgkMuwVvEFFUbbAcrkcTA8+AtOk8E6KiQiDmMFSDqZItAzEVQviRkdDdaFgPp8HSZKAEAL5Qh7Sq2lIJBJwv2scUqkUnKoZgNhcDKhKg5aH+1IkcouCAdFGAQsuWZYhOjwFHQ96oagWgRoUov1T9kRBEODAwxM2QtEUl+Wp+Ln9VRo6BcMw4ErHRYjH4/B26AlQoQQTRdHWwcd9AH57+UAXddvDD37DmrBBV34WfqiXPl61g+vr6xA9zsGeM9gOdsNXkgpEtTwVvwOklXLKm6+/p5ezwk4B+j6droBs2CsGa/gNs6RIxazl4Tc25mpTgw/apPR1LYlNRFAzgsOxkyXYLIM1V8NMwyAkJSctD1eGVKiq5wWjSPdjmeTkiKvVW4f2YPHWl3GAVq6ymcyCTgovM3FzyRiDe2TaKcEKsLpJvNHjZgPNqEtyi6mZIm4SRFyLMUsONSSdkPeFtY1n0mczoY3BHTLhwPRy9/lzcziCw9ACI+yql0VLzcGAZbYSM5CCSZg1/9oc/nn7+i8N9p/8An4JMADxhH+xHfuiKwAAAABJRU5ErkJggg==);
+}
+.notifyjs-bootstrap-info {
+	color: #3A87AD;
+	background-color: #D9EDF7;
+	border-color: #BCE8F1;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QYFAhkSsdes/QAAA8dJREFUOMvVlGtMW2UYx//POaWHXg6lLaW0ypAtw1UCgbniNOLcVOLmAjHZolOYlxmTGXVZdAnRfXQm+7SoU4mXaOaiZsEpC9FkiQs6Z6bdCnNYruM6KNBw6YWewzl9z+sHImEWv+vz7XmT95f/+3/+7wP814v+efDOV3/SoX3lHAA+6ODeUFfMfjOWMADgdk+eEKz0pF7aQdMAcOKLLjrcVMVX3xdWN29/GhYP7SvnP0cWfS8caSkfHZsPE9Fgnt02JNutQ0QYHB2dDz9/pKX8QjjuO9xUxd/66HdxTeCHZ3rojQObGQBcuNjfplkD3b19Y/6MrimSaKgSMmpGU5WevmE/swa6Oy73tQHA0Rdr2Mmv/6A1n9w9suQ7097Z9lM4FlTgTDrzZTu4StXVfpiI48rVcUDM5cmEksrFnHxfpTtU/3BFQzCQF/2bYVoNbH7zmItbSoMj40JSzmMyX5qDvriA7QdrIIpA+3cdsMpu0nXI8cV0MtKXCPZev+gCEM1S2NHPvWfP/hL+7FSr3+0p5RBEyhEN5JCKYr8XnASMT0xBNyzQGQeI8fjsGD39RMPk7se2bd5ZtTyoFYXftF6y37gx7NeUtJJOTFlAHDZLDuILU3j3+H5oOrD3yWbIztugaAzgnBKJuBLpGfQrS8wO4FZgV+c1IxaLgWVU0tMLEETCos4xMzEIv9cJXQcyagIwigDGwJgOAtHAwAhisQUjy0ORGERiELgG4iakkzo4MYAxcM5hAMi1WWG1yYCJIcMUaBkVRLdGeSU2995TLWzcUAzONJ7J6FBVBYIggMzmFbvdBV44Corg8vjhzC+EJEl8U1kJtgYrhCzgc/vvTwXKSib1paRFVRVORDAJAsw5FuTaJEhWM2SHB3mOAlhkNxwuLzeJsGwqWzf5TFNdKgtY5qHp6ZFf67Y/sAVadCaVY5YACDDb3Oi4NIjLnWMw2QthCBIsVhsUTU9tvXsjeq9+X1d75/KEs4LNOfcdf/+HthMnvwxOD0wmHaXr7ZItn2wuH2SnBzbZAbPJwpPx+VQuzcm7dgRCB57a1uBzUDRL4bfnI0RE0eaXd9W89mpjqHZnUI5Hh2l2dkZZUhOqpi2qSmpOmZ64Tuu9qlz/SEXo6MEHa3wOip46F1n7633eekV8ds8Wxjn37Wl63VVa+ej5oeEZ/82ZBETJjpJ1Rbij2D3Z/1trXUvLsblCK0XfOx0SX2kMsn9dX+d+7Kf6h8o4AIykuffjT8L20LU+w4AZd5VvEPY+XpWqLV327HR7DzXuDnD8r+ovkBehJ8i+y8YAAAAASUVORK5CYII=);
+}
+.notifyjs-bootstrap-warn {
+	color: #C09853;
+	background-color: #FCF8E3;
+	border-color: #FBEED5;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAABJlBMVEXr6eb/2oD/wi7/xjr/0mP/ykf/tQD/vBj/3o7/uQ//vyL/twebhgD/4pzX1K3z8e349vK6tHCilCWbiQymn0jGworr6dXQza3HxcKkn1vWvV/5uRfk4dXZ1bD18+/52YebiAmyr5S9mhCzrWq5t6ufjRH54aLs0oS+qD751XqPhAybhwXsujG3sm+Zk0PTwG6Shg+PhhObhwOPgQL4zV2nlyrf27uLfgCPhRHu7OmLgAafkyiWkD3l49ibiAfTs0C+lgCniwD4sgDJxqOilzDWowWFfAH08uebig6qpFHBvH/aw26FfQTQzsvy8OyEfz20r3jAvaKbhgG9q0nc2LbZxXanoUu/u5WSggCtp1anpJKdmFz/zlX/1nGJiYmuq5Dx7+sAAADoPUZSAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfdBgUBGhh4aah5AAAAlklEQVQY02NgoBIIE8EUcwn1FkIXM1Tj5dDUQhPU502Mi7XXQxGz5uVIjGOJUUUW81HnYEyMi2HVcUOICQZzMMYmxrEyMylJwgUt5BljWRLjmJm4pI1hYp5SQLGYxDgmLnZOVxuooClIDKgXKMbN5ggV1ACLJcaBxNgcoiGCBiZwdWxOETBDrTyEFey0jYJ4eHjMGWgEAIpRFRCUt08qAAAAAElFTkSuQmCC);
+}
+</style><style type="text/css" id="core-notify">.notifyjs-corner {
+	position: fixed;
+	margin: 5px;
+	z-index: 1050;
+}
+
+.notifyjs-corner .notifyjs-wrapper,
+.notifyjs-corner .notifyjs-container {
+	position: relative;
+	display: block;
+	height: inherit;
+	width: inherit;
+	margin: 3px;
+}
+
+.notifyjs-wrapper {
+	z-index: 1;
+	position: absolute;
+	display: inline-block;
+	height: 0;
+	width: 0;
+}
+
+.notifyjs-container {
+	display: none;
+	z-index: 1;
+	position: absolute;
+}
+
+.notifyjs-hidable {
+	cursor: pointer;
+}
+
+[data-notify-text],[data-notify-html] {
+	position: relative;
+}
+
+.notifyjs-arrow {
+	position: absolute;
+	z-index: 2;
+	width: 0;
+	height: 0;
+}</style></head><body class="vertical-layout vertical-menu-modern 2-columns footer-static menu-expanded pace-done" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div><div class="modal modal-admin confirm-sort">
+    <div class="overlay"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center;font-weight: 600;font-size: 16px;">
+                Сортировка
+            </div>
+            <div class="modal-body">
+                Лоты буду отсортированы. Вы уверены
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger confirm-sort-btn waves-effect waves-light">Сортировать</button>
+                <button type="button" class="btn btn-warning waves-effect waves-light modal-close">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-admin add-images">
+    <div class="overlay"></div>
+    <div class="modal-dialog" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div id="preloader" class="hidden">
+                <div class="loader">
+                    <div class="loader-inner line-spin-fade-loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <form id="update_image_form" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="PATCH">
+                <input type="hidden" ,="" name="_token" value="B7G2czi8Hf7CvaJAqAKjHquQxYghRFDrVvEWLwR7">
+                <input name="only_img" value="1" type="text" hidden="">
+
+                <div class="modal-header" style="text-align: center;font-weight: 600;font-size: 16px;">
+                    Загрузить фото                    <span>Лот (<span id="lot_article"></span>)</span>
+                    <span style="cursor: pointer; padding: 0 10px" class="modal-close">x</span>
+                </div>
+                <div class="modal-body">
+                    <span id="max_size_warning" class="text-danger hidden">Максимальный размер изображения 5MB</span>
+                    <span id="total_max_size_warning" class="text-danger hidden">(Максимальный общий размер изображений 10MB)</span>
+                    <div class="drop-images ui-sortable"></div>
+                    <div style="position: relative">
+                        <label style="bottom: -2px" class="glyphicon glyphicon-plus-sign text-primary" id="add-icon" for="add-block"><i class="fa fa-plus-square-o" aria-hidden="true"></i></label>
+                        <input type="file" class="add-photo hidden  add-block-foto" id="add-block" onchange="uploadURL(this)" accept="image/*" multiple="">
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: center">
+                    <button type="submit" class="btn btn-warning add-images-btn waves-effect waves-light">Сохранить</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var totalImagesSize = 0;
+    function uploadURL(input) {
+        $('#max_size_warning').addClass('hidden');
+        $('#total_max_size_warning').addClass('hidden');
+        if (input.files) {
+            let filesArr = input.files;
+
+            var totalSize = 0;
+            for (let i = 0; i < filesArr.length; i++) {
+                if (filesArr[i].size > 5 * 1024 * 1024) {
+                    $('#max_size_warning').removeClass('hidden');
+                    return $(input).val('');
+                }
+                totalSize += filesArr[i].size;
+            }
+            if (totalSize + totalImagesSize > 10 * 1024 * 1024) {
+                $('#total_max_size_warning').removeClass('hidden');
+                return $(input).val('');
+            }
+            totalImagesSize += totalSize;
+
+            if (filesArr) {
+                for (let i = 0, f; f = filesArr[i]; i++) {
+                    var reader = new FileReader();
+                    reader.onloadend = function (output) {
+                        addImages(output, filesArr[i]);
+                    };
+                    reader.readAsDataURL(f)
+                }
+            }
+        }
+    }
+
+    function addImages(e, file) {
+        var d = document.createElement('div');
+        var x = document.createElement('input');
+        $(x).attr("name", "photo[]");
+        $(x).attr("type", "file");
+        $(x).addClass("hidden");
+
+        let dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        $(x).prop('files', dataTransfer.files);
+
+        $(d).addClass('image-block')
+            .html(`<div class="image__wrapp"><img src="${e.target.result}" alt=""> </div>
+                     <i class="fa fa-times glyphicon-remove" aria-hidden="true" onclick="removeImage(this)"></i>`)
+            .append(x);
+        $('.drop-images').append(d);
+    }
+
+    function removeImage(item) {
+        var files = $(item).closest('.image-block').find('input')[0].files
+        if (files)
+            totalImagesSize -= files[0].size;
+        $(item).closest('.image-block').remove();
+    }
+</script>
+
+
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://coins.dd-dev.club/image/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://coins.dd-dev.club/image/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://coins.dd-dev.club/image/favicon-16x16.png">
+    <meta name="csrf-token" content="B7G2czi8Hf7CvaJAqAKjHquQxYghRFDrVvEWLwR7">
+
+    <title>Лоты - Coins.ee</title>
+
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.min.css" integrity="sha256-EhmqrzYSImS7269rfDxk4H+AHDyu/KwV1d8FDgIXScI=" crossorigin="anonymous">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://coins.dd-dev.club/admin/fonts/dejavue/stylesheet.css">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="https://coins.dd-dev.club/admin/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://coins.dd-dev.club/admin/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://coins.dd-dev.club/admin/vendors/css/forms/select/select2.min.css">
+
+
+
+
+    
+
+        <!-- BEGIN: Theme CSS-->
+    
+    <link rel="stylesheet" type="text/css" href="https://coins.dd-dev.club/assets/css/admin.min.css?id=1623936949">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+    
+    
+
+
+	
+	<!-- BEGIN: Main Menu-->
+	<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="https://coins.dd-dev.club/admin/dashboard">
+                    <div class="brand-logo"></div>
+                    <h2 class="brand-text mb-0">Coins.ee</h2>
+                </a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content ps">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+
+                <li class="nav-item">
+                    <a href="https://coins.dd-dev.club/admin/dashboard">
+                        <i class="feather icon-home"></i>
+                        <span class="menu-title">Рабочий стол</span>
+                    </a>
+                </li>
+                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-user"></i>
+                        <span class="menu-title">Пользователи</span>
+                    </a>
+                    <ul class="menu-content">
+                                                                        <li class="has-sub">
+                            <a href="#">
+                                <i class="feather icon-sliders"></i>
+                                <span class="menu-title">Клиенты</span>
+                            </a>
+                            <ul class="menu-content">
+                                                                <li>
+                                    <a href="https://coins.dd-dev.club/admin/customers">
+                                        <i class="feather icon-circle"></i>
+                                        <span class="menu-item">Клиенты</span>
+                                    </a>
+                                </li>
+                                                                                                                            </ul>
+                        </li>
+                                            </ul>
+                </li>
+
+                                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-mail"></i>
+                        <span class="menu-title">Рассылка</span>
+                    </a>
+                    <ul class="menu-content">
+                                                <li>
+                            <a href="https://coins.dd-dev.club/admin/mail">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Рассылка новостей</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/subscribers">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">База e-mail</span>
+                            </a>
+                        </li>
+                                            </ul>
+                </li>
+                
+                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-bar-chart"></i>
+                        <span class="menu-title">Аукционы</span>
+                    </a>
+                    <ul class="menu-content">
+                                                <li>
+                            <a href="https://coins.dd-dev.club/admin/auctions">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Аукционы</span>
+                            </a>
+                        </li>
+                                                                        <li>
+                            <a href="https://coins.dd-dev.club/admin/lots">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Лоты</span>
+                            </a>
+                        </li>
+                                                                        <li>
+                            <a href="https://coins.dd-dev.club/admin/lots/deliverer">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Лоты Сдатчика</span>
+                            </a>
+                        </li>
+                                                                        <li>
+                            <a href="https://coins.dd-dev.club/admin/bids">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Ставки</span>
+                            </a>
+                        </li>
+                                                                        <li>
+                            <a href="https://coins.dd-dev.club/admin/leaders">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Лидеры</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/winners">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Победители</span>
+                            </a>
+                        </li>
+                                                
+                                                                    </ul>
+                </li>
+
+                                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-help-circle"></i>
+                        <span class="menu-title">Информация</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/news">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Новости</span>
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/pages">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Помощь</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                                                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-copy"></i>
+                        <span class="menu-title">Импорт / Экспорт</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/parser/tasks">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Задачи</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/export">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Экспорт</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/numisbid">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Экспорт Numis</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/sixbid">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Экспорт Sixbid</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/biddr">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Экспорт Biddr</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/bid-inside">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Экспорт BidInside</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                
+                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="feather icon-settings"></i>
+                        <span class="menu-title">Настройки</span>
+                    </a>
+                    <ul class="menu-content">
+                                                <li>
+                            <a href="https://coins.dd-dev.club/admin/sliders">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Банера</span>
+                            </a>
+                        </li>
+                                                                        <li>
+                            <a href="https://coins.dd-dev.club/admin/categories">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Категории</span>
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://coins.dd-dev.club/admin/certification">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Сертификации</span>
+                            </a>
+                        </li>
+
+                                                <li class="has-sub">
+                            <a href="#">
+                                <i class="feather icon-sliders"></i>
+                                <span class="menu-title">Фильтры</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li>
+                                    <a href="https://coins.dd-dev.club/admin/period">
+                                        <i class="feather icon-circle"></i>
+                                        <span class="menu-item">Периоды</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://coins.dd-dev.club/admin/nominal">
+                                        <i class="feather icon-circle"></i>
+                                        <span class="menu-item">Номинал</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://coins.dd-dev.club/admin/material">
+                                        <i class="feather icon-circle"></i>
+                                        <span class="menu-item">Материал</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                                                <li>
+                            <a href="https://coins.dd-dev.club/admin/countries">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Страны</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://coins.dd-dev.club/admin/deliveries">
+                                <i class="feather icon-circle"></i>
+                                <span class="menu-item">Доставка</span>
+                            </a>
+                        </li>
+                        
+
+                    </ul>
+                </li>
+                
+            </ul>
+        </ul>
+    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+</div>-
+	<!-- END: Main Menu-->
+
+	<!-- BEGIN: Content-->
+	<div class="app-content content">
+
+		<!-- BEGIN: Header-->
+		<div class="content-overlay"></div>
+		<div class="header-navbar-shadow"></div>
+		<div class="header-navbar-shadow"></div>
+		<nav style="height: 63px" class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+    <div class="navbar-wrapper">
+        <div class="navbar-container content">
+            <div class="navbar-collapse" id="navbar-mobile">
+                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs is-active" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav bookmark-icons">
+                        <li class="nav-item d-none d-lg-block">
+                            <a class="nav-link" href="https://coins.dd-dev.club" data-toggle="tooltip" data-placement="top">
+                                Перейти на сайт                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="nav navbar-nav float-right">
+
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <div class="user-nav d-sm-flex d-none">
+                                <span class="user-name text-bold-600">user_01114</span>
+                                <span class="user-status">on-line</span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="https://coins.dd-dev.club/auth/logout">
+                                <i class="feather icon-power"></i>
+                                Выход                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- /.navbar-header -->
+
+		<!-- END: Header-->
+
+		<div class="content-wrapper">
+			<div class="content-header row">
+			</div>
+			
+			<div class="content-body">
+				<!-- Dashboard Analytics Start -->
+				
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Лоты</h1>
+        </div>
+    </div>
+    
+    <div class="content-body">
+
+        <section id="basic-datatable">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label for="auction">Выберите аукцион</label>
+                                                <select id="auction_id" class="form-control" required="" name="auction"><option value="52" selected="selected">Аукцион №vfvfv (ID 52) fbfbfbf</option><option value="49">Аукцион №66 (ID 49) Oksjon 66</option><option value="48">Аукцион №65 (ID 48) Oksjon 65</option><option value="47">Аукцион №62 (ID 47) Serega Test Seregaа</option><option value="46">Аукцион №61 (ID 46) Oksjon 61</option><option value="34">Аукцион №51 (ID 34) 51</option><option value="32">Аукцион №50 (ID 32) test 50</option><option value="31">Аукцион №49 (ID 31) Oksjon 49</option></select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label for="selling_status">Выберите статус</label>
+                                                <select class="form-control" name="selling_status" id="selling_status">
+                                                                                                            <option value="all">Все лоты</option>
+                                                                                                            <option value="all_not_sold">Все непроданные</option>
+                                                                                                            <option value="sold_to_customer">Купил клиент</option>
+                                                                                                            <option value="not_sold_to_customer">Не купил клиент</option>
+                                                                                                            <option value="won_by_bot">Выиграл бот</option>
+                                                                                                    </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label for="image_status">Статус фото в лоте</label>
+                                                <select class="form-control" name="image_status" id="image_status">
+                                                        <option value="all_lots">Все лоты</option>
+                                                        <option value="with_photo">Лоты с фото</option>
+                                                        <option value="no_photo">Лоты без фото</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2" style="display: flex">
+                                                <div class="tooltips">
+                                                    <span class="tooltiptext tooltiptext-block">Впишите артикул лота с которого начать загрузку фото в лоты</span>
+                                                    <label for="images_upload">Добавление фото в лоты</label>
+                                                    <input class="form-control" name="images_upload" id="images_upload" placeholder="артикул лота">
+                                                </div>
+                                                <a class="btn btn-info waves-effect waves-light images-upload-btn" title="Загрузить фото"><i style="pointer-events: none;" class="fa fa-upload"></i></a>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a style="margin-top: 18px; padding: 12px 10px;" id="create_lot" class="btn btn-primary navbar-btn form-control waves-effect waves-light" href="#"><i class="fa fa-plus"></i> Добавить лот</a>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a id="lots_sort" style="margin-top: 18px; padding: 12px 10px;" class="btn btn-success waves-effect waves-light"><i class="fa fa-plus"></i> Сортировать</a>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+
+                                            <div id="dataTablesLot_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTablesLot_length"><label>Show <select name="dataTablesLot_length" aria-controls="dataTablesLot" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option><option value="500">500</option><option value="1000">1,000</option><option value="-1">All</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTablesLot_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTablesLot"></label></div></div></div><div class="row"><div class="col-sm-12"><table class="table zero-configuration no-footer dataTable" id="dataTablesLot" role="grid" aria-describedby="dataTablesLot_info" style="position: relative; width: 1535px;">
+                                                <thead>
+                                                <tr role="row"><th class="reorder sorting_asc" tabindex="0" aria-controls="dataTablesLot" rowspan="1" colspan="1" aria-label="Номер: activate to sort column descending" style="width: 156px;" aria-sort="ascending">Номер</th><th class="sorting" tabindex="0" aria-controls="dataTablesLot" rowspan="1" colspan="1" aria-label="Название: activate to sort column ascending" style="width: 219px;">Название</th><th class="sorting" tabindex="0" aria-controls="dataTablesLot" rowspan="1" colspan="1" aria-label="Категория: activate to sort column ascending" style="width: 509px;">Категория</th><th class="sorting" tabindex="0" aria-controls="dataTablesLot" rowspan="1" colspan="1" aria-label="Артикул: activate to sort column ascending" style="width: 182px;">Артикул</th><th width="200px" class="btn_column sorting_disabled" rowspan="1" colspan="1" aria-label="Действие" style="width: 201px;">Действие</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr role="row" class="odd"><td class="reorder sorting_1">1</td><td>iinlmarrhüžn</td><td>Jelizaveta Petrovna (1741-1762)</td><td>vfvfv-1</td><td><div style="display:flex"><input class="entity_id" type="hidden" value="25568">
+<a style="margin-right: 10px; color: #ffffff" class="btn table-btn_ico btn-info waves-effect waves-light btn-upload" title="Загрузить фото">
+    <i style="pointer-events: none;" class="fa fa-upload"></i>
+</a><a class="btn table-btn_ico btn-warning waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/25568/edit" data-toggle="tooltip" title="" data-original-title="Изменить"><i style="pointer-events: none;" class="fa fa-pencil"></i></a>
+<a style="margin-left: 10px;" class="btn table-btn_ico btn-success waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/copy/25568" data-toggle="tooltip" title="" data-original-title="Копировать">
+<i style="pointer-events: none;" class="fa fa-files-o"></i></a><input class="entity_id" type="hidden" value="25568">
+<a style="margin-left: 10px; color: #ffffff" class="btn table-btn_ico btn-danger waves-effect waves-light btn-delete" data-toggle="tooltip" title="Удалить">
+    <i style="pointer-events: none;" class="fa fa-times"></i>
+</a></div></td></tr><tr role="row" class="even"><td class="reorder sorting_1">2</td><td>iinlmarrhüžn</td><td>Jelizaveta Petrovna (1741-1762)</td><td>vfvfv-2</td><td><div style="display:flex"><input class="entity_id" type="hidden" value="25569">
+<a style="margin-right: 10px; color: #ffffff" class="btn table-btn_ico btn-info waves-effect waves-light btn-upload" title="Загрузить фото">
+    <i style="pointer-events: none;" class="fa fa-upload"></i>
+</a><a class="btn table-btn_ico btn-warning waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/25569/edit" data-toggle="tooltip" title="" data-original-title="Изменить"><i style="pointer-events: none;" class="fa fa-pencil"></i></a>
+<a style="margin-left: 10px;" class="btn table-btn_ico btn-success waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/copy/25569" data-toggle="tooltip" title="" data-original-title="Копировать">
+<i style="pointer-events: none;" class="fa fa-files-o"></i></a><input class="entity_id" type="hidden" value="25569">
+<a style="margin-left: 10px; color: #ffffff" class="btn table-btn_ico btn-danger waves-effect waves-light btn-delete" data-toggle="tooltip" title="Удалить">
+    <i style="pointer-events: none;" class="fa fa-times"></i>
+</a></div></td></tr><tr role="row" class="odd"><td class="reorder sorting_1">3</td><td>iinlmarrhüžn</td><td>Peeter II (1727-1729)</td><td>vfvfv-3</td><td><div style="display:flex"><input class="entity_id" type="hidden" value="25570">
+<a style="margin-right: 10px; color: #ffffff" class="btn table-btn_ico btn-info waves-effect waves-light btn-upload" title="Загрузить фото">
+    <i style="pointer-events: none;" class="fa fa-upload"></i>
+</a><a class="btn table-btn_ico btn-warning waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/25570/edit" data-toggle="tooltip" title="" data-original-title="Изменить"><i style="pointer-events: none;" class="fa fa-pencil"></i></a>
+<a style="margin-left: 10px;" class="btn table-btn_ico btn-success waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/copy/25570" data-toggle="tooltip" title="" data-original-title="Копировать">
+<i style="pointer-events: none;" class="fa fa-files-o"></i></a><input class="entity_id" type="hidden" value="25570">
+<a style="margin-left: 10px; color: #ffffff" class="btn table-btn_ico btn-danger waves-effect waves-light btn-delete" data-toggle="tooltip" title="Удалить">
+    <i style="pointer-events: none;" class="fa fa-times"></i>
+</a></div></td></tr><tr role="row" class="even"><td class="reorder sorting_1">4</td><td>iinlmarrhüžn</td><td>Peeter II (1727-1729)</td><td>vfvfv-4</td><td><div style="display:flex"><input class="entity_id" type="hidden" value="25571">
+<a style="margin-right: 10px; color: #ffffff" class="btn table-btn_ico btn-info waves-effect waves-light btn-upload" title="Загрузить фото">
+    <i style="pointer-events: none;" class="fa fa-upload"></i>
+</a><a class="btn table-btn_ico btn-warning waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/25571/edit" data-toggle="tooltip" title="" data-original-title="Изменить"><i style="pointer-events: none;" class="fa fa-pencil"></i></a>
+<a style="margin-left: 10px;" class="btn table-btn_ico btn-success waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/copy/25571" data-toggle="tooltip" title="" data-original-title="Копировать">
+<i style="pointer-events: none;" class="fa fa-files-o"></i></a><input class="entity_id" type="hidden" value="25571">
+<a style="margin-left: 10px; color: #ffffff" class="btn table-btn_ico btn-danger waves-effect waves-light btn-delete" data-toggle="tooltip" title="Удалить">
+    <i style="pointer-events: none;" class="fa fa-times"></i>
+</a></div></td></tr><tr role="row" class="odd"><td class="reorder sorting_1">5</td><td>iinlmarrhüžn</td><td>Jelizaveta Petrovna (1741-1762)</td><td>vfvfv-5</td><td><div style="display:flex"><input class="entity_id" type="hidden" value="25572">
+<a style="margin-right: 10px; color: #ffffff" class="btn table-btn_ico btn-info waves-effect waves-light btn-upload" title="Загрузить фото">
+    <i style="pointer-events: none;" class="fa fa-upload"></i>
+</a><a class="btn table-btn_ico btn-warning waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/25572/edit" data-toggle="tooltip" title="" data-original-title="Изменить"><i style="pointer-events: none;" class="fa fa-pencil"></i></a>
+<a style="margin-left: 10px;" class="btn table-btn_ico btn-success waves-effect waves-light" href="https://coins.dd-dev.club/admin/lots/copy/25572" data-toggle="tooltip" title="" data-original-title="Копировать">
+<i style="pointer-events: none;" class="fa fa-files-o"></i></a><input class="entity_id" type="hidden" value="25572">
+<a style="margin-left: 10px; color: #ffffff" class="btn table-btn_ico btn-danger waves-effect waves-light btn-delete" data-toggle="tooltip" title="Удалить">
+    <i style="pointer-events: none;" class="fa fa-times"></i>
+</a></div></td></tr></tbody>
+                                            </table><div id="dataTablesLot_processing" class="dataTables_processing card" style="display: none;">Processing...</div></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTablesLot_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTablesLot_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTablesLot_previous"><a href="#" aria-controls="dataTablesLot" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTablesLot" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="dataTablesLot_next"><a href="#" aria-controls="dataTablesLot" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+				<!-- Dashboard Analytics end -->
+
+			</div>
+		</div>
+
+	</div>
+	<!-- END: Content-->
+
+	<!-- BEGIN: Footer-->
+	<footer class="footer footer-static footer-light">
+		<p class="clearfix blue-grey lighten-2 mb-0" style="text-align: center"><span class="d-block d-md-inline-block mt-25">COPYRIGHT © 2021<a class="text-bold-800 grey darken-2" href="coins.ee" target="_blank">Coins.ee,</a>All rights Reserved</span>
+		</p>
+	</footer>
+	<!-- END: Footer-->
+
+    <div class="loader-wrapp hidden">
+        <div class="loader "></div>
+        <div class="loader-overlay"></div>
+    </div>
+
+    <div class="modal modal-admin confirm-delete">
+    <div class="overlay"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center;font-weight: 600;font-size: 16px;">
+                Удалить
+            </div>
+            <div class="modal-body">
+                Подтвердите удаление
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger confirm-delete-btn waves-effect waves-light">Удалить</button>
+                <button type="button" class="btn btn-warning waves-effect waves-light modal-close">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>    <!-- BEGIN: Vendor JS-->
+    <script src="https://coins.dd-dev.club/admin/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+        <script src="https://coins.dd-dev.club/admin/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="https://coins.dd-dev.club/admin/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="https://coins.dd-dev.club/admin/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="https://coins.dd-dev.club/admin/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="https://coins.dd-dev.club/admin/vendors/js/forms/select/select2.full.min.js"></script>
+    
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+
+    <script src="https://coins.dd-dev.club/admin/js/core/app-menu.js"></script>
+    <script src="https://coins.dd-dev.club/admin/js/core/app.js"></script>
+    <script src="https://coins.dd-dev.club/admin/js/scripts/components.js"></script>
+    
+    <!-- END: Theme JS-->
+
+    <script src="https://coins.dd-dev.club/assets/js/admin.min.js?id=1623936949"></script>
+    
+        <script src="https://coins.dd-dev.club/socket.io/socket.io.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.5/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.5/css/rowReorder.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            getImagesUploadStatus();
+
+            var table = getLots(getFilterParams());
+
+            table.on('row-reorder', function (e, diff, edit) {
+                var result = {};
+
+                for (var i = 0, ien = diff.length; i < ien; i++) {
+                    var rowData = table.row(diff[i].node).data();
+                    result[i] = {
+                        "lot": {
+                            "auction": '52',
+                            "id": rowData.id,
+                            "number": rowData.number,
+                            "new": diff[i].newData,
+                            "old": diff[i].oldData
+                        }
+                    };
+                }
+                $.ajaxSetup({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                });
+                $.ajax({
+                    cache: false,
+                    type: 'POST',
+                    data: {data: result},
+                    url: 'https://coins.dd-dev.club/admin/lots/reorder',
+                    success: function (data) {
+                        table.destroy();
+                        table = getLots(getFilterParams());
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+            });
+
+
+            var user_id = " 1114 ";
+            if (user_id) {
+                user_id = user_id.trim();
+                user_id = parseInt(user_id);
+            }
+            var _token = " 922fbc6818acc2269ed7296fbcce5cf0 ";
+            _token = _token.trim();
+            // var socket = io.connect(getSocketIp());
+
+            $('.btn-smm').click(function (e) {
+                e.preventDefault();
+                var but = $(this);
+                $.ajaxSetup({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                });
+                $.ajax({
+                    cache: false,
+                    //timeout: 8000,
+                    type: 'POST',
+                    data: {id: $(this).attr('lot_id')},
+                    url: 'https://coins.dd-dev.club/admin/off_bot',
+                    success: function (data) {
+                        if (data == 1) {
+                            socket.emit('resetAuction', {
+                                customer_id: parseInt(user_id),
+                                hash: _token,
+                                auction_id: parseInt($(but).attr('auction_id'))
+                            });
+                            $(but).css('display', 'none');
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+
+            //delete row
+
+            $(document).on('click', '.btn-delete', function () {
+                let lot_id = $(this).parent().find('.entity_id').val();
+                $('.confirm-delete').css({display: 'block'})
+
+                $('.confirm-delete-btn').on('click', function () {
+                    $('.confirm-delete').css({display: 'none'})
+                    $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                    });
+                    $.ajax({
+                        cache: false,
+                        type: 'POST',
+                        data: {},
+                        url: 'https://coins.dd-dev.club/admin/lots/destroy' + '/' + lot_id,
+                        success: function (data) {
+                            $('.notifyjs-wrapper').remove();
+                            $.notify("Лот успешно удалён", 'success');
+                            location.href = getAuctionId();
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                })
+            })
+            $('#auction').change(function () {
+                window.location.href = 'https://coins.dd-dev.club/admin/lots/' + $('#auction').find('option:selected').val();
+            });
+            $('#model').on('click', function () {
+                window.location.href = 'https://coins.dd-dev.club/admin/lots/deleted';
+            });
+
+            $('#clear_all').on('click', function () {
+                window.location.href = 'https://coins.dd-dev.club/admin/lots/clear/all';
+            });
+
+            $(document).on('click', '#lots_sort', function () {
+                $('.confirm-sort').css({display: 'block'})
+
+                $('.confirm-sort-btn').on('click', function () {
+                    let auctionId = getAuctionId();
+                    $('.confirm-sort').css({display: 'none'})
+                    $.ajax({
+                        cache: false,
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/admin/lots/sort/' + auctionId,
+
+                        success: function (data) {
+                            table.destroy();
+                            table = getLots(getFilterParams());
+                            $('.notifyjs-wrapper').remove();
+                            $.notify("Лоты успешно отсортированы", 'success');
+                        },
+                        error: function (err) {
+
+                        }
+                    });
+                });
+            });
+
+            $('#auction_id').change(function () {
+
+                table.destroy();
+                table = getLots(getFilterParams());
+
+            });
+
+            $('#selling_status').change(function () {
+
+                table.destroy();
+                table = getLots(getFilterParams());
+
+            });
+
+            $('#image_status').change(function () {
+                table.destroy();
+                table = getLots(getFilterParams());
+            });
+
+            $('#create_lot').on('click', function () {
+                window.location = 'https://coins.dd-dev.club/admin/lots/create?auction_id=' + $('#auction_id').val()
+            })
+
+            let lot_id;
+
+            $(document).on('click', '.btn-upload', function () {
+                $('.add-images').css('display', 'block');
+                $('#preloader').removeClass('hidden');
+                $('.drop-images').html('');
+                $('#add-block').val(null);
+                lot_id = $(this).parent().find('.entity_id').val();
+                $('#update_image_form').attr('action', 'https://coins.dd-dev.club/admin/lots/' + lot_id);
+                $.ajax({
+                    url: '/admin/lots/getLotImages',
+                    type: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        lotId: lot_id
+                    },
+                    success: function (data) {
+                        data.images.map(function (image) {
+                            $('.drop-images').append('<div class="image-block">' +
+                                '<div class="image__wrapp"><img src="https://coins.dd-dev.club/images/uploads/lots/250/' + image + '" alt=""></div>' +
+                                '<i class="fa fa-times glyphicon-remove" aria-hidden="true" onclick="removeImage(this)"></i>' +
+                                '<input type="text" value="' + image + '" class="add-photo hidden" name="photo[]" accept="image/*"></div>')
+                        })
+                        $('#lot_article').text(data.article);
+                        $('#preloader').addClass('hidden');
+                    }
+                });
+            });
+
+            $('#update_image_form').on('submit',(function(e) {
+                e.preventDefault();
+                $('#preloader').removeClass('hidden');
+                $('.add-images-btn').addClass('disabled');
+                var formData = new FormData(this);
+                $.ajax({
+                    url: 'https://coins.dd-dev.club/admin/lots/' + lot_id,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $('#preloader').addClass('hidden');
+                        $('.add-images').css('display', 'none');
+                        $('.notifyjs-wrapper').remove();
+                        $.notify("Изображения успешно сохранены", 'success');
+                        $('.add-images-btn').removeClass('disabled');
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }));
+
+            $('.drop-images').sortable();
+        });
+        function getAuctionId() {
+            let auctionId = $('#auction_id').val();
+            return typeof auctionId === "undefined" ? 0 : auctionId;
+        }
+
+        function getFilterParams() {
+            return {
+                auction_id: $('#auction_id').val(),
+                selling_status: $('#selling_status').val(),
+                image_status: $('#image_status').val()
+            };
+        }
+        function getLots(params) {
+
+            return $('#dataTablesLot').DataTable({
+                rowReorder: {
+                    dataSrc: 'number',
+                    selector: 'tr'
+                },
+                columnDefs: [
+                    {orderable: true, className: 'reorder', targets: 0},
+                    {orderable: false, targets: '_all'},
+                    {
+                        "targets": [0],
+                        "visible": true,
+                        "searchable": false
+                    }
+                ],
+                pageLength: 500,
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: '/admin/lots/getLots',
+                    type: "POST",
+                    data: params,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                },
+
+                lengthMenu: [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "All"]],
+
+                columns: [
+                    {data: 'number', name: 'number', orderable: true, searchable: true},
+                    // {data: 'id', name: 'numidber', orderable: false, searchable: false},
+                    {data: 'title', name: 'title', orderable: true, searchable: true},
+                    {data: 'category_name', name: 'category_name', orderable: true, searchable: true},
+                    // {data: 'auction_id', name: 'auction_id', orderable: false, searchable: false},
+                    {data: 'article', name: 'article', orderable: true, searchable: true},
+                    // {data: 'count_view', name: 'count_view', orderable: false, searchable: false},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ],
+            });
+        }
+
+        $('#images_upload').on('keypress', function () {
+            $('#images_upload').css('border-color', '');
+        })
+
+        $('.images-upload-btn').on('click', function () {
+            var article = $('#images_upload').val();
+            if (!article)
+                return $('#images_upload').css('border-color', 'red');
+            $.ajax({
+                url: 'https://coins.dd-dev.club/admin/import/lots/images?article=' + article,
+                type: 'GET',
+                success: function () {
+                    $('.images-upload-btn').addClass('disabled').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                error: function (err) {
+                    // console.log(err);
+                }
+            })
+        })
+
+        setInterval(getImagesUploadStatus, 30000)
+
+        function getImagesUploadStatus() {
+            $.ajax({
+                url: 'https://coins.dd-dev.club/admin/import/lots/images',
+                type: 'GET',
+                success: function (data) {
+                    if (data && data.message == 'upcoming') {
+                        return $('.images-upload-btn').addClass('disabled').html('<i class="fa fa-spinner fa-spin"></i>');
+                    }
+                    $('.images-upload-btn').removeClass('disabled').html('<i style="pointer-events: none;" class="fa fa-upload"></i>');
+                },
+                error: function (err) {
+                    // console.log(err);
+                }
+            })
+        }
+    </script>
+    <!-- BEGIN: Page JS-->
+        <!-- END: Page JS-->
+    <script src="https://coins.dd-dev.club/admin/js/scripts/datatables/datatable.js"></script>
+    <script src="https://coins.dd-dev.club/admin/js/scripts/cropper.js"></script>
+    <script src="https://coins.dd-dev.club/admin/js/scripts/custom_drop.js"></script>
+
+    <script type="text/javascript" src="https://coins.dd-dev.club/assets/selectize/selectize.js"></script>
+    <script type="text/javascript" src="https://coins.dd-dev.club/assets/selectize/main.js"></script>
+    
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    // $(document).ready(function() {
+    //     $('#dataTables-example').DataTable({
+    //             responsive: true,
+    //         "order": [[ 1, "desc" ]]
+    //     });
+    //     $('.datetimepicker').datetimepicker({
+    //
+    //         lang: 'ru',
+    //         minDate:'-1970/01/01'//yesterday is minimum date(for today use 0 or -1970/01/01)
+    //
+    //     });
+    //
+    //     $('#categories').multiselect({
+    //     buttonContainer: '<div></div>'
+    //     });
+    // });
+
+    $(document).on('click', '.modal-close', function () {
+         $('.modal').css({display: 'none'})
+    });
+
+    function getSocketIp() {
+        // if (location.href.indexOf('127.0.0.1') != -1)
+        //     return 'http://localhost:81';
+        // if (location.href.indexOf('v2.aurora') != -1)
+        //     return 'http://v2.coins.ee:83';
+        // return 'http://coins.ee:81'
+        return "https://coins.dd-dev.club"
+    }
+
+    window.getSocketIp = getSocketIp;
+    </script>
+
+
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS && TrackJS.install({
+        token: "4c3d06fdad6c4a93b61e0faccbd8432b"
+        // for more configuration options, see https://docs.trackjs.com
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>
