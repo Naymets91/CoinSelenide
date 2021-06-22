@@ -1,6 +1,7 @@
 
 import Config.Values;
 import Pages.AdminPanelPage;
+import Pages.AuctionsPage;
 import Pages.LotiPagePage;
 
 
@@ -11,7 +12,7 @@ import org.testng.annotations.*;
 
 
 public class Coins {
-
+    AuctionsPage auctionsPg;
     LotiPagePage lotiPg;
     AdminPanelPage adminPanelPg;
     Values values;
@@ -23,6 +24,7 @@ public class Coins {
         adminPanelPg = new AdminPanelPage();
         values = new Values();
         mainPg = new MainPage();
+        auctionsPg =new AuctionsPage();
 
         Configuration.timeout = 6000;
        Configuration.startMaximized = true;
@@ -57,6 +59,9 @@ public class Coins {
         lotiPg.parsLotAfter();
         lotiPg.buttonSave();
     }
+
+
+
     @Test
     public void editLot () {
         mainPg.gotoAdminPanel();
@@ -98,7 +103,32 @@ public class Coins {
     }
 
 
+@Test
+    public void addAuctions() {
+       mainPg.gotoAdminPanel();
+       adminPanelPg.auctions();
+       adminPanelPg.auctionAdd();
+       auctionsPg.create();
+       auctionsPg.number();
+       auctionsPg.name();
+//       auctionsPg.descrintion(20,30,25);
+       auctionsPg.dateStart("2021/06/22 20:00");
+       auctionsPg.dateFinish("2021/06/26 23:00");
+       auctionsPg.intervalEnd();
+       auctionsPg.prolongation();
+       auctionsPg.currency();
+       auctionsPg.statys();
+       auctionsPg.buttonSave();
+    }
 
+    @Test
+    public void deleteAuctions() {
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.auctionAdd();
+        auctionsPg.randomEditorAuction();
+        auctionsPg.delete();
+    }
 
 
 

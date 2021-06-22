@@ -14,8 +14,11 @@ public class AdminPanelPage extends Page {
     }
 
     public void loti () {
-//        $(By.xpath("//li[@class='open']//li")).click();
-        open("https://coins.dd-dev.club/admin/lots/");
+        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();
+    }
+
+    public void auctionAdd() {
+        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click();
     }
 }
 
