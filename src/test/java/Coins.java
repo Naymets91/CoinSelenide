@@ -33,8 +33,7 @@ public class Coins {
     }
 
     @Test
-    public void addLot()throws InterruptedException  {
-
+    public void addLot() {
         gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
@@ -56,7 +55,6 @@ public class Coins {
         lotiPg.reve();
         lotiPg.safety();
         lotiPg.buttonSave();
-        sleep(15000);
     }
     @Test
     public void editLot () {

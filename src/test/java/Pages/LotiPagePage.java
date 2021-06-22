@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class LotiPagePage extends Page {
@@ -117,6 +116,7 @@ public class LotiPagePage extends Page {
 
     public void buttonSave() {                // кнопка сохранить
         $(By.xpath("//button[@type='submit']")).click();
+        sleep(5000);
         $(byText(parsName)).click();
     }
 
