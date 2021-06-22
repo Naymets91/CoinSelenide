@@ -87,7 +87,14 @@ public class Coins {
 
     }
 
-
+    @Test
+    public void deleteLot() {
+        gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.loti();
+        lotiPg.randomEditLot();
+        lotiPg.delete();
+    }
 
 
 

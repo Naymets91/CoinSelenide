@@ -9,17 +9,20 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.visible;
 
 
 public class LotiPagePage extends Page {
+    boolean tempBool;
+
     String temp;
     String parsName;
 
     Integer size;
     Integer sizeRandom;
 
-    List<String> before  = new ArrayList<>();
-    List<String> after  = new ArrayList<>();
+    List<String> before = new ArrayList<>();
+    List<String> after = new ArrayList<>();
 
     public void createLot() {
         $(By.id("create_lot")).click();
@@ -119,6 +122,8 @@ public class LotiPagePage extends Page {
         sleep(5000);
         $(byText(parsName)).click();
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ///////////////////////////////////////////////             EditLot          /////////////////////////////////
 
@@ -129,7 +134,7 @@ public class LotiPagePage extends Page {
         if (size == 0) {
             createLot();
             name(12, 10, 8);
-            descrintion(190, 50, 60);
+            descrintion(20, 12, 10);
             sender();
             country();
             category();
@@ -145,6 +150,11 @@ public class LotiPagePage extends Page {
             reve();
             safety();
             buttonSave();
+            $(By.xpath("//tr[@class='odd']")).click();
+            size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
+            sizeRandom = getRandomNumber(1, size);
+            System.out.println("Вибрано лот " + sizeRandom);
+
         } else {
             sizeRandom = getRandomNumber(1, size);
             System.out.println("Вибрано лот для редагування " + sizeRandom);
@@ -182,7 +192,7 @@ public class LotiPagePage extends Page {
         before.add($(By.name("safety")).getAttribute("value"));
 
         System.out.println(before.size());
-        for(String s : before) {
+        for (String s : before) {
             System.out.println(s);
         }
     }
@@ -209,54 +219,50 @@ public class LotiPagePage extends Page {
         after.add($(By.id("is_rare")).getSelectedText());
         after.add($(By.name("safety")).getAttribute("value"));
         System.out.println(after.size());
-        for(String s : after) {
+        for (String s : after) {
             System.out.println(s);
         }
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
-//    public List<String> pars() {
-//        List<String> group = new ArrayList<>();
-//        group.add($(By.name("title")).getAttribute("value"));
-//        group.add($(By.name("___title[en]")).getAttribute("value"));
-//        group.add($(By.name("___title[ru]")).getAttribute("value"));
-//        group.add($(By.xpath("//div[@class='col-12']/textarea[1]")).getAttribute("value"));
-//        group.add($(By.name("___description[en]")).getAttribute("value"));
-//        group.add($(By.name("___description[ru]")).getAttribute("value"));
-//        group.add($(By.name("deliverer_id")).getSelectedText());
-//        group.add($(By.name("country_id")).getSelectedText());
-//        group.add($(By.name("category_id")).getSelectedText());
-//        group.add($(By.id("year")).getAttribute("value"));
-//        group.add($(By.name("min_price")).getAttribute("value"));
-//        group.add($(By.name("start_price")).getAttribute("value"));
-////        group.add($(By.name("material_id")).getSelectedText());
-////        group.add($(By.name("nominal_id")).getSelectedText());
-////        group.add($(By.name("period_id")).getSelectedText());
-////        group.add($(By.id("top_lot")).getSelectedText());
-////        group.add($(By.name("certification_id")).getSelectedText());
-////        group.add($(By.id("is_max_safety")).getSelectedText());
-////        group.add($(By.id("is_rare")).getSelectedText());
-////        group.add($(By.name("safety")).getAttribute("value"));
-//
-//        return group;
-//    }
+/////////////////////////////////////////// delete Lote///////////////////////////////////
+
+    public void delete() {
+        temp = $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//td[4]")).getText();
+        System.out.println(temp);
+        $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//a[4]")).click();
+        $(By.xpath("//div[@class='modal modal-admin confirm-delete']//button")).should(visible).click();
+
+        tempBool = find(By.xpath("//*[text()='" + temp + "']"));
+        // $(By.xpath("//*[text()='"+ temp +"']")).should(visible);
+        if (tempBool != true) {
+            System.out.println("Лот удалился");
+        } else {
+            System.out.println("Лот не удалился");
+            $(By.xpath("//*[@id='t']/t")).click();  // чтоб тест упал когда найден удаляемый лот
+        }
+        System.out.println(tempBool);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        public void equalsLot(){
-            System.out.println(before.size());
-            for(int i = 0; i < before.size(); i++){
-                for(int j = 0; j < before.size(); j++){
-                    if(before.get(i).equals(after.get(j)) != true){
-                        System.out.println("Элемент " + i +
-                                " первого массива равен элементу " + j + " второго массива.");
-                    }else{
-                        System.out.println("Элемент " + i +
-                                " первого массива не равен элементу " + j + " второго массива.");
-                    }
+
+    public void equalsLot() {
+        System.out.println(before.size());
+        for (int i = 0; i < before.size(); i++) {
+            for (int j = 0; j < before.size(); j++) {
+                if (before.get(i).equals(after.get(j)) != true) {
+                    System.out.println("Элемент " + i +
+                            " первого массива равен элементу " + j + " второго массива.");
+                } else {
+                    System.out.println("Элемент " + i +
+                            " первого массива не равен элементу " + j + " второго массива.");
                 }
             }
         }
-
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////
@@ -316,7 +322,6 @@ public class LotiPagePage extends Page {
 //        temp = $(By.name(nameId)).getSelectedText();
 //        System.out.println(printName + "     " + temp);
     }
-
 
 
 }

@@ -7,3 +7,4 @@ target/test-classes/Coins.class
 target/test-classes/Config/Values.class
 target/test-classes/Pages/LotiPagePage.class
 *.class
+*.class
