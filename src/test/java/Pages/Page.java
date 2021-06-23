@@ -1,12 +1,28 @@
 package Pages;
 
+import Config.Values;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class Page {
+
+    public void openHomePage() {
+        open("https://coins.dd-dev.club/");
+    }
+
+    public void Login() {
+        $(By.className("btn-yel")).click();
+        $(By.name("email")).sendKeys(Values.client_email);
+        $(By.name("password")).sendKeys(Values.client_password);
+        $(By.className("btn-modal")).click();
+    }
+
+
 
 
     public void createEE(String name, int language) {

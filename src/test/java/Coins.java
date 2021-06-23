@@ -1,36 +1,32 @@
 
 import Config.Values;
-import Pages.AdminPanelPage;
-import Pages.AuctionsPage;
-import Pages.LotiPagePage;
+import Pages.*;
 
 
-import Pages.MainPage;
 import com.codeborne.selenide.Configuration;
 
 import org.testng.annotations.*;
 
 
-public class Coins {
+public class Coins extends Page {
+
     AuctionsPage auctionsPg;
     LotiPagePage lotiPg;
     AdminPanelPage adminPanelPg;
-    Values values;
     MainPage mainPg;
 
     @BeforeMethod
     public void setUp() {
         lotiPg = new LotiPagePage();
         adminPanelPg = new AdminPanelPage();
-        values = new Values();
         mainPg = new MainPage();
         auctionsPg =new AuctionsPage();
 
         Configuration.timeout = 6000;
        Configuration.startMaximized = true;
 //        Configuration.browserSize = "1920x1080";
-        values.openHomePage();
-        values.Login();
+        openHomePage();
+        Login();
         mainPg.SwitchLanguageRu();
     }
 
