@@ -1,5 +1,4 @@
 
-import Config.Values;
 import Pages.*;
 
 
@@ -26,8 +25,14 @@ public class Coins extends Page {
        Configuration.startMaximized = true;
 //        Configuration.browserSize = "1920x1080";
         openHomePage();
-        Login();
         mainPg.SwitchLanguageRu();
+//        LoginUser();
+    }
+
+    @Test
+    public void correct2FALogin() {
+        LoginAdmin();
+        mainPg.gotoAdminPanel();
     }
 
     @Test
