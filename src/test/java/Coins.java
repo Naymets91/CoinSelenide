@@ -13,6 +13,8 @@ public class Coins extends Page {
     LotiPagePage lotiPg;
     AdminPanelPage adminPanelPg;
     MainPage mainPg;
+    LimitCashPage limitCashPg;
+    LoginPage loginPg;
 
     @BeforeMethod
     public void setUp() {
@@ -20,8 +22,10 @@ public class Coins extends Page {
         adminPanelPg = new AdminPanelPage();
         mainPg = new MainPage();
         auctionsPg =new AuctionsPage();
+        limitCashPg = new LimitCashPage();
+        loginPg = new LoginPage();
 
-        Configuration.timeout = 6000;
+        Configuration.timeout = 20000;
        Configuration.startMaximized = true;
 //        Configuration.browserSize = "1920x1080";
         openHomePage();
@@ -29,14 +33,15 @@ public class Coins extends Page {
 //        LoginUser();
     }
 
-    @Test
+    @Test                                             // Тест двойной аутеннтификации
     public void correct2FALogin() {
-        LoginAdmin();
+        loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
     }
 
-    @Test
+    @Test                                             // Добавить лот
     public void addLot() {
+        loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
@@ -63,8 +68,9 @@ public class Coins extends Page {
 
 
 
-    @Test
+    @Test                                       // Изменение лотав
     public void editLot () {
+        loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
@@ -94,8 +100,9 @@ public class Coins extends Page {
 
     }
 
-    @Test
+    @Test                                       // Удаление лотов
     public void deleteLot() {
+        loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
@@ -103,9 +110,9 @@ public class Coins extends Page {
         lotiPg.delete();
     }
 
-
-@Test
-    public void addAuctions() {
+@Test                                           // Создание аукциона
+    public void createAuctions() {
+    loginPg.loginAdmin();
        mainPg.gotoAdminPanel();
        adminPanelPg.auctions();
        adminPanelPg.auctionAdd();
@@ -122,8 +129,9 @@ public class Coins extends Page {
        auctionsPg.buttonSave();
     }
 
-    @Test
+    @Test                                       // Удаление аукциона
     public void deleteAuctions() {
+        loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.auctionAdd();
@@ -132,7 +140,24 @@ public class Coins extends Page {
     }
 
 
-
+    @Test                                       // Изменение кредитного лимита
+    public  void editLimit() {
+        loginPg.loginUser();
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAut(6);
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.acceptNewCash();
+//        limitCashPg.goToHomePage();
+        loginPg.logAut(7);
+        loginPg.loginUser();
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCash();
+    }
 
 
 

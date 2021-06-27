@@ -9,44 +9,15 @@ import org.openqa.selenium.WebDriver;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class Page {
-
+    Integer size;
     public void openHomePage() {
         open(Values.homePage);
     }
 
-    public void LoginUser() {
-        $(By.className("btn-yel")).click();
-        $(By.name("email")).sendKeys(Values.user_email);
-        $(By.name("password")).sendKeys(Values.user_password);
-        $(By.className("btn-modal")).click();
-    }
 
-
-
-    public void LoginAdmin() {
-        $(By.className("btn-yel")).click();
-        $(By.name("email")).sendKeys(Values.admin_email);
-        $(By.name("password")).sendKeys(Values.admin_password);
-        $(By.className("btn-modal")).click();
-        GoogleAuthenticator gAuth = new GoogleAuthenticator();
-        int code = gAuth.getTotpPassword(Values.fa2_secret_key);
-        System.out.println("Code = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-        $(By.id("one_time_password")).sendKeys(Integer.toString(code));
-        $(By.xpath("//form[@method='POST']//button")).click();
-    }
-
-
-    public void createEE(String name, int language) {
-        $(By.name(name)).clear();
-        $(By.name(name)).sendKeys(randomStringEE(language));
-//        System.out.println("Имя лота " + language + temp);
-    }
     public void createEN(String name, int language) {
         $(By.name(name)).clear();
         $(By.name(name)).sendKeys(randomStringEN(language));
@@ -95,6 +66,12 @@ public class Page {
             randString.append(symbols.charAt((int) (Math.random() * symbols.length())));
 //        temp = String.valueOf(randString);
         return randString;
+    }
+
+    public void createEE(String name, int language) {
+        $(By.name(name)).clear();
+        $(By.name(name)).sendKeys(randomStringEE(language));
+//        System.out.println("Имя лота " + language + temp);
     }
 
     public boolean finde (By locator) {
