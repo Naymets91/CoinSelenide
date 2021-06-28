@@ -18,26 +18,26 @@ public class LoginPage extends Page {
 
 
     public void loginUser() {
-        $(By.className("btn-yel")).click();
-        $(By.name("email")).sendKeys(Values.user_email);
-        $(By.name("password")).sendKeys(Values.user_password);
-        $(By.className("btn-modal")).click();
+        $(By.className("btn-yel")).click();         // клик по кнопке вход
+        $(By.name("email")).sendKeys(Values.user_email);    // ввод в поле емаил емаил юзера
+        $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
+        $(By.className("btn-modal")).click();   // клик по кнопке
     }
 
 
 
     public void loginAdmin() {
-        $(By.className("btn-yel")).click();
-        $(By.name("email")).sendKeys(Values.admin_email);
-        $(By.name("password")).sendKeys(Values.admin_password);
-        $(By.className("btn-modal")).click();
-        GoogleAuthenticator gAuth = new GoogleAuthenticator();
-        int code = gAuth.getTotpPassword(Values.fa2_secret_key);
+        $(By.className("btn-yel")).click();  // клик по кнопке вход
+        $(By.name("email")).sendKeys(Values.admin_email);       // ввод в поле емаил емаил администратора
+        $(By.name("password")).sendKeys(Values.admin_password); // ввод в поле пароль пароль администратора
+        $(By.className("btn-modal")).click();        // клик по кнопке
+        GoogleAuthenticator gAuth = new GoogleAuthenticator();      // подключение  2 аутентификации
+        int code = gAuth.getTotpPassword(Values.fa2_secret_key);    // считывания кода 2 аутентификации
         System.out.println("Code = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-        $(By.id("one_time_password")).sendKeys(Integer.toString(code));
+        $(By.id("one_time_password")).sendKeys(Integer.toString(code));  // ввод в нужное поле кода 2 аутентификации
 
-        $(By.xpath("//form[@method='POST']//button")).click();
-        if ($$(By.name("email")).size() != 0 ) {
+        $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
+        if ($$(By.name("email")).size() != 0 ) {    // если код на двухфакторку еподошол пробуем авторизоватся еще раз
             $(By.name("email")).sendKeys(Values.admin_email);
             $(By.name("password")).sendKeys(Values.admin_password);
             $(By.className("btn-modal")).click();
@@ -46,9 +46,9 @@ public class LoginPage extends Page {
             $(By.id("one_time_password")).sendKeys(Integer.toString(code2));
             $(By.xpath("//form[@method='POST']//button")).click();
         }
-        if ($$(By.name("email")).size() != 0 ) {
+        if ($$(By.name("email")).size() != 0 ) {        // если авторизация не удалась тест падает с выводом текста ошибки
             System.out.println( "2 раза введено неверно код провер двухфакторки");
-            throw new Error();
+            throw new Error();      // после етой команды тест падает
             }
     }
 

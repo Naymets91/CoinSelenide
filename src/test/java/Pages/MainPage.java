@@ -21,8 +21,8 @@ public class MainPage extends Page {
     }
 
     public void gotoAdminPanel() {
-        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
-        $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();     // Нажать на кнопку меню ЛИЧНЫЙ КАБИНЕТ
+        $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();     // клик по разделу выпадающего меню АДМИНКА
     }
     public void gotoProfile() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
