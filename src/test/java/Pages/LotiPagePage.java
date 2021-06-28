@@ -28,31 +28,31 @@ public class LotiPagePage extends Page {
 ////////////////////////////////////////// createLot ////////////////////////////////////
 
     public void createLot() {
-        $(By.id("create_lot")).click();
+        $(By.id("create_lot")).click(); //нажать кнопку создать лот
     }
 
 
     public void name(int ee, int en, int ru) {
-        createEE("title", ee);
-        createEN("___title[en]", en);
-        createRU("___title[ru]", ru);
+        createEE("title", ee);      // Заполнение поля имя рандомными символами на эстонском
+        createEN("___title[en]", en);       // Заполнение поля имя рандомными символами на английско
+        createRU("___title[ru]", ru);       // Заполнение поля имя рандомными символами на русском
         System.out.println();
     }
 
     public void descrintion(int ee, int en, int ru) {
         $(By.xpath("//div[@class='col-12']/textarea[1]")).clear();
-        $(By.xpath("//div[@class='col-12']/textarea[1]")).sendKeys(randomStringEE(ee));
+        $(By.xpath("//div[@class='col-12']/textarea[1]")).sendKeys(randomStringEE(ee)); // Заполнение поля описания рандомными символами на эстонском
 //        System.out.println("Описание лота ee " + temp);
 
-        createEN("___description[en]", en);
-        createRU("___description[ru]", ru);
+        createEN("___description[en]", en);     // Заполнение поля описания рандомными символами на английском
+        createRU("___description[ru]", ru);     // Заполнение поля описания рандомными символами на русском
         System.out.println();
 
     }
 
 
     public void sender() {                  // Сдатчик
-        randomLotiSelect("deliverer_id", "Сдатчик", 2);
+        randomLotiSelect("deliverer_id", "Сдатчик", 2); // рандомное заполнения здатчика
     }
 
     public void country() {                // Страна

@@ -16,6 +16,12 @@ public class LoginPage extends Page {
 
     String password;
 
+    public void loginUserUkrnet() {
+        $(By.className("btn-yel")).click();         // клик по кнопке вход
+        $(By.name("email")).sendKeys(Values.user_email);    // ввод в поле емаил емаил юзера
+        $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
+        $(By.className("btn-modal")).click();   // клик по кнопке
+    }
 
     public void loginUser() {
         $(By.className("btn-yel")).click();         // клик по кнопке вход
@@ -23,7 +29,6 @@ public class LoginPage extends Page {
         $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
     }
-
 
 
     public void loginAdmin() {
@@ -37,19 +42,20 @@ public class LoginPage extends Page {
         $(By.id("one_time_password")).sendKeys(Integer.toString(code));  // ввод в нужное поле кода 2 аутентификации
 
         $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
-        if ($$(By.name("email")).size() != 0 ) {    // если код на двухфакторку еподошол пробуем авторизоватся еще раз
+        if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку еподошол пробуем авторизоватся еще раз
             $(By.name("email")).sendKeys(Values.admin_email);
             $(By.name("password")).sendKeys(Values.admin_password);
             $(By.className("btn-modal")).click();
-            int code2 = gAuth.getTotpPassword(Values.fa2_secret_key);
-            System.out.println("Code = " + code2 + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+            GoogleAuthenticator gAuth2 = new GoogleAuthenticator();
+            int code2 = gAuth2.getTotpPassword(Values.fa2_secret_key);
+            System.out.println("Code2 = " + code2 + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
             $(By.id("one_time_password")).sendKeys(Integer.toString(code2));
             $(By.xpath("//form[@method='POST']//button")).click();
         }
-        if ($$(By.name("email")).size() != 0 ) {        // если авторизация не удалась тест падает с выводом текста ошибки
-            System.out.println( "2 раза введено неверно код провер двухфакторки");
+        if ($$(By.name("email")).size() != 0) {        // если авторизация не удалась тест падает с выводом текста ошибки
+            System.out.println("2 раза введено неверно код провер двухфакторки");
             throw new Error();      // после етой команды тест падает
-            }
+        }
     }
 
 
@@ -77,7 +83,7 @@ public class LoginPage extends Page {
     public void recsetPassword() {
         switchTo().window(1);       // переключения на 2 вкладку
         tempStr = "Df";
-        tempInt = getRandomNumber(8000000,8999999);
+        tempInt = getRandomNumber(8000000, 8999999);
         password = tempStr + tempInt;
         System.out.println(password);
         $(By.name("email")).sendKeys(Values.ukrnet_email);      // ввод емаийла
@@ -85,17 +91,22 @@ public class LoginPage extends Page {
         $(By.name("password_confirmation")).sendKeys(password); // подтверждения пароля
         $(By.xpath("//button[@class='btn-yel btn-modal']")).click();           // нажатия кнопки Отправить
     }
-    public  void loginRessetPassword () {
+
+    public void loginRessetPassword() {
         $(By.className("btn-yel")).click();
         $(By.name("email")).sendKeys(Values.ukrnet_email);
         $(By.name("password")).sendKeys(password);
         $(By.className("btn-modal")).click();
+    }
+
+
+    public void checkingUserAuthorization() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();
         if ($$(By.name("phone")).size() == 0) {
             System.out.println("Невозможно авторизоваться используя новый пароль");
             throw new Error();
         }
-    }
 
+    }
 }
