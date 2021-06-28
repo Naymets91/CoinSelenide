@@ -15,6 +15,7 @@ public class Coins extends Page {
     MainPage mainPg;
     LimitCashPage limitCashPg;
     LoginPage loginPg;
+    UkrnetPage ukrnetPg;
 
     @BeforeMethod
     public void setUp() {
@@ -24,6 +25,7 @@ public class Coins extends Page {
         auctionsPg =new AuctionsPage();
         limitCashPg = new LimitCashPage();
         loginPg = new LoginPage();
+        ukrnetPg = new UkrnetPage();
 
         Configuration.timeout = 20000;
        Configuration.startMaximized = true;
@@ -145,23 +147,29 @@ public class Coins extends Page {
         loginPg.loginUser();
         mainPg.gotoProfile();
         limitCashPg.editLimitCash();
-        loginPg.logAut(6);
+        loginPg.logAutUser();
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.limitCahEdit();
         limitCashPg.searchUser();
         limitCashPg.acceptNewCash();
 //        limitCashPg.goToHomePage();
-        loginPg.logAut(7);
+        loginPg.logAutAdmin();
         loginPg.loginUser();
         mainPg.gotoProfile();
         limitCashPg.parsCash();
         limitCashPg.equalsCash();
     }
 
-@Test
+@Test                                               // Востановления пароля
     public void  recoveryPassword () {
-
+        loginPg.createRequestRecoveryPassword ();
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet();
+        ukrnetPg.selectionLastLetter();
+        loginPg.recsetPassword();
+        loginPg.logAutUser();
+        loginPg.loginRessetPassword();
 }
 
 }

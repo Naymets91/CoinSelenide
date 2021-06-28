@@ -16,6 +16,9 @@ public class Page {
     public void openHomePage() {
         open(Values.homePage);
     }
+    public void openUkrnetPage() {
+        open(Values.ukrnetPage);
+    }
 
 
     public void createEN(String name, int language) {

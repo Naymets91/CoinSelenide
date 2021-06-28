@@ -1,7 +1,6 @@
 package Pages;
 
 import Config.Values;
-import com.codeborne.selenide.Selenide;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import org.openqa.selenium.By;
 
@@ -10,7 +9,13 @@ import java.util.Date;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class LoginPage {
+public class LoginPage extends Page {
+
+    String tempStr;
+    Integer tempInt;
+
+    String password;
+
 
     public void loginUser() {
         $(By.className("btn-yel")).click();
@@ -48,15 +53,49 @@ public class LoginPage {
     }
 
 
-    public void logAut(Integer size) {
-
+    public void logAutAdmin() {
         open("https://coins.dd-dev.club/");
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
+        $(By.xpath("//ul[@class='-visible']//li[7]/a")).click();
+    }
 
-        $(By.xpath("//ul[@class='-visible']//li["+ size +"]/a")).click();
+    public void logAutUser() {
+        open("https://coins.dd-dev.club/");
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
+        $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();
     }
 
 
+    public void createRequestRecoveryPassword() {
+        $(By.className("btn-yel")).click();    // клик по кнопке вход
+        $(By.xpath("//div[@class='form__ithem form_forgot']/a[2]")).click();    // клик по ссылке  Забыли пароль?
+        $(By.name("email")).sendKeys(Values.userReset_email);   // ввод емайла для востановления пароля
+        $(By.className("btn-modal")).click();    // нажатия кнопки Отправить
+    }
 
+
+    public void recsetPassword() {
+        switchTo().window(1);       // переключения на 2 вкладку
+        tempStr = "Df";
+        tempInt = getRandomNumber(8000000,8999999);
+        password = tempStr + tempInt;
+        System.out.println(password);
+        $(By.name("email")).sendKeys(Values.ukrnet_email);      // ввод емаийла
+        $(By.name("password")).sendKeys(password);              // ввод сгенерированого рандомного пароля
+        $(By.name("password_confirmation")).sendKeys(password); // подтверждения пароля
+        $(By.xpath("//button[@class='btn-yel btn-modal']")).click();           // нажатия кнопки Отправить
+    }
+    public  void loginRessetPassword () {
+        $(By.className("btn-yel")).click();
+        $(By.name("email")).sendKeys(Values.ukrnet_email);
+        $(By.name("password")).sendKeys(password);
+        $(By.className("btn-modal")).click();
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
+        $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();
+        if ($$(By.name("phone")).size() == 0) {
+            System.out.println("Невозможно авторизоваться используя новый пароль");
+            throw new Error();
+        }
+    }
 
 }
