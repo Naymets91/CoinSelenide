@@ -33,7 +33,7 @@ public class Coins extends Page {
 //        LoginUser();
     }
 
-    @Test                                             // Тест двойной аутеннтификации
+    @Test                                             // Тест двойной аутентификации
     public void correct2FALogin() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -159,6 +159,9 @@ public class Coins extends Page {
         limitCashPg.equalsCash();
     }
 
+@Test
+    public void  recoveryPassword () {
 
+}
 
 }
