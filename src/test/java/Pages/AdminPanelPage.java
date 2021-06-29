@@ -36,8 +36,6 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click(); // клик на меню клиенты
     }
     public void searchUser(){
-//    $(By.xpath("//*[@id='dataTable1_filter']")).click();
-//        $(By.xpath("//*[@id='dataTable1_filter']/label")).click();
     $(By.xpath("//*[@id='dataTable1_filter']/label/input")).sendKeys(Values.ukrnet_email);  // в поле поиск ввести емайл пользователя
     $(byXpath("//*[text()='testcoins179@ukr.net']/..//a[1]")).should(visible).click();  // нажать на кнопку изминить
     }

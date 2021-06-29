@@ -4,7 +4,13 @@ import Pages.*;
 
 import com.codeborne.selenide.Configuration;
 
+import org.apache.commons.exec.CommandLine;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Coins extends Page {
@@ -31,6 +37,9 @@ public class Coins extends Page {
 
         Configuration.timeout = 20000;
         Configuration.startMaximized = true;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("test-type");
+        options.addArguments("disable-popup-blocking");
 //        Configuration.browserSize = "1920x1080";
         openHomePage();
         mainPg.SwitchLanguageRu();
@@ -184,4 +193,23 @@ public class Coins extends Page {
         loginPg.checkingUserAuthorization();
     }
 
+    @Test                                   //  Добавить много лотов с помощу кнопки дублировать лот
+    public void  addManyLots(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.loti();
+        lotiPg.checkingExistencelots();
+        lotiPg.addManyLoti(20);
+    }
+
+    @Test
+    public  void startAuctions() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.auctionAdd();
+//       auctionsPg.showMaxAuctions();
+        auctionsPg.startAuction();
+    }
 }

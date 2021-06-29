@@ -250,6 +250,37 @@ public class LotiPagePage extends Page {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
+///////////////////////////// checkingExistencelots //////////////////////////
+
+    public void checkingExistencelots() {
+        $(By.xpath("//tr[@class='odd']")).click();
+        size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
+        System.out.println(size);
+        if (size == 0) {
+            createLot();
+            name(12, 10, 8);
+            descrintion(20, 12, 10);
+            sender();
+            country();
+            category();
+            year();
+            minPrice();
+            startPrice();
+            material();
+            denomination();
+            period();
+            topLot();
+            certification();
+            maxSafety();
+            reve();
+            safety();
+            buttonSave();
+            $(By.xpath("//tr[@class='odd']")).click();
+        }
+
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     public void equalsLot() {
@@ -282,5 +313,11 @@ public class LotiPagePage extends Page {
     }
 
 
+    public void addManyLoti(Integer r) {
+for(int i=0; i==r; i++){
+    $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[1]//a[3]")).click();
+    $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
+}
 
+    }
 }

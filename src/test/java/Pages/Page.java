@@ -1,10 +1,8 @@
 package Pages;
 
 import Config.Values;
-import com.warrenstrange.googleauth.GoogleAuthenticator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,5 +83,22 @@ public class Page {
             return false;
         }
     }
+public String datePlus(int rtime) {
+    Date dateNow = new Date();
+    SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy/MM/");
+    SimpleDateFormat formatForDateNow2 = new SimpleDateFormat("dd");
+
+    String r2 = formatForDateNow2.format(dateNow) ;
+    int date = Integer.parseInt(r2);
+    date = date + rtime;
+    System.out.println(date);
+    String strDate = Integer.toString(date);
+    String r = formatForDateNow.format(dateNow);
+    String t = "20:00:00" ;
+    String rx = r + strDate + t;
+    System.out.println(rx);
+    return rx ;
+//    System.out.println(rx);
+}
 
 }

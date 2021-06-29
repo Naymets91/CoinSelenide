@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AuctionsPage extends Page {
 
@@ -25,14 +24,14 @@ public class AuctionsPage extends Page {
     }
 
     public void number() {
-        sizeRandom = getRandomNumber(1,100) ;
+        sizeRandom = getRandomNumber(1, 100);
         $(By.id("number")).sendKeys("№ " + sizeRandom);
     }
 
     public void name() {
-        $(By.name("name")).sendKeys("Oksjon № " + sizeRandom );
-        $(By.name("___name[en]")).sendKeys("Auction № " + sizeRandom );
-        $(By.name("___name[ru]")).sendKeys("Аукцион № " + sizeRandom );
+        $(By.name("name")).sendKeys("Oksjon № " + sizeRandom);
+        $(By.name("___name[en]")).sendKeys("Auction № " + sizeRandom);
+        $(By.name("___name[ru]")).sendKeys("Аукцион № " + sizeRandom);
         System.out.println();
     }
 
@@ -48,11 +47,11 @@ public class AuctionsPage extends Page {
     }
 
 
-    public void dateStart(String start ) {
+    public void dateStart(String start) {
         $(By.xpath("//input[@name='start']")).sendKeys(start);
     }
 
-    public void dateFinish(String finish ) {
+    public void dateFinish(String finish) {
         $(By.xpath("//input[@name='finish']")).sendKeys(finish);
     }
 
@@ -89,7 +88,7 @@ public class AuctionsPage extends Page {
 
         $(By.xpath("//tr[@class='odd']")).click();
         size = $$(By.xpath("//table[@id='dataTable']//tbody/tr")).size();
-       System.out.println(size);
+        System.out.println(size);
         if (size == 0) {
             create();
             number();
@@ -109,7 +108,7 @@ public class AuctionsPage extends Page {
         }
     }
 
-    public void delete () {
+    public void delete() {
         temp = $(By.xpath("//table[@id='dataTable']//tbody/tr[" + size + "]//td[2]")).getText();
         System.out.println(temp);
         $(By.xpath("//table[@id='dataTable']//tbody/tr[" + size + "]//button")).click();
@@ -126,4 +125,39 @@ public class AuctionsPage extends Page {
         }
         System.out.println(tempBool);
     }
+
+    ///////////////////////////////////////////// startAuctions ////////////////////////////////
+
+
+    public void showMaxAuctions() {
+        $(By.xpath("//div[@id='dataTable_length']//select")).click();
+        $(By.xpath("//div[@id='dataTable_length']//select/option[4]")).click();     // показать на странице максимальное количество аукционов
+    }
+
+    public void startAuction() {
+        $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();       // нажать на кнопку редактировать
+        $(By.xpath("//input[@name='start']")).click();
+        $(By.xpath("//button[@class='xdsoft_next']")).click();
+        $(By.xpath("//td[@class='xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_current']")).click();
+
+
+        $(By.xpath("//input[@name='finish']")).click();
+        sleep(1000);
+        $(By.xpath("//button[@class='xdsoft_next']")).click();
+        
+        $(By.xpath("//td[@class='xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_current']")).click();
+
+        sleep(1000);
+
+       sleep(15000);
+
+
+
+//        $(By.xpath("//select[@id='status']")).click();
+//        $(By.xpath("//select[@id='status']/option[3]")).click();
+        $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
+
+    }
+
+
 }
