@@ -93,11 +93,11 @@ public String datePlus(int rtime) {
     date = date + rtime;
     System.out.println(date);
     String strDate = Integer.toString(date);
-    String r = formatForDateNow.format(dateNow);
-    String t = "20:00:00" ;
-    String rx = r + strDate + t;
-    System.out.println(rx);
-    return rx ;
+//    String r = formatForDateNow.format(dateNow);
+//    String t = " 21:12:00" ;
+//    String rx = r + strDate + t;
+//    System.out.println(rx);
+    return strDate ;
 //    System.out.println(rx);
 }
 

@@ -4,13 +4,8 @@ import Pages.*;
 
 import com.codeborne.selenide.Configuration;
 
-import org.apache.commons.exec.CommandLine;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class Coins extends Page {
@@ -211,5 +206,9 @@ public class Coins extends Page {
         adminPanelPg.auctionAdd();
 //       auctionsPg.showMaxAuctions();
         auctionsPg.startAuction();
+        loginPg.logAutAdmin();
+        loginPg.loginUser();
+        auctionsPg.onlineAuction();
+        auctionsPg.equalsStartAuction();
     }
 }

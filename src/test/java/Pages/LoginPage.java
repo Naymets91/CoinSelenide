@@ -24,7 +24,8 @@ public class LoginPage extends Page {
     }
 
     public void loginUser() {
-        $(By.className("btn-yel")).click();         // клик по кнопке вход
+
+        $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();         // клик по кнопке вход
         $(By.name("email")).sendKeys(Values.user_email);    // ввод в поле емаил емаил юзера
         $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
@@ -32,7 +33,7 @@ public class LoginPage extends Page {
 
 
     public void loginAdmin() {
-        $(By.className("btn-yel")).click();  // клик по кнопке вход
+        $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();  // клик по кнопке вход
         $(By.name("email")).sendKeys(Values.admin_email);       // ввод в поле емаил емаил администратора
         $(By.name("password")).sendKeys(Values.admin_password); // ввод в поле пароль пароль администратора
         $(By.className("btn-modal")).click();        // клик по кнопке
@@ -73,7 +74,7 @@ public class LoginPage extends Page {
 
 
     public void createRequestRecoveryPassword() {
-        $(By.className("btn-yel")).click();    // клик по кнопке вход
+        $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();    // клик по кнопке вход
         $(By.xpath("//div[@class='form__ithem form_forgot']/a[2]")).click();    // клик по ссылке  Забыли пароль?
         $(By.name("email")).sendKeys(Values.userReset_email);   // ввод емайла для востановления пароля
         $(By.className("btn-modal")).click();    // нажатия кнопки Отправить
@@ -93,7 +94,7 @@ public class LoginPage extends Page {
     }
 
     public void loginRessetPassword() {
-        $(By.className("btn-yel")).click();
+        $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();
         $(By.name("email")).sendKeys(Values.ukrnet_email);
         $(By.name("password")).sendKeys(password);
         $(By.className("btn-modal")).click();

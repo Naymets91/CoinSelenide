@@ -136,28 +136,34 @@ public class AuctionsPage extends Page {
 
     public void startAuction() {
         $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();       // нажать на кнопку редактировать
-        $(By.xpath("//input[@name='start']")).click();
-        $(By.xpath("//button[@class='xdsoft_next']")).click();
-        $(By.xpath("//td[@class='xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_current']")).click();
 
+        $(By.xpath("//input[@name='start']")).click();
+        $(By.xpath("//input[@name='start']")).clear();
+        $(By.xpath("//input[@name='start']")).sendKeys("2021/07/30 11:00");
+        sleep(1000);
 
         $(By.xpath("//input[@name='finish']")).click();
-        sleep(1000);
-        $(By.xpath("//button[@class='xdsoft_next']")).click();
-        
-        $(By.xpath("//td[@class='xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_current']")).click();
-
+        $(By.xpath("//input[@name='finish']")).clear();
+        $(By.xpath("//input[@name='finish']")).sendKeys("2021/07/30 18:00");
         sleep(1000);
 
-       sleep(15000);
+        $(By.xpath("//select[@id='status']")).click();
+        $(By.xpath("//select[@id='status']/option[3]")).click();
 
-
-
-//        $(By.xpath("//select[@id='status']")).click();
-//        $(By.xpath("//select[@id='status']/option[3]")).click();
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
 
     }
 
 
+    public void onlineAuction() {
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]")).click();
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]//li")).click();
+    }
+
+    public void equalsStartAuction() {
+        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
+        temp = $(By.xpath("//p[@id='timer-inner']")).getText();
+        System.out.println("До начала  " + temp );
+
+    }
 }
