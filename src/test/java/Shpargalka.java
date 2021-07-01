@@ -13,15 +13,65 @@ public class Shpargalka { }
 
 
     $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();        // нажать на кнопку
-
-
+    с = $$(By.xpath("//div[@class='auction-ithem']")).size()                    //  узнать количество елементов
+/////////////////////////////////////////////////////////////////
 
 if ($$(By.xpath("//div[@class='auction-ithem']")).size() != 0) {
             System.out.println("Аукцион не остановлен");
-            throw new Error();
+            throw new Error();                                         // остановить тест с ошибкой + текст ошибки
         } else {
             System.out.println("Аукцион успершно остановлен");
         }
+
+
+
+///////////////////////////////////////////////////////////
+   $(By.name("___description[ru]")).getAttribute("value");        // узнать текс елемента
+        $(By.name("deliverer_id")).getText();                      // узнать текс елемента 2 способ
+
+        $(By.name("deliverer_id")).getSelectedText();       // узнать текст вибраного селектора
+
+
+
+///////////////////////////////
+
+tempBool = $(By.xpath("//*[text()='тут нужный текст]"));  // поиск по нужному тексту
+
+//////////////////////////////
+
+
+
+public static final String user1_email = "емаил";           // если так написать то можно получить текст переменной в любом классе
+public static final String user1_password = "пароль123";  // если так написать то можно получить текст переменной в любом классе
+
+loginPg.loginUser(Values.user1_email, Values.user1_password); // визов переменнои в другом классе (Values ето имя класа в котором находится переменная)
+
+///////////////////////////////////////////////
+
+
+public int getRandomNumber(int a1, int b1) {    // рандомний генератор чисел  нужно подать диапазон чисел
+        int a = a1;
+        int b = b1;
+        int x = a + (int) (Math.random() * ((b - a) + 1));
+        //System.out.println("Случайное число x: " + x);
+        return x;
+    }
+
+//////////////////////////
+
+
+    public StringBuilder randomStringEN(int s) {            // Рандомное заполнения имен нужно подать количество символов
+        String symbols = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder randString = new StringBuilder();
+        int count = s;
+        for (int i = 0; i < count; i++)
+            randString.append(symbols.charAt((int) (Math.random() * symbols.length())));
+//        System.out.print(randString);
+//        temp = String.valueOf(randString);
+        return randString;
+    }
+
+///////////////////////////////////
 
    */
 
