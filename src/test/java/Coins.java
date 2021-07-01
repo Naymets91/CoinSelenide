@@ -1,4 +1,5 @@
 
+import Config.Values;
 import Pages.*;
 
 
@@ -145,10 +146,9 @@ public class Coins extends Page {
         auctionsPg.delete();
     }
 
-
     @Test                                       // Изменение кредитного лимита  (иногда проблема нахождения пользователя для редактиования)
     public void editLimit() {
-        loginPg.loginUser();
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
         mainPg.gotoProfile();
         limitCashPg.editLimitCash();
         loginPg.logAutUser();
@@ -158,7 +158,7 @@ public class Coins extends Page {
         limitCashPg.searchUser();
         limitCashPg.acceptNewCash();
         loginPg.logAutAdmin();
-        loginPg.loginUser();
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
         mainPg.gotoProfile();
         limitCashPg.parsCash();
         limitCashPg.equalsCash();
@@ -172,7 +172,7 @@ public class Coins extends Page {
         ukrnetPg.selectionLastLetter();
         loginPg.recsetPassword();
         loginPg.logAutUser();
-        loginPg.loginRessetPassword();
+        loginPg.loginUser(Values.ukrnet_email,Values.ukrnet_password);
         loginPg.checkingUserAuthorization();
     }
 
@@ -198,17 +198,50 @@ public class Coins extends Page {
         lotiPg.addManyLoti(20);
     }
 
-    @Test
+    @Test                                   //  Старт предварительного аукциона
     public  void startAuctions() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.auctionAdd();
 //       auctionsPg.showMaxAuctions();
-        auctionsPg.startAuction();
+        auctionsPg.startAuctionDate();
         loginPg.logAutAdmin();
-        loginPg.loginUser();
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
         auctionsPg.onlineAuction();
         auctionsPg.equalsStartAuction();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.auctionAdd();
+        auctionsPg.stopAuction();
     }
+
+     @Test
+    public void BidsUsersPreliminaryAuction (){     // ставки пользователей на предварительном аукционе
+         loginPg.loginAdmin();
+         mainPg.gotoAdminPanel();
+         adminPanelPg.auctions();
+         adminPanelPg.auctionAdd();
+         auctionsPg.startAuction();
+         loginPg.logAutAdmin();
+         loginPg.loginUser(Values.user1_email,Values.user1_password);
+         auctionsPg.onlineAuction();
+         auctionsPg.placeBet();
+         loginPg.logAutUser();
+         loginPg.loginUser(Values.user2_email,Values.user2_password);
+         auctionsPg.onlineAuction();
+         auctionsPg.placeBet();
+         loginPg.logAutUser();
+         loginPg.loginUser(Values.user1_email,Values.user1_password);
+         auctionsPg.onlineAuction();
+         auctionsPg.placeBet();
+         loginPg.logAutUser();
+         loginPg.loginAdmin();
+         mainPg.gotoAdminPanel();
+         adminPanelPg.auctions();
+         adminPanelPg.auctionAdd();
+         auctionsPg.stopAuction();
+     }
 }

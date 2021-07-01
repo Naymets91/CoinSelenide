@@ -12,8 +12,16 @@ public class Shpargalka { }
 
 
 
+    $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();        // нажать на кнопку
 
 
+
+if ($$(By.xpath("//div[@class='auction-ithem']")).size() != 0) {
+            System.out.println("Аукцион не остановлен");
+            throw new Error();
+        } else {
+            System.out.println("Аукцион успершно остановлен");
+        }
 
    */
 

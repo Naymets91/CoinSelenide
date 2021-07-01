@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.Values;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -15,6 +16,10 @@ public class AuctionsPage extends Page {
 
     Integer size;
     Integer sizeRandom;
+
+    String afterBet;
+    String beaforeBet;
+    String tempBet ;
 
 
 ///////////////////////////////////////////////   AddAuction  ///////////////////////////////////
@@ -134,36 +139,85 @@ public class AuctionsPage extends Page {
         $(By.xpath("//div[@id='dataTable_length']//select/option[4]")).click();     // показать на странице максимальное количество аукционов
     }
 
-    public void startAuction() {
-        $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();       // нажать на кнопку редактировать
+    public void startAuctionDate() {
+        $(By.xpath("//table[@id='dataTable']//tbody//td[6]/a")).click();       // нажать на кнопку редактировать (1 в списку аукцион)
 
         $(By.xpath("//input[@name='start']")).click();
         $(By.xpath("//input[@name='start']")).clear();
-        $(By.xpath("//input[@name='start']")).sendKeys("2021/07/30 11:00");
+        $(By.xpath("//input[@name='start']")).sendKeys("2021/07/30 11:00"); //  заполнить поле старта аукциона
         sleep(1000);
 
         $(By.xpath("//input[@name='finish']")).click();
         $(By.xpath("//input[@name='finish']")).clear();
-        $(By.xpath("//input[@name='finish']")).sendKeys("2021/07/30 18:00");
+        $(By.xpath("//input[@name='finish']")).sendKeys("2021/07/30 18:00");    //  заполнить поле конца аукциона
         sleep(1000);
 
-        $(By.xpath("//select[@id='status']")).click();
-        $(By.xpath("//select[@id='status']/option[3]")).click();
+        $(By.xpath("//select[@id='status']")).click();                  // клик по выбору статуса
+        $(By.xpath("//select[@id='status']/option[3]")).click();        // вибор статус ДА
 
-        $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
+        $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();    // нажатия кнопик обновить
 
     }
 
 
     public void onlineAuction() {
-        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]")).click();
-        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]//li")).click();
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]")).click();    // клик по випадающем меню аукционы
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]//li")).click();    // клик по пункту онлайн аукционы
     }
 
     public void equalsStartAuction() {
-        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
-        temp = $(By.xpath("//p[@id='timer-inner']")).getText();
-        System.out.println("До начала  " + temp );
+        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();       // клик на кнопку редактировать
+        temp = $(By.xpath("//p[@id='timer-inner']")).getText();             // получам информацию про время до начала аукциона
+        System.out.println("До начала  " + temp);
 
     }
+
+    public void stopAuction() {
+        $(By.xpath("//table[@id='dataTable']//tbody//td[5]/a")).click();       // клик на кнопку админ панель (1 в списку аукцион)
+        $(By.xpath("//div[@class='panel__btn-set'][3]/img")).click();        // нажать на кнопку остановить аукион
+        $(By.xpath("//div[@class='message__btn-wrapp']/button[2]")).click();    // нажать на кнопку подтверждения
+        openHomePage();     // перейти на главную
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]")).click();   // клик на меню аукционы
+        $(By.xpath("//ul[@class='header-nav__nav -horizontal']/li[2]//li")).click();        // клик на меню онлайн аукционы
+        if ($$(By.xpath("//div[@class='auction-ithem']")).size() != 0) {
+            System.out.println("Аукцион не остановлен");
+            throw new Error();
+        } else {
+            System.out.println("Аукцион успершно остановлен");
+        }
+    }
+
+    public void startAuction() {
+        $(By.xpath("//table[@id='dataTable']//tbody//td[5]/a")).click();       // клик на кнопку админ панель (1 в списку аукцион)
+        $(By.xpath("//div[@class='panel__btn-set'][5]/img")).click();        // нажать на настройки аукциона
+        $(By.xpath("//div[@class='panel__btn-wrapp ng-scope']/p[3]")).click();  // клик на кноку рестарт аукциона
+        $(By.xpath("//div[@class='message__btn-wrapp']/button[2]")).click();    // нажать на кнопку подтверждения
+    }
+
+    public void placeBet() {
+        $(By.xpath("//div[@class='auction-ithem']//a[2]")).click(); // перейти в онлайн аукцион
+        if (tempBet == null) {
+            tempBet = $(By.xpath("//div[@class='auction-one__rate ng-scope']//input")).getAttribute("value");   // узнать суму ставки до ставки
+            beaforeBet = $(By.xpath("//div[@class='auction-one__rate ng-scope']//input")).getAttribute("value");    // чтоб при первом запуске неупал тест
+        }
+        tempBool = tempBet.equals(tempBet);
+        if (tempBool == false){
+            System.out.println("ХЗ");
+            throw new Error();
+        }
+        sleep(1500);
+        beaforeBet = $(By.xpath("//div[@class='auction-one__rate ng-scope']//input")).getAttribute("value");  // узнать суму ставки до ставки
+        System.out.println("Цена до ставки " + beaforeBet);
+        $(By.xpath("//div[@class='auction-one__rate ng-scope']//button")).click();
+        sleep(1500);// сделать ставку
+        $(By.xpath("//div[@class='message__btn-wrapp']//button")).click();      // подтвердить ставку
+        sleep(1500);
+        afterBet = $(By.xpath("//div[@class='auction-one__rate ng-scope']//input")).getAttribute("value");  // узнать суму после ставки
+        System.out.println("После ставки " + afterBet);
+        System.out.println("");
+        tempBet = afterBet;
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////
 }

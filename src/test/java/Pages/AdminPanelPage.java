@@ -26,7 +26,7 @@ public void limitCahEdit () {
     }
 
     public void auctionAdd() {
-        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
     }
 
 

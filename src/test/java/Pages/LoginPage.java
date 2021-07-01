@@ -18,16 +18,15 @@ public class LoginPage extends Page {
 
     public void loginUserUkrnet() {
         $(By.className("btn-yel")).click();         // клик по кнопке вход
-        $(By.name("email")).sendKeys(Values.user_email);    // ввод в поле емаил емаил юзера
-        $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
+        $(By.name("email")).sendKeys(Values.user1_email);    // ввод в поле емаил емаил юзера
+        $(By.name("password")).sendKeys(Values.user1_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
     }
 
-    public void loginUser() {
-
+    public void loginUser(String user_email, String user_password) {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();         // клик по кнопке вход
-        $(By.name("email")).sendKeys(Values.user_email);    // ввод в поле емаил емаил юзера
-        $(By.name("password")).sendKeys(Values.user_password);      // ввод в поле пароль пароль юзера
+        $(By.name("email")).sendKeys(user_email);    // ввод в поле емаил емаил юзера
+        $(By.name("password")).sendKeys(user_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
     }
 
@@ -61,15 +60,15 @@ public class LoginPage extends Page {
 
 
     public void logAutAdmin() {
-        open("https://coins.dd-dev.club/");
-        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
-        $(By.xpath("//ul[@class='-visible']//li[7]/a")).click();
+       openHomePage(); // открить стартовую страницу
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
+        $(By.xpath("//ul[@class='-visible']//li[7]/a")).click();              // клик по пункту меню выход
     }
 
     public void logAutUser() {
-        open("https://coins.dd-dev.club/");
-        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
-        $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();
+        openHomePage(); // открить стартовую страницу
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
+        $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();        // клик по пункту меню выход
     }
 
 
@@ -93,12 +92,6 @@ public class LoginPage extends Page {
         $(By.xpath("//button[@class='btn-yel btn-modal']")).click();           // нажатия кнопки Отправить
     }
 
-    public void loginRessetPassword() {
-        $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();
-        $(By.name("email")).sendKeys(Values.ukrnet_email);
-        $(By.name("password")).sendKeys(password);
-        $(By.className("btn-modal")).click();
-    }
 
 
     public void checkingUserAuthorization() {
