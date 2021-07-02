@@ -73,6 +73,17 @@ public int getRandomNumber(int a1, int b1) {    // рандомний генер
 
 ///////////////////////////////////
 
+//  $(".loading_progress").should(disappear); // Само подождёт, пока элемент исчезнет
+ // $("#username").shouldHave(text("Hello, Johny!")); // Само подождёт, пока у элемента появится нужный текст
+
+$("#username").shouldBe(visible);   // ждёт, пока элемент появится
+  $("#username").shouldHave(text("Hello, Johny!")); // ждёт, пока текст элемента изменится на "Hello, Johny!"
+  $("#login-button").shouldHave(cssClass("green-button")); // ждёт, пока кнопка станет зелёной
+  $("#login-button").shouldBe(disabled); // ждёт, пока кнопка станет неактивной
+  $(".error").shouldNotBe(visible);  // ждёт, пока элемент исчезнет
+  $(".error").should(disappear);     // амо подождёт, пока элемент исчезнет
+
+clearBrowserCache();       // очистить кеш браузера
    */
 
 

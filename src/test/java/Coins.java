@@ -5,8 +5,12 @@ import Pages.*;
 
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 
 public class Coins extends Page {
@@ -22,6 +26,7 @@ public class Coins extends Page {
 
     @BeforeMethod
     public void setUp() {
+//        Configuration.browser=;
         lotiPg = new LotiPagePage();
         adminPanelPg = new AdminPanelPage();
         mainPg = new MainPage();
@@ -30,6 +35,7 @@ public class Coins extends Page {
         loginPg = new LoginPage();
         ukrnetPg = new UkrnetPage();
         editUserPg = new EditUserPage();
+        closeWebDriver();
 
         Configuration.timeout = 20000;
         Configuration.startMaximized = true;
@@ -40,14 +46,18 @@ public class Coins extends Page {
         openHomePage();
         mainPg.SwitchLanguageRu();
     }
+    @AfterMethod
+    public void finito() {
+        closeWebDriver();
+    }
 
-    @Test                                             // Тест двойной аутентификации
+    @Test (priority = 1)                                            // Тест двойной аутентификации
     public void correct2FALogin() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
     }
 
-    @Test                                             // Добавить лот
+    @Test   (priority = 2)                                          // Добавить лот
     public void addLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -75,7 +85,7 @@ public class Coins extends Page {
     }
 
 
-    @Test                                       // Изменение лотав
+    @Test        (priority = 2)                               // Изменение лотав
     public void editLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
