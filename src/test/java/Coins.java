@@ -6,43 +6,61 @@ import Pages.*;
 import com.codeborne.selenide.Configuration;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 
 public class Coins extends Page {
-
-    AuctionsPage auctionsPg;
-    LotiPagePage lotiPg;
-    AdminPanelPage adminPanelPg;
-    MainPage mainPg;
-    LimitCashPage limitCashPg;
-    LoginPage loginPg;
-    UkrnetPage ukrnetPg;
-    EditUserPage editUserPg;
+     AuctionsPage auctionsPg = new AuctionsPage();
+     LotiPagePage lotiPg = new LotiPagePage();
+     AdminPanelPage adminPanelPg = new AdminPanelPage();
+     MainPage mainPg = new MainPage();
+     LimitCashPage limitCashPg = new LimitCashPage();
+     LoginPage loginPg = new LoginPage();
+     UkrnetPage ukrnetPg = new UkrnetPage();
+     EditUserPage editUserPg = new EditUserPage();
 
     @BeforeMethod
     public void setUp() {
-//        Configuration.browser=;
-        lotiPg = new LotiPagePage();
-        adminPanelPg = new AdminPanelPage();
-        mainPg = new MainPage();
-        auctionsPg = new AuctionsPage();
-        limitCashPg = new LimitCashPage();
-        loginPg = new LoginPage();
-        ukrnetPg = new UkrnetPage();
-        editUserPg = new EditUserPage();
-        closeWebDriver();
-
-        Configuration.timeout = 20000;
-        Configuration.startMaximized = true;
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("test-type");
-        options.addArguments("disable-popup-blocking");
+//        closeWebDriver();
+//        Configuration.timeout = 20000;
+//        Configuration.startMaximized = true;
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("test-type");
+//        options.addArguments("disable-popup-blocking");
 //        Configuration.browserSize = "1920x1080";
+        com.codeborne.selenide.Configuration.browser = "chrome";      //браузер для тестов
+        com.codeborne.selenide.Configuration.timeout = 60000;   //максимальный интервал ожидания вебэлементов в милисекундах
+//        com.codeborne.selenide.Configuration.savePageSource = false;  //не сохранять дополнительные настройки
+        ChromeOptions options = new ChromeOptions();  //создать обьект для установки опций браузера хром
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false); // вспливающие окна
+        prefs.put("password_manager_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});    // Отключить расширения режима разработчика , отключить панель автоматизации
+        options.addArguments("--no-sandbox");   // для докера
+        options.addArguments("--disable-dev-shm-usage"); // для докера
+        WebDriver myWebDriver = new ChromeDriver(options);
+        WebDriverRunner.setWebDriver(myWebDriver);
+        myWebDriver.manage().window().maximize();
+
+
+//        options.addArguments("--disable-infobars");   //убрать в браузере полосу infobars
+//        options.addArguments("--disable-dev-tools");  //отключить в браузере dev-tools
+//        options.addArguments("--test-type");        // убрать всплывающие окна
+//        options.addArguments("--disable-popup-blocking");// убрать всплывающие окна
+//        WebDriver myWebDriver = new ChromeDriver(options);  //создать вебдрайвер с  указанными выше опциями
+//        WebDriverRunner.setWebDriver(myWebDriver); //запуск браузера
+//        myWebDriver.manage().window().maximize();
         openHomePage();
         mainPg.SwitchLanguageRu();
     }
