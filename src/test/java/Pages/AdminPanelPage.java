@@ -17,6 +17,11 @@ public void limitCahEdit () {
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[3]//span")).should(visible).click();
 }
 
+    public void requestDelUser () {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[2]//span")).should(visible).click();
+    }
     public void auctions() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
     }
@@ -38,6 +43,12 @@ public void limitCahEdit () {
     public void searchUser(){
     $(By.xpath("//*[@id='dataTable1_filter']/label/input")).sendKeys(Values.ukrnet_email);  // в поле поиск ввести емайл пользователя
     $(byXpath("//*[text()='testcoins179@ukr.net']/..//a[1]")).should(visible).click();  // нажать на кнопку изминить
+    }
+
+    public void delUser( String name) {
+        $(byXpath("//*[text()='" + name + "']/..//input")).should(visible).click();
+        $(byXpath("//a[@id='customer_deleter']")).should(visible).click();
+
     }
 }
 

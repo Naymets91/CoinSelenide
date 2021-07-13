@@ -3,20 +3,17 @@ import Config.Values;
 import Pages.*;
 
 
-import com.codeborne.selenide.Configuration;
-
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class Coins extends Page {
@@ -39,7 +36,7 @@ public class Coins extends Page {
 //        options.addArguments("disable-popup-blocking");
 //        Configuration.browserSize = "1920x1080";
         com.codeborne.selenide.Configuration.browser = "chrome";      //браузер для тестов
-        com.codeborne.selenide.Configuration.timeout = 60000;   //максимальный интервал ожидания вебэлементов в милисекундах
+        com.codeborne.selenide.Configuration.timeout = 6000;   //максимальный интервал ожидания вебэлементов в милисекундах
 //        com.codeborne.selenide.Configuration.savePageSource = false;  //не сохранять дополнительные настройки
         ChromeOptions options = new ChromeOptions();  //создать обьект для установки опций браузера хром
         Map<String, Object> prefs = new HashMap<>();
@@ -196,8 +193,8 @@ public class Coins extends Page {
     public void recoveryPassword() {
         loginPg.createRequestRecoveryPassword();
         openUkrnetPage();
-        ukrnetPg.loginUkrnet();
-        ukrnetPg.selectionLastLetter();
+        ukrnetPg.loginUkrnet(Values.ukrnet_email, Values.ukrnet_password);
+        ukrnetPg.selectionLastLetterPassword();
         loginPg.recsetPassword();
         loginPg.logAutUser();
         loginPg.loginUser(Values.ukrnet_email,Values.ukrnet_password);
@@ -272,4 +269,26 @@ public class Coins extends Page {
          adminPanelPg.auctionAdd();
          auctionsPg.stopAuction();
      }
+
+    @Test
+    public  void RegisterDel(){
+        loginPg.register();
+        // loginPg.pars
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
+        ukrnetPg.selectionLastLetterRegister();
+        switcToWindowsTab(1);
+        loginPg.logAutUser();
+        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
+        loginPg.createDelet();
+        // loginPg.pars
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.requestDelUser();
+        adminPanelPg.delUser(loginPg.parsName());
+        loginPg.logAutAdmin();
+        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
+    }
+
 }

@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class Page {
     Integer size;
+    public String tempStrPage;
     public void openHomePage() {
         open(Values.homePage);
     }
@@ -18,6 +19,9 @@ public class Page {
         open(Values.ukrnetPage);
     }
 
+    public void switcToWindowsTab(int index) {
+        switchTo().window(index);       // переключения на 2 вкладку
+    }
 
     public void createEN(String name, int language) {
         $(By.name(name)).clear();

@@ -126,7 +126,7 @@ public class AuctionsPage extends Page {
             System.out.println("Аукцион удалился");
         } else {
             System.out.println("Аукцион не удалился");
-            $(By.xpath("//*[@id='t']/t")).click();  // чтоб тест упал когда найден удаляемый лот
+            throw new Error();  // чтоб тест упал когда найден удаляемый лот
         }
         System.out.println(tempBool);
     }
