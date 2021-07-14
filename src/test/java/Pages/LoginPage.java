@@ -50,7 +50,6 @@ public class LoginPage extends Page {
             $(By.name("email")).sendKeys(Values.admin_email);
             $(By.name("password")).sendKeys(Values.admin_password);
             $(By.className("btn-modal")).click();
-//            GoogleAuthenticator gAuth2 = new GoogleAuthenticator();
             code = gAuth.getTotpPassword(Values.fa2_secret_key);
             System.out.println("Code2 = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
             $(By.id("one_time_password")).sendKeys(Integer.toString(code));
@@ -129,9 +128,7 @@ public class LoginPage extends Page {
         $(By.name("password")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
         $(By.name("password_confirmation")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
         $(By.id("rules_policy_confirmation")).click(); // клик чекбокс подтверждения правил
-//
         $(By.xpath("//div[@class='form__cont sing-form']//button")).click(); // клик зарегистрироватся
-
     }
 
     public void createDelet() {
@@ -176,5 +173,12 @@ public class LoginPage extends Page {
             throw new Error();
         }
 
+    }
+
+    public void goToProfile() {
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
+        $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();        // клик по пункту меню профиль
+        tempStr = $(By.xpath("//*[@id='name']")).getAttribute("value"); // парсится и записуется значения имени и фамилии
+        System.out.println(tempStr);
     }
 }

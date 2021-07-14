@@ -50,5 +50,17 @@ public void limitCahEdit () {
         $(byXpath("//a[@id='customer_deleter']")).should(visible).click();
 
     }
+
+    public void DelUserAdmin(String name) {
+       $(By.xpath("//div[@id='dataTable1_filter']//input")).sendKeys(Values.userRegDelMail);  // ввод в поле поска електронки удаляемого пользователя
+        $(byXpath("//*[text()='" + name + "']/..//input/../a")).should(visible).click();    // нажать кнопку удалить
+        $(byXpath("//div[@class='modal-footer']/button")).should(visible).click();    // подтверждение удаления
+    }
+
+    public void User() {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click();
+    }
 }
 

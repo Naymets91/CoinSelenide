@@ -36,7 +36,7 @@ public class Coins extends Page {
 //        options.addArguments("disable-popup-blocking");
 //        Configuration.browserSize = "1920x1080";
         com.codeborne.selenide.Configuration.browser = "chrome";      //браузер для тестов
-        com.codeborne.selenide.Configuration.timeout = 6000;   //максимальный интервал ожидания вебэлементов в милисекундах
+        com.codeborne.selenide.Configuration.timeout = 20000;   //максимальный интервал ожидания вебэлементов в милисекундах
 //        com.codeborne.selenide.Configuration.savePageSource = false;  //не сохранять дополнительные настройки
         ChromeOptions options = new ChromeOptions();  //создать обьект для установки опций браузера хром
         Map<String, Object> prefs = new HashMap<>();
@@ -271,7 +271,7 @@ public class Coins extends Page {
      }
 
     @Test
-    public  void RegisterDel(){
+    public  void RegisterDel(){ // Регистрация пользователя и удаления через запрос в профиле клиента
         loginPg.register();
         // loginPg.pars
         openUkrnetPage();
@@ -287,6 +287,27 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.requestDelUser();
         adminPanelPg.delUser(loginPg.parsName());
+        loginPg.logAutAdmin();
+        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
+    }
+
+    @Test
+    public  void RegisterDelAdminDel (){ // Регистрация пользователя и удаления администратором
+        loginPg.register();
+        // loginPg.pars
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
+        ukrnetPg.selectionLastLetterRegister();
+        switcToWindowsTab(1);
+        loginPg.logAutUser();
+        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
+        // loginPg.pars
+        loginPg.goToProfile();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.User();
+        adminPanelPg.DelUserAdmin(loginPg.parsName());
         loginPg.logAutAdmin();
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }

@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="CoinSelenide" />
         <module name="Coin" />
+        <module name="testselenide" />
       </profile>
     </annotationProcessing>
   </component>
