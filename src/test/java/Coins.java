@@ -4,10 +4,13 @@ import Pages.*;
 
 
 import com.codeborne.selenide.WebDriverRunner;
+import listeners.AllureOnFailListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
+import ru.yandex.qatools.allure.annotations.Description;
+import ru.yandex.qatools.allure.annotations.Title;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +18,8 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.sleep;
 
-
+@Listeners({AllureOnFailListener.class})
+@Title("FlyTest Test Suite")
 public class Coins extends Page {
      AuctionsPage auctionsPg = new AuctionsPage();
      LotiPagePage lotiPg = new LotiPagePage();
@@ -28,16 +32,8 @@ public class Coins extends Page {
 
     @BeforeMethod
     public void setUp() {
-//        closeWebDriver();
-//        Configuration.timeout = 20000;
-//        Configuration.startMaximized = true;
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("test-type");
-//        options.addArguments("disable-popup-blocking");
-//        Configuration.browserSize = "1920x1080";
         com.codeborne.selenide.Configuration.browser = "chrome";      //браузер для тестов
-        com.codeborne.selenide.Configuration.timeout = 20000;   //максимальный интервал ожидания вебэлементов в милисекундах
-//        com.codeborne.selenide.Configuration.savePageSource = false;  //не сохранять дополнительные настройки
+        com.codeborne.selenide.Configuration.timeout = 15000;   //максимальный интервал ожидания вебэлементов в милисекундах
         ChromeOptions options = new ChromeOptions();  //создать обьект для установки опций браузера хром
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false); // вспливающие окна
@@ -49,21 +45,8 @@ public class Coins extends Page {
         WebDriver myWebDriver = new ChromeDriver(options);
         WebDriverRunner.setWebDriver(myWebDriver);
         myWebDriver.manage().window().maximize();
-
-
-//        options.addArguments("--disable-infobars");   //убрать в браузере полосу infobars
-//        options.addArguments("--disable-dev-tools");  //отключить в браузере dev-tools
-//        options.addArguments("--test-type");        // убрать всплывающие окна
-//        options.addArguments("--disable-popup-blocking");// убрать всплывающие окна
-//        WebDriver myWebDriver = new ChromeDriver(options);  //создать вебдрайвер с  указанными выше опциями
-//        WebDriverRunner.setWebDriver(myWebDriver); //запуск браузера
-//        myWebDriver.manage().window().maximize();
         openHomePage();
         mainPg.SwitchLanguageRu();
-    }
-    @AfterMethod
-    public void finito() {
-        closeWebDriver();
     }
 
     @Test (priority = 1)                                            // Тест двойной аутентификации
@@ -271,7 +254,8 @@ public class Coins extends Page {
      }
 
     @Test
-    public  void RegisterDel(){ // Регистрация пользователя и удаления через запрос в профиле клиента
+    @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
+    public void RegisterDel(){ // Регистрация пользователя и удаления через запрос в профиле клиента
         loginPg.register();
         // loginPg.pars
         openUkrnetPage();
@@ -292,6 +276,7 @@ public class Coins extends Page {
     }
 
     @Test
+    @Description(value = "Регистрация пользователя и удаления администратором")
     public  void RegisterDelAdminDel (){ // Регистрация пользователя и удаления администратором
         loginPg.register();
         // loginPg.pars
@@ -312,4 +297,8 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
 
+    @AfterMethod
+    public void after() {
+        closeWebDriver();
+    }
 }

@@ -1,6 +1,7 @@
 package Pages;
 
 import Config.Values;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -12,12 +13,21 @@ import static com.codeborne.selenide.Selenide.*;
 public class Page {
     Integer size;
     public String tempStrPage;
+
+    @Step("Переход на сайт coins.dd-dev.club")
     public void openHomePage() {
+
         open(Values.homePage);
     }
+
+    @Step("Переход на сайт Ukr.net")
     public void openUkrnetPage() {
         open(Values.ukrnetPage);
     }
+
+    public void setInput () {
+
+}
 
     public void switcToWindowsTab(int index) {
         switchTo().window(index);       // переключения на 2 вкладку

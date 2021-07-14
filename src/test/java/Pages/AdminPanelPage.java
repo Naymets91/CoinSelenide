@@ -1,6 +1,7 @@
 package Pages;
 
 import Config.Values;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -16,7 +17,7 @@ public void limitCahEdit () {
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[3]//span")).should(visible).click();
 }
-
+    @Step("Перейти в раздел Заявки на удаление аккаунта")
     public void requestDelUser () {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
@@ -44,19 +45,21 @@ public void limitCahEdit () {
     $(By.xpath("//*[@id='dataTable1_filter']/label/input")).sendKeys(Values.ukrnet_email);  // в поле поиск ввести емайл пользователя
     $(byXpath("//*[text()='testcoins179@ukr.net']/..//a[1]")).should(visible).click();  // нажать на кнопку изминить
     }
-
+    @Step("Удаления пользователя")
     public void delUser( String name) {
         $(byXpath("//*[text()='" + name + "']/..//input")).should(visible).click();
         $(byXpath("//a[@id='customer_deleter']")).should(visible).click();
 
     }
 
+    @Step("Удаление пользователя администратором")
     public void DelUserAdmin(String name) {
        $(By.xpath("//div[@id='dataTable1_filter']//input")).sendKeys(Values.userRegDelMail);  // ввод в поле поска електронки удаляемого пользователя
         $(byXpath("//*[text()='" + name + "']/..//input/../a")).should(visible).click();    // нажать кнопку удалить
         $(byXpath("//div[@class='modal-footer']/button")).should(visible).click();    // подтверждение удаления
     }
 
+    @Step("Переход на вкладку пользователи")
     public void User() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();

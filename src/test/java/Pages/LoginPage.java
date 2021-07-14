@@ -2,8 +2,9 @@ package Pages;
 
 import Config.Values;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class LoginPage extends Page {
 
     boolean tempBool;
+    StringBuilder tempStrB;
 
     String tempStr;
     Integer tempInt;
@@ -25,7 +27,7 @@ public class LoginPage extends Page {
         $(By.name("password")).sendKeys(Values.user1_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
     }
-
+    @Step("Авторизация пользователя")
     public void loginUser(String user_email, String user_password) {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();         // клик по кнопке вход
         $(By.name("email")).sendKeys(user_email);    // ввод в поле емаил емаил юзера
@@ -33,7 +35,7 @@ public class LoginPage extends Page {
         $(By.className("btn-modal")).click();   // клик по кнопке
     }
 
-
+    @Step("Авторизация администратором")
     public void loginAdmin() {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();  // клик по кнопке вход
         $(By.name("email")).sendKeys(Values.admin_email);       // ввод в поле емаил емаил администратора
@@ -68,6 +70,7 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[7]/a")).click();              // клик по пункту меню выход
     }
 
+    @Step("Выход из учетной записи пользователя")
     public void logAutUser() {
         openHomePage(); // открить стартовую страницу
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
@@ -106,11 +109,15 @@ public class LoginPage extends Page {
         }
 
     }
-
+    @Step("Регистрация пользователя")
     public void register() {        // регистрация нового пользователя
         $(By.xpath("//div[@class='nav-lang']/../a[1]")).click();  // клик по кнопке регистрация
-        $(By.name("first_name")).sendKeys(randomStringEE(7));  // ввод в поле имя
-        $(By.name("last_name")).sendKeys(randomStringEE(7));  // ввод в поле фамилия
+        tempStrB = randomStringEE(7);
+        $(By.name("first_name")).sendKeys(tempStrB);  // ввод в поле имя
+        Allure.addAttachment("Результат", "text/plain","Имя = " + String.valueOf(tempStrB));
+        tempStrB = randomStringEE(7);
+        $(By.name("last_name")).sendKeys(tempStrB);  // ввод в поле фамилия
+        Allure.addAttachment("Результат", "text/plain","Фамилия = " + String.valueOf(tempStrB));
         $(By.name("company")).sendKeys(randomStringEE(7));  // ввод в поле компания
         $(By.name("vat")).sendKeys(randomStringEE(2) + "02555787");  // ввод в поле ват
         $(By.name("email")).sendKeys(Values.userRegDelMail);  // ввод в поле email
@@ -130,7 +137,7 @@ public class LoginPage extends Page {
         $(By.id("rules_policy_confirmation")).click(); // клик чекбокс подтверждения правил
         $(By.xpath("//div[@class='form__cont sing-form']//button")).click(); // клик зарегистрироватся
     }
-
+    @Step("Создать запрос на удаления пользователя")
     public void createDelet() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();        // клик по пункту меню профиль
@@ -158,7 +165,7 @@ public class LoginPage extends Page {
 //        temp = $(By.name(nameId)).getSelectedText();
 //        System.out.println(printName + "     " + temp);
     }
-
+    @Step("Проверка авторизации удаленным пользователем")
     public void checkLogin (String user_email, String user_password) {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();         // клик по кнопке вход
         $(By.name("email")).sendKeys(user_email);    // ввод в поле емаил емаил юзера
@@ -174,7 +181,7 @@ public class LoginPage extends Page {
         }
 
     }
-
+    @Step("Переход в профиль")
     public void goToProfile() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();        // клик по пункту меню профиль
