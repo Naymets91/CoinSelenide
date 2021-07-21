@@ -77,7 +77,7 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();        // клик по пункту меню выход
     }
 
-
+@Step ("Pапроса для сброса пароля")
     public void createRequestRecoveryPassword() {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();    // клик по кнопке вход
         $(By.xpath("//div[@class='form__ithem form_forgot']/a[2]")).click();    // клик по ссылке  Забыли пароль?
@@ -85,21 +85,25 @@ public class LoginPage extends Page {
         $(By.className("btn-modal")).click();    // нажатия кнопки Отправить
     }
 
-
-    public void recsetPassword() {
+@Step ("Генерация нового пароля ")
+    public String recsetPassword() {
         switchTo().window(1);       // переключения на 2 вкладку
         tempStr = "Df";
         tempInt = getRandomNumber(8000000, 8999999);
         password = tempStr + tempInt;
         System.out.println(password);
-        $(By.name("email")).sendKeys(Values.ukrnet_email);      // ввод емаийла
         $(By.name("password")).sendKeys(password);              // ввод сгенерированого рандомного пароля
         $(By.name("password_confirmation")).sendKeys(password); // подтверждения пароля
-        $(By.xpath("//button[@class='btn-yel btn-modal']")).click();           // нажатия кнопки Отправить
+        $(By.xpath("//button[@class='btn-yel btn-modal']")).click();// нажатия кнопки Отправить
+        tempStrPage = password;
+    System.out.println("tempStrPage " + tempStrPage);
+        return password;
     }
 
-
-
+    public String getMyPass(){
+        return this.password;
+    }
+@Step ("Проверка авторизации используя повый пароль")
     public void checkingUserAuthorization() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();

@@ -14,7 +14,7 @@ public class UkrnetPage extends Page {
         $(By.name("password")).sendKeys(ukrnet_password);    // ввод в поле пароль валидный пароль
         $(By.xpath("//button [@class='Ol0-ktls jY4tHruE _2Qy_WiMj']")).click(); // нажатия кнопки Продолжить
     }
-
+@Step ("Переход по ссылке в письме")
     public void selectionLastLetterPassword() {
         sleep(5000);
         $(By.xpath("//table[@class='noselect']//tbody/tr[1]")).click();     // выбор 1 письма

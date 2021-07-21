@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.sleep;
 
 @Listeners({AllureOnFailListener.class})
 @Title("FlyTest Test Suite")
@@ -154,8 +153,8 @@ public class Coins extends Page {
         auctionsPg.delete();
     }
 
-    @Test                                       // Изменение кредитного лимита  (иногда проблема нахождения пользователя для редактиования)
-    public void editLimit() {
+    @Test                                       // Изменение кредитного лимита , статус одобрено
+    public void editLimitStatusApproved() {
         loginPg.loginUser(Values.user1_email, Values.user1_password);
         mainPg.gotoProfile();
         limitCashPg.editLimitCash();
@@ -164,12 +163,50 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.limitCahEdit();
         limitCashPg.searchUser();
+        limitCashPg.userEdit();
         limitCashPg.acceptNewCash();
         loginPg.logAutAdmin();
         loginPg.loginUser(Values.user1_email, Values.user1_password);
         mainPg.gotoProfile();
         limitCashPg.parsCash();
         limitCashPg.equalsCash();
+    }
+
+    @Test                                       // Изменение кредитного лимита , статус отменено
+    public void editLimitStatusReject() {
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.userEdit();
+        limitCashPg.rejectNewCash();
+        loginPg.logAutAdmin();
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCashReject();
+    }
+
+    @Test                                       // Изменение кредитного лимита , удаления запроса
+    public void editLimitDel() {
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.userDel();
+        loginPg.logAutAdmin();
+        loginPg.loginUser(Values.user1_email, Values.user1_password);
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCashReject();
     }
 
     @Test                                       // Востановления пароля через запрос забили пароль.
@@ -180,7 +217,7 @@ public class Coins extends Page {
         ukrnetPg.selectionLastLetterPassword();
         loginPg.recsetPassword();
         loginPg.logAutUser();
-        loginPg.loginUser(Values.ukrnet_email,Values.ukrnet_password);
+        loginPg.loginUser(Values.ukrnet_email,loginPg.getMyPass());
         loginPg.checkingUserAuthorization();
     }
 

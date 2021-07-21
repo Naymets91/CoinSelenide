@@ -29,6 +29,15 @@ public class Page {
 
 }
 
+    public boolean find(By locator) {
+        try {
+            $(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public void switcToWindowsTab(int index) {
         switchTo().window(index);       // переключения на 2 вкладку
     }

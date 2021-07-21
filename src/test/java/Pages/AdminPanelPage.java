@@ -17,12 +17,14 @@ public void limitCahEdit () {
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[3]//span")).should(visible).click();
 }
+
     @Step("Перейти в раздел Заявки на удаление аккаунта")
     public void requestDelUser () {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[2]//span")).should(visible).click();
     }
+
     public void auctions() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
     }
@@ -35,12 +37,13 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
     }
 
-
+@Step ("Переход в пункт меню Клиенты")
     public void editPassUser() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();      // клик на меню пользователи
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click(); // клик на меню клиенты
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click(); // клик на меню клиенты
     }
+    @Step ("Поиск нужного пользователя")
     public void searchUser(){
     $(By.xpath("//*[@id='dataTable1_filter']/label/input")).sendKeys(Values.ukrnet_email);  // в поле поиск ввести емайл пользователя
     $(byXpath("//*[text()='testcoins179@ukr.net']/..//a[1]")).should(visible).click();  // нажать на кнопку изминить

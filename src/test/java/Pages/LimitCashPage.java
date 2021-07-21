@@ -3,16 +3,19 @@ package Pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class LimitCashPage extends Page {
     boolean tempBool;
 
     String beafore;
     String after;
+    String statysBeafore;
+    String statysAfter;
     String temp;
     String parsName;
 
@@ -23,9 +26,17 @@ public class LimitCashPage extends Page {
     public void searchUser() {
         $(By.xpath("//select[@id='status']")).should(visible).click();
         $(By.xpath("//select[@id='status']/option[2]")).should(visible).click();
+        sleep(2000);
         $(By.xpath("//table[@id='dataTableRequests']//tr")).should(visible).click();
         $(byXpath("//*[text()='В ожидании']")).should(visible);
-        $(byXpath("//*[text()='Serega Test 1 Serega1']/..//a[1]")).should(visible).click();
+    }
+
+    public void userEdit() {
+        $(byXpath("//*[contains(text(),'Serega')]/..//a[1]")).should(visible).click();
+    }
+    public void userDel() {
+        $(byXpath("//*[contains(text(),'Serega')]/..//a[2]")).should(visible).click();
+        sleep(4000);
     }
 
     public void acceptNewCash() {
@@ -33,6 +44,15 @@ public class LimitCashPage extends Page {
         $(By.xpath("//select[@id='status']/option[3]")).should(visible).click();
         $(By.xpath("//div[@class='card-body']//button")).should(visible).click();
     }
+
+    public void rejectNewCash() {
+        $(By.xpath("//select[@id='status']")).click();
+        $(By.xpath("//select[@id='status']/option[4]")).click();
+        $(By.xpath("//div[@class='top-page-name']//h1")).click();
+        sleep(2000);
+        $(By.xpath("//div[@class='card-body']//button")).click();
+    }
+
 public void goToHomePage(){
         $(By.xpath("//*[@id=\"navbar-mobile\"]//ul[2]/li/a")).click();
     }
@@ -46,14 +66,12 @@ public void goToHomePage(){
         beafore = $(By.xpath("//input[@id='max_credit_limit']")).getAttribute("value");
         System.out.println("желаемый кредит  " + beafore);
         $(By.xpath("//button[@id='maxLimitBtn']")).click();
-        $(By.xpath("//span[@class='limit-status text-warning']")).should(Condition.visible);
-
+        statysBeafore = $(By.xpath("//span[@class='limit-status text-warning']")).getAttribute("value");
     }
 
     public void parsCash() {
         after =  $(By.xpath("//div[@class='wrapp__col col-xs-12 col-sm-9 col-md-4'][3]//input")).getAttribute("value");
         System.out.println("После подтверждения " + after);
-
     }
 
     public void equalsCash(){
@@ -64,5 +82,24 @@ public void goToHomePage(){
         } else {
             System.out.println("Кредитный  лимит равен желаемому");
         }
+    }
+
+    public void equalsCashReject() {
+        boolean size = find(By.xpath("//span[@class='limit-status text-warning']"));
+        if (size == false) {
+            System.out.println("Ошибка изминения статуса или удаления кредитного запроса");
+            throw new Error();
+        } else {
+            System.out.println("Ошибка изминения статуса или удаления кредитного запроса");
+            System.out.println("Статус изминен на отклонено или заявка на лимит удалена");
+        }
+
+        if (beafore.equals(after) != false) {
+            System.out.println("Кредитный  лимит изменен ");
+            throw new Error();
+        } else {
+            System.out.println("Кредитный  лимит не изменен");
+        }
+
     }
 }
