@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.sleep;
 
 @Listeners({AllureOnFailListener.class})
 @Title("FlyTest Test Suite")
@@ -28,6 +29,7 @@ public class Coins extends Page {
      LoginPage loginPg = new LoginPage();
      UkrnetPage ukrnetPg = new UkrnetPage();
      EditUserPage editUserPg = new EditUserPage();
+     CategoryPage categoryPg = new CategoryPage();
 
     @BeforeMethod
     public void setUp() {
@@ -333,6 +335,22 @@ public class Coins extends Page {
         loginPg.logAutAdmin();
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
+
+    @Test
+    public void addEdidDelCategory(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.category();
+        categoryPg.addCategory();
+        categoryPg.equalsAddCategory();
+        categoryPg.editCategory();
+        categoryPg.equalsEditCategory();
+        categoryPg.usageNewCategory();
+        categoryPg.delCategory();
+        categoryPg.equalsDelCategory();
+    }
+
+
 
     @AfterMethod
     public void after() {

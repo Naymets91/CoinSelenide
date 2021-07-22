@@ -68,5 +68,12 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click();
     }
+////////////////////////////////////////////////////////////настройка
+    ///////////////////////////////////////////////// Категории
+@Step("Переход на вкладку категории")
+    public void category() {
+    $(By.xpath("//ul[@id='main-menu-navigation']/li[7]")).should(visible).click();      // клик на меню настройкм
+    $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[2]")).should(visible).click(); // клик на меню категории
+    }
 }
 
