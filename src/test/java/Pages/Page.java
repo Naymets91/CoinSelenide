@@ -1,10 +1,14 @@
 package Pages;
 
 import Config.Values;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -88,7 +92,7 @@ public class Page {
         int count = s;
         for (int i = 0; i < count; i++)
             randString.append(symbols.charAt((int) (Math.random() * symbols.length())));
-//        temp = String.valueOf(randString);
+
         return randString;
     }
 
@@ -123,5 +127,8 @@ public String datePlus(int rtime) {
     return strDate ;
 //    System.out.println(rx);
 }
+
+
+
 
 }

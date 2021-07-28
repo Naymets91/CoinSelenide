@@ -1,6 +1,7 @@
 package Pages;
 
 
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 
 
@@ -198,6 +199,7 @@ public class LotiPagePage extends Page {
         for (String s : before) {
             System.out.println(s);
         }
+        Allure.attachment("Результат", String.valueOf(before));
     }
 
     public void parsLotAfter() {

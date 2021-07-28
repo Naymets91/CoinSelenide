@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.sleep;
 
 @Listeners({AllureOnFailListener.class})
 @Title("FlyTest Test Suite")
@@ -337,13 +336,18 @@ public class Coins extends Page {
     }
 
     @Test
-    public void addEdidDelCategory(){
+    public void addEdidDelCategory() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.category();
-        categoryPg.addCategory();
-        categoryPg.equalsAddCategory();
-        categoryPg.editCategory();
+        categoryPg.clickButtonAddCategoty();
+        categoryPg.fillCategory();
+        categoryPg.clickButtonSaveCategoty();
+        categoryPg.equalsAddEditCategory();
+        categoryPg.clickButtonEditCategoty();
+        categoryPg.fillCategory();
+        categoryPg.clickButtonUpdateCategoty();
+        categoryPg.equalsAddEditCategory();
         categoryPg.equalsEditCategory();
         categoryPg.usageNewCategory();
         categoryPg.delCategory();

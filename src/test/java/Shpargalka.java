@@ -90,3 +90,7 @@ clearBrowserCache();       // очистить кеш браузера
 //public String getMyPass(){                получить переменную из другого класса
 //    return this.password;
 //}
+
+//Allure.step("bla bla bla", () -> {
+//        $("#sldfbasd").should(visible)
+//        });

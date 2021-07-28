@@ -7,19 +7,25 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends Page {
 
     boolean tempBool;
+
     StringBuilder tempStrB;
 
     String tempStr;
     Integer tempInt;
 
     String password;
+
+    List<String> beforeReg = new ArrayList<>();
+    List<String> afterReg = new ArrayList<>();
 
     public void loginUserUkrnet() {
         $(By.className("btn-yel")).click();         // клик по кнопке вход
@@ -116,31 +122,74 @@ public class LoginPage extends Page {
     @Step("Регистрация пользователя")
     public void register() {        // регистрация нового пользователя
         $(By.xpath("//div[@class='nav-lang']/../a[1]")).click();  // клик по кнопке регистрация
-        tempStrB = randomStringEE(7);
-        $(By.name("first_name")).sendKeys(tempStrB);  // ввод в поле имя
-        Allure.addAttachment("Результат", "text/plain","Имя = " + String.valueOf(tempStrB));
-        tempStrB = randomStringEE(7);
-        $(By.name("last_name")).sendKeys(tempStrB);  // ввод в поле фамилия
-        Allure.addAttachment("Результат", "text/plain","Фамилия = " + String.valueOf(tempStrB));
-        $(By.name("company")).sendKeys(randomStringEE(7));  // ввод в поле компания
-        $(By.name("vat")).sendKeys(randomStringEE(2) + "02555787");  // ввод в поле ват
-        $(By.name("email")).sendKeys(Values.userRegDelMail);  // ввод в поле email
-        $(By.name("phone")).sendKeys("+380980000058");  // ввод в поле номер телефона
+
+        setAllurStrRandom("first_name", "Имя = "); // ввод в поле имя
+        setAllurStrRandom("last_name", "Фамилия = "); // ввод в поле фамилия
+        setAllurStrRandom("company", "Компания = "); // ввод в поле компания
+        setAllurStr_IntRandom("vat", "Ват = ",5000,10000);  // ввод в поле ват
+        setAllurStrMail("email", "email = "); // ввод в поле email
+        setAllurStrSave_IntRandom("phone", "телефон = ",10000000,999999999); // ввод в поле номер телефона
+
         $(By.id("country_id-selectized")).click();
-        randomSelect("country_id", "Страна", 2);    // ввод в поле Страна
-        $(By.name("index")).sendKeys("22400");  // ввод в поле индекс
-        $(By.name("region")).sendKeys("Винницкий");  // ввод в поле регион
+        randomSelect("country_id", 2);    // ввод в поле Страна
+
+        setAllurStrSave("index","индекс =","22400");// ввод в поле индекс
+        setAllurStrSave("region","регион =","Винницкий");// ввод в поле регион
+
         $(By.name("city")).sendKeys("Vinnitsa");  // ввод в поле город
         $(By.name("address")).sendKeys("Vinnitsa");  // ввод в поле Адрес для выставления счетов
-         randomSelect("delivery_id", "Способ доставки", 1);  // ввод в поле Способ доставки
+
+        randomSelect("delivery_id",  1);  // ввод в поле Способ доставки
+
         $(By.name("shipping_address")).sendKeys(randomStringEE(7) + " "+ "35");  // ввод в поле Адрес доставки
         $(By.name("recommendations")).sendKeys(randomStringEE(5) );  // ввод в поле рекомендации
         $(By.name("max_credit_limit")).sendKeys("555" );  // ввод в поле кредитный лимит
         $(By.name("password")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
         $(By.name("password_confirmation")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
+
         $(By.id("rules_policy_confirmation")).click(); // клик чекбокс подтверждения правил
-        $(By.xpath("//div[@class='form__cont sing-form']//button")).click(); // клик зарегистрироватся
+        parsReg();
+        $(By.xpath("//div[@class='form__cont sing-form']//button")).click();
+        $(By.xpath("//div[@class='alert alert-success']//p")).click();
     }
+
+
+    private void setAllurStr_IntRandom(String by_Name, String contentName, Integer a1, Integer a2 ) {
+        tempStr = String.valueOf(randomStringEE(2)) + getRandomNumber(a1,a2);
+        $(By.name(by_Name)).sendKeys(tempStr);
+        Allure.addAttachment("Результат", "application/json", contentName + String.valueOf(tempStr));
+    }
+    private void setAllurStrSave(String by_Name, String contentName, String sendKeys) {
+        tempStr = sendKeys;
+        $(By.name(by_Name)).sendKeys(tempStr);
+        Allure.addAttachment("Результат", "application/json", contentName + tempStr);
+    }
+    private void setAllurStrSave_IntRandom(String by_Name, String contentName, Integer a1, Integer a2 ) {
+        tempStr = "+380" + getRandomNumber(a1,a2);
+        $(By.name(by_Name)).sendKeys(tempStr);
+        Allure.addAttachment("Результат", "application/json", contentName + String.valueOf(tempStr));
+    }
+
+    private void setAllurStrMail(String by_Name, String contentName ) {
+        tempStr = Values.userRegDelMail;
+        $(By.name(by_Name)).sendKeys(tempStr);
+        Allure.addAttachment("Результат", "application/json", contentName + tempStr);
+    }
+
+    private void setAllurStrRandom(String by_Name, String contentName) {
+        tempStrB = randomStringEE(7);
+        $(By.name(by_Name)).sendKeys(tempStrB);
+        Allure.addAttachment("Результат", "application/json", contentName + String.valueOf(tempStrB));
+    }
+    private void setAllurSelectRandom(String by_Name, String contentName) {
+        tempStrB = randomStringEE(7);
+        $(By.name(by_Name)).sendKeys(tempStrB);
+        Allure.addAttachment("Результат", "application/json", contentName + String.valueOf(tempStrB));
+    }
+    private void parsReg() {
+
+    }
+
     @Step("Создать запрос на удаления пользователя")
     public void createDelet() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
@@ -161,13 +210,12 @@ public class LoginPage extends Page {
         $(By.xpath("//div[@class='message__btn-wrapp']/button[2]")).click();        // клик по  кнопке подтвердить
     }
 
-    public void randomSelect(String nameId, String printName, int startRandomNumber) {
+    public void randomSelect(String nameId, int startRandomNumber) {
         $(By.id(nameId+"-selectized")).click();
         size = $$(By.xpath("//select[@id='" + nameId + "']/..//div[@class='selectize-dropdown-content']/div/span")).size();
         size = getRandomNumber(startRandomNumber, size);
         $(By.xpath("//select[@id='" + nameId + "']/..//div[@class='selectize-dropdown-content']/div[" + size + "]/span")).click();
-//        temp = $(By.name(nameId)).getSelectedText();
-//        System.out.println(printName + "     " + temp);
+
     }
     @Step("Проверка авторизации удаленным пользователем")
     public void checkLogin (String user_email, String user_password) {
