@@ -348,8 +348,9 @@ public class Coins extends Page {
         categoryPg.fillCategory();
         categoryPg.clickButtonUpdateCategoty();
         categoryPg.equalsAddEditCategory();
-        categoryPg.equalsEditCategory();
         categoryPg.usageNewCategory();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.category();
         categoryPg.delCategory();
         categoryPg.equalsDelCategory();
     }

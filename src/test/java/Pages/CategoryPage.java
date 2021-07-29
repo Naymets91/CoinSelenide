@@ -5,15 +5,14 @@ import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
-
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CategoryPage extends Page {
-    String r ="Привіт";
+
     Integer sizeRandom;
     String nameEe;
+    String nameRu;
+    String tempName;
     String rangomNameCategory;
 
     @Step("Клик на кнопку Добавить категорию")
@@ -31,7 +30,7 @@ public class CategoryPage extends Page {
         $(By.id("sort")).sendKeys("" + sizeRandom);
     }
 
-    @Step("Имя категории ")
+
     public String setNameDescrintion(String lang, String xPathName, String xPathDescription) {
         Integer temp = null;
         String langEe = "Ee";
@@ -55,7 +54,8 @@ public class CategoryPage extends Page {
             $(By.name(xPathName)).sendKeys(rangomNameCategory);
             $(By.id("description")).clear();
             $(By.id("description")).sendKeys(rangomNameCategory);
-            Allure.attachment("Результат", rangomNameCategory);
+            Allure.attachment("Имя/описания категории Ee", "Имя =  " + rangomNameCategory + "   Описание =  " + rangomNameCategory );
+
         }
         if (langEn.equals(lang)) {
             rangomNameCategory = String.valueOf(randomStringEN(8));
@@ -64,18 +64,19 @@ public class CategoryPage extends Page {
             $(By.name(xPathName)).sendKeys(rangomNameCategory);
             $(By.name(xPathDescription)).clear();
             $(By.name(xPathDescription)).sendKeys(rangomNameCategory);
-            Allure.attachment("Результат", rangomNameCategory);
+            Allure.attachment("Имя/описания категории Еn ", "Имя = " + rangomNameCategory + "  Описание = " + rangomNameCategory );
         }
         if (langRu.equals(lang)) {
             rangomNameCategory = String.valueOf(randomStringRU(5));
+            nameRu = rangomNameCategory;
             $(By.xpath("//ul[@class='dropdown-menu show']/li[" + temp + "]")).click();
             $(By.name(xPathName)).clear();
             $(By.name(xPathName)).sendKeys(rangomNameCategory);
             $(By.name(xPathDescription)).clear();
             $(By.name(xPathDescription)).sendKeys(rangomNameCategory);
-            Allure.attachment("Результат", rangomNameCategory);
+            Allure.attachment("Имя/описания категории Ru ", "Имя = " + rangomNameCategory + "   Описание =  " + rangomNameCategory );
         }
-        return rangomNameCategory;
+        return rangomNameCategory ;
     }
 
     @Step("Клик на кнопку Сохранить")
@@ -87,14 +88,14 @@ public class CategoryPage extends Page {
     @Step("Проверка создания категории / редактирования категории")
     public void equalsAddEditCategory() {
       $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
-      sleep(2000);
+      sleep(1000);
        Boolean name = find((By.xpath("//*[text()='"+nameEe+"']")));
 if (name == true){
     System.out.println("Елемент успешно создан/редактирован");
     Allure.attachment("Результат", "Елемент успешно создан/редактирован" );
 } else {
     System.out.println("Елемент не создан/не редактирован ");
-    Allure.addAttachment("Результат", "application/json", "!! Елемент не создан/не редактирован !!" );
+    Allure.attachment("Результат", "!! Елемент не создан/не редактирован !!" );
     throw new Error();
 }
     }
@@ -103,7 +104,7 @@ if (name == true){
     public void clickButtonEditCategoty() {
         $(By.xpath("//div[@id='dataTable_filter']//input")).clear();
         $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
-        sleep(2000);
+        sleep(1000);
         $(By.xpath("//*[text()='"+nameEe+"']/..//a")).click();
     }
 
@@ -112,22 +113,68 @@ if (name == true){
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
     }
 
-    public void equalsEditCategory() {
-    }
+
     @Step("Использование новой категории")
     public void usageNewCategory() {
 
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
+        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
+        $(By.xpath("//*[@id='dataTablesLot']/tbody/tr//a[2]")).click(); //  редактировать
 
+        $(By.name("category_id")).click();                                              // добавить в лот новую категорию
+        size = $$(By.xpath("//select[@name='category_id']/option")).size();
+        $(By.xpath("//select[@name='category_id']/option[contains(text(), '" + nameEe +"')]")).click();
+        System.out.println(size);
+        tempName = $(By.name("category_id")).getSelectedText();
+        System.out.println("Temp name =" + tempName);
+        System.out.println("NameEE =" + nameEe);
+        if (tempName.equals(nameEe) != true) {
+            Allure.attachment("Результат", "Невозможно выбрать созданую категорию");
+            throw new Error();
+            }
+        else {Allure.attachment("Результат", "Новая категория успешно успешно добавленая в лот" );}
+        $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();// клик по кнопке обновить
+        $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
+        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
+
+        $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).click(); // показать все категории
+        sleep(1000);
+
+        Boolean nameBool = $(By.xpath("//*[text()='"+nameRu+"']")).isDisplayed();
+        System.out.println("NameRu = " + nameRu);
+        System.out.println("Name = " + nameBool);
+        if (nameBool == true){
+            System.out.println("Елемент присутствует в фильтре");
+            Allure.attachment("Результат", ">>> Елемент присутствует в фильтре <<<" );
+        } else {
+            System.out.println("Елемент отсутствует в фильтре");
+            Allure.attachment("Результат", ">>> Елемент отсутствует в фильтре <<<" );
+            throw new Error();
+        }
 
     }
 
 
     @Step("Удаления созданой категории")
     public void delCategory() {
-//        $(By.xpath("//*[text()='"+nameEe+"']/..//a")).click();
+        $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
+        sleep(2000);
+        $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light']")).click();
     }
-
+    @Step("Проверка удаления категории")
     public void equalsDelCategory() {
+        $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
+        sleep(1000);
+        Boolean nameB = $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light']")).isDisplayed();
+        System.out.println("Поиск удаления = "+ nameB);
+        if (nameB != true){
+            System.out.println("Елемент успешно удален");
+            Allure.attachment("Результат", ">>> Елемент успешно удален <<<" );
+        } else {
+            System.out.println("Елемент не создан/не редактирован ");
+            Allure.attachment("!!Результат!!", ">>> Елемент не удален  <<<" );
+            throw new Error();
+        }
     }
 
 
