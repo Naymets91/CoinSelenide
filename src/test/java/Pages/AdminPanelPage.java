@@ -75,5 +75,18 @@ public void limitCahEdit () {
     $(By.xpath("//ul[@id='main-menu-navigation']/li[7]")).should(visible).click();      // клик на меню настройкм
     $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[2]")).should(visible).click(); // клик на меню категории
     }
+
+    @Step("Переход на вкладку период")
+    public void period() {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[7]")).should(visible).click();      // клик на меню настройкм
+        $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]")).should(visible).click(); // клик на меню фильтры
+        $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]//li[1]")).should(visible).click(); // клик на меню период
+    }
+    @Step("Переход на вкладку номинал")
+    public void denomination() {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[7]")).should(visible).click();      // клик на меню настройкм
+        $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]")).should(visible).click(); // клик на меню фильтры
+        $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]//li[2]")).should(visible).click(); // клик на меню номинал
+    }
 }
 

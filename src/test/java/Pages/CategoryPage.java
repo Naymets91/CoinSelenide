@@ -5,6 +5,7 @@ import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CategoryPage extends Page {
@@ -27,6 +28,7 @@ public class CategoryPage extends Page {
         nameEe = $(By.name("name")).getAttribute("value");;
         setNameDescrintion("En", "___name[en]", "___description[en]");
         setNameDescrintion("Ru", "___name[ru]", "___description[ru]");
+        $(By.id("sort")).clear();
         $(By.id("sort")).sendKeys("" + sizeRandom);
     }
 
@@ -92,10 +94,10 @@ public class CategoryPage extends Page {
        Boolean name = find((By.xpath("//*[text()='"+nameEe+"']")));
 if (name == true){
     System.out.println("Елемент успешно создан/редактирован");
-    Allure.attachment("Результат", "Елемент успешно создан/редактирован" );
+    Allure.attachment("Результат", ">>> Елемент успешно создан/редактирован <<<" );
 } else {
     System.out.println("Елемент не создан/не редактирован ");
-    Allure.attachment("Результат", "!! Елемент не создан/не редактирован !!" );
+    Allure.attachment("Результат", ">>> Елемент не создан/не редактирован  <<<" );
     throw new Error();
 }
     }
@@ -129,22 +131,28 @@ if (name == true){
         System.out.println("Temp name =" + tempName);
         System.out.println("NameEE =" + nameEe);
         if (tempName.equals(nameEe) != true) {
-            Allure.attachment("Результат", "Невозможно выбрать созданую категорию");
+            Allure.attachment("Результат", ">>> Невозможно выбрать созданую категорию <<<");
             throw new Error();
             }
-        else {Allure.attachment("Результат", "Новая категория успешно успешно добавленая в лот" );}
+        else {Allure.attachment("Результат", ">>> Новая категория успешно добавленая в лот <<<" );}
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();// клик по кнопке обновить
         $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
         $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
+        $(By.xpath("//div[@class='auction-filter__wrapp dash-filter__wrapp filter-mob']")).shouldBe(visible);
 
-        $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).click(); // показать все категории
-        sleep(1000);
+        Boolean visible = $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).isDisplayed();
 
-        Boolean nameBool = $(By.xpath("//*[text()='"+nameRu+"']")).isDisplayed();
+        if (visible == true){
+            $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).click(); // показать все категории
+            sleep(1000);
+        }
+
+
+        Boolean nameBool = $(By.xpath("//*[text()='"+nameRu+"']")).exists();
         System.out.println("NameRu = " + nameRu);
         System.out.println("Name = " + nameBool);
         if (nameBool == true){
-            System.out.println("Елемент присутствует в фильтре");
+            System.out.println(">>> Елемент присутствует в фильтре <<<");
             Allure.attachment("Результат", ">>> Елемент присутствует в фильтре <<<" );
         } else {
             System.out.println("Елемент отсутствует в фильтре");
@@ -158,7 +166,7 @@ if (name == true){
     @Step("Удаления созданой категории")
     public void delCategory() {
         $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
-        sleep(2000);
+        sleep(1000);
         $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light']")).click();
     }
     @Step("Проверка удаления категории")

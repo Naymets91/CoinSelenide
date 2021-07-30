@@ -29,6 +29,8 @@ public class Coins extends Page {
      UkrnetPage ukrnetPg = new UkrnetPage();
      EditUserPage editUserPg = new EditUserPage();
      CategoryPage categoryPg = new CategoryPage();
+     PeriodPage periodPg = new PeriodPage();
+     DenominationPage denominationPg = new DenominationPage();
 
     @BeforeMethod
     public void setUp() {
@@ -355,7 +357,45 @@ public class Coins extends Page {
         categoryPg.equalsDelCategory();
     }
 
+    @Test
+    public  void addEditUseDelPeriod() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.period();
+        periodPg.clickButtonAddPeriod();
+        periodPg.fillPeriod();
+        periodPg.clickButtonSavePeriod();
+        periodPg.equalsAddEditPeriod();
+        periodPg.clickButtonEditPeriod();
+        periodPg.fillPeriod();
+        periodPg.clickButtonUpdatePeriod();
+        periodPg.equalsAddEditPeriod();
+        periodPg.usageNewPeriod();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.period();
+        periodPg.delPeriod();
+        periodPg.equalsDelPeriod();
+    }
 
+    @Test
+    public void addEditUseDelDenomination() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.denomination();
+        denominationPg.clickButtonAddDenomination();
+        denominationPg.fillDenomination();
+        denominationPg.clickButtonSaveDenomination();
+        denominationPg.equalsAddEditDenomination();
+        denominationPg.clickButtonEditDenomination();
+        denominationPg.fillDenomination();
+        denominationPg.clickButtonUpdateDenomination();
+        denominationPg.equalsAddEditDenomination();
+        denominationPg.usageNewDenomination();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.denomination();
+        denominationPg.delDenomination();
+        denominationPg.equalsDenomination();
+    }
 
     @AfterMethod
     public void after() {
