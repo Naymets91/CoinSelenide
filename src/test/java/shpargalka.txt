@@ -153,7 +153,7 @@ __________
     }
 
   _____________________________
-    Config.JsonSimpleReadExample.java              Зчитати з файла json
+    Config.JsonRead.java              Зчитати з файла json
   _____________________________
 
     import org.json.simple.JSONArray;
@@ -166,7 +166,7 @@ __________
     import java.io.Reader;
     import java.util.Iterator;
 
-    public class Config.JsonSimpleReadExample {
+    public class Config.JsonRead {
 
         public static void main(String[] args) {
 
@@ -200,3 +200,6 @@ __________
 
 
     }
+
+
+

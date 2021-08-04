@@ -1,0 +1,29 @@
+{
+  "homePage" : "https://coins.dd-dev.club/",
+  "ukrnetPage" : "https://accounts.ukr.net/login?lang=ru",
+
+  "ukrnet_email" : "testcoins179@ukr.net",
+  "ukrnet_password" : "",
+  "userReset_email" :"testcoins179@ukr.net",
+
+
+  "userRegDelMail" : "reg_del@ukr.net",
+  "userRegDelPassword" : "",
+
+
+  "user1_email" : "testcoins179@ukr.net",
+  "user1_password" : "",
+
+
+  "user2_email" : "naymets_s_v@ukr.net",
+  "user2_password" : "",
+
+
+  "user3_Limit_email" : "limit.editor.coins@yandex.ua",
+  "user3_Limit_password" : "",
+
+  "admin_email" : "Exibet179@gmail.com",
+  "admin_password" : "",
+
+  "fa2_secret_key"  : ""
+}

@@ -1,4 +1,5 @@
 
+import Config.JsonRead;
 import Config.Values;
 import Pages.*;
 
@@ -34,6 +35,12 @@ public class Coins extends Page {
      CategoryPage categoryPg = new CategoryPage();
      PeriodPage periodPg = new PeriodPage();
      DenominationPage denominationPg = new DenominationPage();
+     JsonRead jsonRead = new JsonRead();
+
+     @BeforeClass
+     public void red(){
+         jsonRead.read();
+     }
 
     @BeforeMethod
     public void setUp() {
