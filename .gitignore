@@ -6,3 +6,5 @@ src/test/java/Config/Values.java
 target/test-classes/Coins.class
 
 *.class
+src/test/resources/values.json
+target/test-classes/values.json
