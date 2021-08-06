@@ -33,6 +33,7 @@ public class MainPage extends Page {
     }
 
 
-
-
+    public void gotoAuction() {
+        $(By.xpath("//div[@class='auction-ithem__desc']//a[@class='btn-yel']")).click();
+    }
 }

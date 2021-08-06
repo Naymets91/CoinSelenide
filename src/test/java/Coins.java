@@ -551,7 +551,7 @@ public class Coins extends Page {
     @Feature(value = "Лоты")
     @Story(value ="Избранне")
     public void addDelFavoritesPageAuctions(){
-      loginPg.loginUser(Values.user3_Limit_email, Values.ukrnet_password);
+    loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
     mainPg.gotoAuction();
     auctionsPg.randomAddFavorites();
     sleep(5000);
