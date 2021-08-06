@@ -1,6 +1,7 @@
 package Pages;
 
-import Config.Values;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -220,7 +221,7 @@ public class AuctionsPage extends Page {
 
 
     /////////////////////////////////////////////////////////////////////////////////////////
-
+    @Step("Рандомное добавление лота в избранное")
     public void randomAddFavorites() {
        $(By.xpath("//div[@class='auction-one']")).shouldBe(visible);
        size = $$(By.xpath("//div[@class='auction-one']")).size();
@@ -228,14 +229,7 @@ public class AuctionsPage extends Page {
         for (int i = 0; i < 10; i++){
             sizeRandom = getRandomNumber(1, size);
             System.out.println("sizeRandom = " + sizeRandom);
-            if($$(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']")).size() != 0){
-                tempBool = true;
-                System.out.println("true");
-            }else{
-                System.out.println("false");
-                tempBool = false;
-            }
-//            tempBool = find(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']"));
+            tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']"));
             if ( tempBool == true ) {
                 System.out.println("Tyta");
                 break;
@@ -244,5 +238,30 @@ public class AuctionsPage extends Page {
        temp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//p")).getText();
         System.out.println("Имя вибранного лота = " + temp );
         $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//div[@class='auction-one__favorite ng-scope']/img")).click();
+        Allure.attachment("Значения лота", "Имя =  " + temp);
+    }
+    @Step("Проверка на добавление лота в избранное")
+    public void equalsAddFavorites() {
+        sleep(2000);
+        tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']"));
+        if (tempBool == true) {
+            System.out.println("Добалено в избранное");
+            Allure.attachment("Значение", "Добалено в избранное" );
+        } else {
+            System.out.println("Не добалено в избранное");
+            Allure.attachment("Значение", "!!Не добалено в избранное!!" );
+            throw new Error();
+        }
+    }
+
+
+    public boolean findIf(By xpath){
+        if($$(xpath).size() != 0){
+            System.out.println("Poisk = true");
+            return true;
+        }else{
+            System.out.println("Poisk = false");
+            return false;
+        }
     }
 }

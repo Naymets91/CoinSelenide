@@ -565,6 +565,7 @@ public class Coins extends Page {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoAuction();
         auctionsPg.randomAddFavorites();
+        auctionsPg.equalsAddFavorites();
         sleep(5000);
     }
 

@@ -1,14 +1,10 @@
 package Pages;
 
 import Config.Values;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,6 +34,15 @@ public class Page {
             $(locator);
             return true;
         } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    public boolean findIfXpath(String xpath){
+        if($$(By.xpath(xpath)).size() != 0){
+            System.out.println("true");
+            return true;
+        }else{
+            System.out.println("false");
             return false;
         }
     }

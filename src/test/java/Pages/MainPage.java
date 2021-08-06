@@ -32,7 +32,7 @@ public class MainPage extends Page {
         $(By.xpath("//ul[@class='-visible']/li[5]/a")).click();
     }
 
-
+    @Step("Перейти в аукцион")
     public void gotoAuction() {
         $(By.xpath("//div[@class='auction-ithem__desc']//a[@class='btn-yel']")).click();
     }
