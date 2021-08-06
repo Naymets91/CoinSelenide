@@ -220,4 +220,29 @@ public class AuctionsPage extends Page {
 
 
     /////////////////////////////////////////////////////////////////////////////////////////
+
+    public void randomAddFavorites() {
+       $(By.xpath("//div[@class='auction-one']")).shouldBe(visible);
+       size = $$(By.xpath("//div[@class='auction-one']")).size();
+       System.out.println("Найдено - "+ size + " Лотов");
+        for (int i = 0; i < 10; i++){
+            sizeRandom = getRandomNumber(1, size);
+            System.out.println("sizeRandom = " + sizeRandom);
+            if($$(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']")).size() != 0){
+                tempBool = true;
+                System.out.println("true");
+            }else{
+                System.out.println("false");
+                tempBool = false;
+            }
+//            tempBool = find(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']"));
+            if ( tempBool == true ) {
+                System.out.println("Tyta");
+                break;
+            }
+        }
+       temp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//p")).getText();
+        System.out.println("Имя вибранного лота = " + temp );
+        $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//div[@class='auction-one__favorite ng-scope']/img")).click();
+    }
 }

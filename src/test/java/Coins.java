@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.sleep;
 
 @Listeners({AllureOnFailListener.class})
 @Title("FlyTest Test Suite")
@@ -544,6 +545,27 @@ public class Coins extends Page {
         adminPanelPg.denomination();
         denominationPg.delDenomination();
         denominationPg.equalsDenomination();
+    }
+    @Test (priority = 29)
+    @Epic(value = "Пользователь")
+    @Feature(value = "Лоты")
+    @Story(value ="Избранне")
+    public void addDelFavoritesPageAuctions(){
+      loginPg.loginUser(Values.user3_Limit_email, Values.ukrnet_password);
+    mainPg.gotoAuction();
+    auctionsPg.randomAddFavorites();
+    sleep(5000);
+    }
+
+    @Test (priority = 30)
+    @Epic(value = "Пользователь")
+    @Feature(value = "Лоты")
+    @Story(value ="Избранне")
+    public void addDelFavoritesPageFavorites(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction();
+        auctionsPg.randomAddFavorites();
+        sleep(5000);
     }
 
 //    @Test (priority = 50, enabled= false)
