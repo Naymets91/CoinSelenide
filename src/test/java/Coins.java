@@ -554,7 +554,9 @@ public class Coins extends Page {
     loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
     mainPg.gotoAuction();
     auctionsPg.randomAddFavorites();
-    sleep(5000);
+    auctionsPg.equalsAddFavorites();
+    auctionsPg.delAddFavorites();
+    auctionsPg.equalsDellFavorites();
     }
 
     @Test (priority = 30)
@@ -562,11 +564,14 @@ public class Coins extends Page {
     @Feature(value = "Лоты")
     @Story(value ="Избранне")
     public void addDelFavoritesPageFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction();
-        auctionsPg.randomAddFavorites();
-        auctionsPg.equalsAddFavorites();
-        sleep(5000);
+    loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+    mainPg.gotoAuction();
+    auctionsPg.randomAddFavorites();
+    auctionsPg.equalsAddFavorites();
+    mainPg.goFavoritesPage();
+    auctionsPg.equalsAddFavoritesPage();
+    auctionsPg.delAddFavoritesPageFavorites();
+    auctionsPg.equalsDellFavoritesPageFavorites();
     }
 
 //    @Test (priority = 50, enabled= false)

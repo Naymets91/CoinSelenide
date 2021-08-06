@@ -21,7 +21,7 @@ public class MainPage extends Page {
         $(By.xpath("//div[@class='nav-lang__list']/a[3]")).click();
     }
 
-    @Step("Перейти в админ панель")
+    @Step("Переход в админ панель")
     public void gotoAdminPanel() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();     // Нажать на кнопку меню ЛИЧНЫЙ КАБИНЕТ
         $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();     // клик по разделу выпадающего меню АДМИНКА
@@ -32,8 +32,13 @@ public class MainPage extends Page {
         $(By.xpath("//ul[@class='-visible']/li[5]/a")).click();
     }
 
-    @Step("Перейти в аукцион")
+    @Step("Переход в аукцион")
     public void gotoAuction() {
         $(By.xpath("//div[@class='auction-ithem__desc']//a[@class='btn-yel']")).click();
+    }
+    @Step("Переход на страницу избраного")
+    public void goFavoritesPage() {
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();     // Нажать на кнопку меню ЛИЧНЫЙ КАБИНЕТ
+        $(By.xpath("//ul[@class='-visible']/li[2]/a")).click();     // клик по разделу выпадающего меню АДМИНКА
     }
 }

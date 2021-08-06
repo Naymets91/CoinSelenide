@@ -253,7 +253,19 @@ public class AuctionsPage extends Page {
             throw new Error();
         }
     }
-
+    @Step("Проверка на удаления лота с избранного")
+    public void equalsDellFavorites() {
+        sleep(2000);
+        tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']"));
+        if (tempBool != true) {
+            System.out.println("Удалено с избранного");
+            Allure.attachment("Значение", "Удалено с избранного" );
+        } else {
+            System.out.println("Не удалено с избранного");
+            Allure.attachment("Значение", "!!Не удалено с избранного!!" );
+            throw new Error();
+        }
+    }
 
     public boolean findIf(By xpath){
         if($$(xpath).size() != 0){
@@ -262,6 +274,41 @@ public class AuctionsPage extends Page {
         }else{
             System.out.println("Poisk = false");
             return false;
+        }
+    }
+
+    @Step("Удаление лота из избранного")
+    public void delAddFavorites() {
+        $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']")).click();
+    }
+    @Step("Проверка отображается на странице избранное")
+    public void equalsAddFavoritesPage() {
+        sleep(2000);
+        tempBool = findIf(By.xpath("//*[text()='" + temp + "']"));
+        if (tempBool == true) {
+            System.out.println("Отображается на странице избранное");
+            Allure.attachment("Значение", "Отображается на странице избранное" );
+        } else {
+            System.out.println("Не отображается на странице избранное");
+            Allure.attachment("Значение", "!!Не отображается на странице избранное!!" );
+            throw new Error();
+        }
+    }
+    @Step("Удаление лота из избранного на странице избранное")
+    public void delAddFavoritesPageFavorites() {
+        $(By.xpath("//*[text()='" + temp + "']/../../../../..//div[@class='auction-one__favorite checked ng-scope']")).click();
+    }
+    @Step("Проверка на удаления лота с избранного страница избранное")
+    public void equalsDellFavoritesPageFavorites() {
+        sleep(2000);
+        tempBool = findIf(By.xpath("//*[text()='" + temp + "']"));
+        if (tempBool != true) {
+            System.out.println("Удалено с избранного");
+            Allure.attachment("Значение", "Удалено с избранного" );
+        } else {
+            System.out.println("Не удалено с избранного");
+            Allure.attachment("Значение", "!!Не удалено с избранного!!" );
+            throw new Error();
         }
     }
 }
