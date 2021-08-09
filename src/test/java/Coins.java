@@ -19,8 +19,7 @@ import ru.yandex.qatools.allure.annotations.Title;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 @Listeners({AllureOnFailListener.class})
 @Title("FlyTest Test Suite")
@@ -400,7 +399,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
-    public void addCategory() {
+    public void addCategory() {     // Создание новой катеории
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.category();
@@ -414,7 +413,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
-    public void editCategory() {
+    public void editCategory() {            // Редактирование новой катеории
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.category();
@@ -428,7 +427,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
-    public void usageNewCategor() {
+    public void usageNewCategor() {     // Проверка использования новой категории
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         categoryPg.usageNewCategory();
@@ -438,7 +437,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
-    public void delCategor() {
+    public void delCategor() {      // Удаление новой категории
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.category();
@@ -450,7 +449,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
-    public  void addPeriod() {
+    public  void addPeriod() {      // Создание нового периода
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.period();
@@ -464,7 +463,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
-    public  void editPeriod() {
+    public  void editPeriod() {         // Редактирование нового периода
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.period();
@@ -478,7 +477,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
-    public void usageNewPeriod() {
+    public void usageNewPeriod() {      // Использование нового периода
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         periodPg.usageNewPeriod();
@@ -488,7 +487,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
-    public void delPeriod() {
+    public void delPeriod() {       // Удаление нового периода
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.category();
@@ -500,7 +499,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
-    public void addDenomination() {
+    public void addDenomination() {         // Создание нового номинала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.denomination();
@@ -514,7 +513,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
-    public void editDenomination() {
+    public void editDenomination() {        // Редактирование нового номинала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.denomination();
@@ -527,7 +526,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
-    public void useDenomination() {
+    public void useDenomination() {     // Использвание нового номинала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.denomination();
@@ -539,7 +538,7 @@ public class Coins extends Page {
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
-    public void delDenomination() {
+    public void delDenomination() {     // Удаление нового номинала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.denomination();
@@ -549,7 +548,7 @@ public class Coins extends Page {
     @Test (priority = 29)
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
-    @Story(value ="Избранне")
+    @Story(value ="Избранне")   // Добавление, удаление лотов на странице аукциона
     public void addDelFavoritesPageAuctions(){
     loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
     mainPg.gotoAuction();
@@ -563,7 +562,7 @@ public class Coins extends Page {
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")
-    public void addDelFavoritesPageFavorites(){
+    public void addDelFavoritesPageFavorites(){     // Добавление, удаление лотов на странице Избранные лоты
     loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
     mainPg.gotoAuction();
     auctionsPg.randomAddFavorites();
@@ -573,7 +572,21 @@ public class Coins extends Page {
     auctionsPg.delAddFavoritesPageFavorites();
     auctionsPg.equalsDellFavoritesPageFavorites();
     }
-
+    @Test (priority = 31)
+    @Epic(value = "Пользователь")
+    @Feature(value = "Лоты")
+    @Story(value ="Избранне")   // Добавление, удаление много лотов на странице аукциона
+    public void addDelManyFavorites(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction();
+        auctionsPg.randomAddManyFavorites();
+        auctionsPg.equalsAddManyFavorites();
+        refresh();
+        sleep(3000);
+        auctionsPg.equalsAddManyFavorites();
+        auctionsPg.delAddManyFavorites();
+        auctionsPg.equalsDellManyFavorites();
+    }
 //    @Test (priority = 50, enabled= false)
 //    @Epic(value = "Администратор")
 //    @Feature(value = "Админка => Пункт меню настройка")

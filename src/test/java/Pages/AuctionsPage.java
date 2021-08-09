@@ -4,13 +4,20 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuctionsPage extends Page {
 
+
     boolean tempBool;
+
+    List<String> favoritesLot = new ArrayList<>();
+//    String[] favoritesLot ;
 
     String temp;
     String parsName;
@@ -309,6 +316,39 @@ public class AuctionsPage extends Page {
             System.out.println("Не удалено с избранного");
             Allure.attachment("Значение", "!!Не удалено с избранного!!" );
             throw new Error();
+        }
+    }
+
+    public void randomAddManyFavorites() {
+       Integer j;
+        for ( j = 0;  j < 5; j++) {
+            randomAddFavorites();
+            favoritesLot.add(temp);
+        }
+    }
+
+    public void equalsAddManyFavorites() {
+        Integer j;
+        for ( j = 0;  j < 5; j++) {
+            temp = favoritesLot.get(j);
+            equalsAddFavoritesPage();
+        }
+    }
+
+    public void delAddManyFavorites() {
+        Integer j;
+        for ( j = 0;  j < 5; j++) {
+            temp = favoritesLot.get(j);
+            delAddFavoritesPageFavorites();
+            sleep(1000);
+        }
+    }
+
+    public void equalsDellManyFavorites() {
+        Integer j;
+        for ( j = 0;  j < 5; j++) {
+            temp = favoritesLot.get(j);
+            equalsAddFavoritesPage();
         }
     }
 }
