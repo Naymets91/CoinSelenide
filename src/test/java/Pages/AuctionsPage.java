@@ -27,7 +27,7 @@ public class AuctionsPage extends Page {
 
     String afterBet;
     String beaforeBet;
-    String tempBet ;
+    String tempBet;
 
 
 ///////////////////////////////////////////////   AddAuction  ///////////////////////////////////
@@ -209,7 +209,7 @@ public class AuctionsPage extends Page {
             beaforeBet = $(By.xpath("//div[@class='auction-one__rate ng-scope']//input")).getAttribute("value");    // чтоб при первом запуске неупал тест
         }
         tempBool = tempBet.equals(tempBet);
-        if (tempBool == false){
+        if (tempBool == false) {
             System.out.println("ХЗ");
             throw new Error();
         }
@@ -230,55 +230,57 @@ public class AuctionsPage extends Page {
     /////////////////////////////////////////////////////////////////////////////////////////
     @Step("Рандомное добавление лота в избранное")
     public void randomAddFavorites() {
-       $(By.xpath("//div[@class='auction-one']")).shouldBe(visible);
-       size = $$(By.xpath("//div[@class='auction-one']")).size();
-       System.out.println("Найдено - "+ size + " Лотов");
-        for (int i = 0; i < 10; i++){
+        $(By.xpath("//div[@class='auction-one']")).shouldBe(visible);
+        size = $$(By.xpath("//div[@class='auction-one']")).size();
+        System.out.println("Найдено - " + size + " Лотов");
+        for (int i = 0; i < 10; i++) {
             sizeRandom = getRandomNumber(1, size);
             System.out.println("sizeRandom = " + sizeRandom);
             tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']"));
-            if ( tempBool == true ) {
+            if (tempBool == true) {
                 System.out.println("Tyta");
                 break;
             }
         }
-       temp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//p")).getText();
-        System.out.println("Имя вибранного лота = " + temp );
-        $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6']["+ sizeRandom +"]//div[@class='auction-one__favorite ng-scope']/img")).click();
+        temp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//p")).getText();
+        System.out.println("Имя вибранного лота = " + temp);
+        $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']/img")).click();
         Allure.attachment("Значения лота", "Имя =  " + temp);
     }
+
     @Step("Проверка на добавление лота в избранное")
     public void equalsAddFavorites() {
         sleep(2000);
         tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']"));
         if (tempBool == true) {
             System.out.println("Добалено в избранное");
-            Allure.attachment("Значение", "Добалено в избранное" );
+            Allure.attachment("Значение", "Добалено в избранное");
         } else {
             System.out.println("Не добалено в избранное");
-            Allure.attachment("Значение", "!!Не добалено в избранное!!" );
+            Allure.attachment("Значение", "!!Не добалено в избранное!!");
             throw new Error();
         }
     }
+
     @Step("Проверка на удаления лота с избранного")
     public void equalsDellFavorites() {
         sleep(2000);
         tempBool = findIf(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']"));
         if (tempBool != true) {
             System.out.println("Удалено с избранного");
-            Allure.attachment("Значение", "Удалено с избранного" );
+            Allure.attachment("Значение", "Удалено с избранного");
         } else {
             System.out.println("Не удалено с избранного");
-            Allure.attachment("Значение", "!!Не удалено с избранного!!" );
+            Allure.attachment("Значение", "!!Не удалено с избранного!!");
             throw new Error();
         }
     }
 
-    public boolean findIf(By xpath){
-        if($$(xpath).size() != 0){
+    public boolean findIf(By xpath) {
+        if ($$(xpath).size() != 0) {
             System.out.println("Poisk = true");
             return true;
-        }else{
+        } else {
             System.out.println("Poisk = false");
             return false;
         }
@@ -288,56 +290,69 @@ public class AuctionsPage extends Page {
     public void delAddFavorites() {
         $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite checked ng-scope']")).click();
     }
+
     @Step("Проверка отображается на странице избранное")
     public void equalsAddFavoritesPage() {
         sleep(2000);
         tempBool = findIf(By.xpath("//*[text()='" + temp + "']"));
         if (tempBool == true) {
             System.out.println("Отображается на странице избранное");
-            Allure.attachment("Значение", "Отображается на странице избранное" );
+            Allure.attachment("Значение", "Отображается на странице избранное");
         } else {
             System.out.println("Не отображается на странице избранное");
-            Allure.attachment("Значение", "!!Не отображается на странице избранное!!" );
+            Allure.attachment("Значение", "!!Не отображается на странице избранное!!");
             throw new Error();
         }
     }
+
     @Step("Удаление лота из избранного на странице избранное")
     public void delAddFavoritesPageFavorites() {
         $(By.xpath("//*[text()='" + temp + "']/../../../../..//div[@class='auction-one__favorite checked ng-scope']")).click();
     }
+
     @Step("Проверка на удаления лота с избранного страница избранное")
     public void equalsDellFavoritesPageFavorites() {
         sleep(2000);
         tempBool = findIf(By.xpath("//*[text()='" + temp + "']"));
         if (tempBool != true) {
             System.out.println("Удалено с избранного");
-            Allure.attachment("Значение", "Удалено с избранного" );
+            Allure.attachment("Значение", "Удалено с избранного");
         } else {
             System.out.println("Не удалено с избранного");
-            Allure.attachment("Значение", "!!Не удалено с избранного!!" );
+            Allure.attachment("Значение", "!!Не удалено с избранного!!");
             throw new Error();
         }
     }
 
     public void randomAddManyFavorites() {
-       Integer j;
-        for ( j = 0;  j < 5; j++) {
+        Integer j;
+        for (j = 0; j < 5; j++) {
             randomAddFavorites();
             favoritesLot.add(temp);
+            sleep(1000);
         }
     }
 
     public void equalsAddManyFavorites() {
         Integer j;
-        for ( j = 0;  j < 5; j++) {
+        for (j = 0; j < 5; j++) {
             temp = favoritesLot.get(j);
-            equalsAddFavoritesPage();
+            sleep(2000);
+            tempBool = findIf(By.xpath("//*[text()='" + temp + "']/../../../../..//div[@class='auction-one__favorite checked ng-scope']"));
+            if (tempBool == true) {
+                System.out.println("Добалено в избранное");
+                Allure.attachment("Значение", "Добалено в избранное");
+            } else {
+                System.out.println("Не добалено в избранное");
+                Allure.attachment("Значение", "!!Не добалено в избранное!!");
+                throw new Error();
+            }
         }
     }
 
     public void delAddManyFavorites() {
         Integer j;
-        for ( j = 0;  j < 5; j++) {
+        for (j = 0; j < 5; j++) {
             temp = favoritesLot.get(j);
             delAddFavoritesPageFavorites();
             sleep(1000);
@@ -346,9 +361,23 @@ public class AuctionsPage extends Page {
 
     public void equalsDellManyFavorites() {
         Integer j;
-        for ( j = 0;  j < 5; j++) {
+        for (j = 0; j < 5; j++) {
             temp = favoritesLot.get(j);
-            equalsAddFavoritesPage();
+            sleep(2000);
+            tempBool = findIf(By.xpath("//*[text()='" + temp + "']/../../../../..//div[@class='auction-one__favorite checked ng-scope']"));
+            if (tempBool != true) {
+                System.out.println("Удалено с избранного");
+                Allure.attachment("Значение", "Удалено с избранного");
+            } else {
+                System.out.println("Не удалено с избранного");
+                Allure.attachment("Значение", "!!Не удалено с избранного!!");
+                throw new Error();
+            }
         }
+    }
+    @Step("Обновление странице")
+    public void refreshPage(){
+        refresh();
+        sleep(5000);
     }
 }

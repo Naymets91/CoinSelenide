@@ -581,8 +581,7 @@ public class Coins extends Page {
         mainPg.gotoAuction();
         auctionsPg.randomAddManyFavorites();
         auctionsPg.equalsAddManyFavorites();
-        refresh();
-        sleep(3000);
+        auctionsPg.refreshPage();
         auctionsPg.equalsAddManyFavorites();
         auctionsPg.delAddManyFavorites();
         auctionsPg.equalsDellManyFavorites();
