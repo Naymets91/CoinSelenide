@@ -86,6 +86,10 @@ $("#username").shouldBe(visible);   // ждёт, пока элемент поя�
 clearBrowserCache();       // очистить кеш браузера
    */
 
+
+
+   priceaFavorites = priceaFavorites.substring(1, 2);
+
 ////////////////////////////////////////////
         public String getMyPass(){                получить переменную из другого класса
    return this.password;

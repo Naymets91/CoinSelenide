@@ -22,6 +22,9 @@ public class AuctionsPage extends Page {
     String temp;
     String parsName;
 
+    String priceaAuction;
+    String priceaFavorites;
+
     Integer size;
     Integer sizeRandom;
 
@@ -243,9 +246,11 @@ public class AuctionsPage extends Page {
             }
         }
         temp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//p")).getText();
+        priceaAuction = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][1]//div[@class='ng-scope']//span")).getText();
         System.out.println("Имя вибранного лота = " + temp);
+        System.out.println("цена = " + priceaAuction);
         $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']/img")).click();
-        Allure.attachment("Значения лота", "Имя =  " + temp);
+        Allure.attachment("Значения лота", "Имя =  " + temp + "Цена =  " + priceaAuction );
     }
 
     @Step("Проверка на добавление лота в избранное")
@@ -303,6 +308,8 @@ public class AuctionsPage extends Page {
             Allure.attachment("Значение", "!!Не отображается на странице избранное!!");
             throw new Error();
         }
+       priceaFavorites = $(By.xpath("//*[text()='" + temp + "']/../../..//p[@class='price ng-binding']")).getText();
+        priceaFavorites = priceaFavorites.substring(0, 2);
     }
 
     @Step("Удаление лота из избранного на странице избранное")
@@ -367,7 +374,7 @@ public class AuctionsPage extends Page {
             tempBool = findIf(By.xpath("//*[text()='" + temp + "']/../../../../..//div[@class='auction-one__favorite checked ng-scope']"));
             if (tempBool != true) {
                 System.out.println("Удалено с избранного");
-                Allure.attachment("Значение", "Удалено с избранного");
+
             } else {
                 System.out.println("Не удалено с избранного");
                 Allure.attachment("Значение", "!!Не удалено с избранного!!");
@@ -379,5 +386,18 @@ public class AuctionsPage extends Page {
     public void refreshPage(){
         refresh();
         sleep(5000);
+    }
+
+    public void equalsPriceFavoritesPage() {
+       tempBool = (priceaAuction).equals(priceaFavorites);
+       if (tempBool == true) {
+           System.out.println( "Цена сооветствует " + priceaAuction + " = "+ priceaFavorites);
+           Allure.attachment("Значение", "Цена сооветствует" + priceaAuction + " = " + priceaFavorites );
+       }else  {
+           System.out.println( "Цена не сооветствует " + priceaAuction + " != "+ priceaFavorites);
+           Allure.attachment("Значение", "Цена не сооветствует" + priceaAuction + " != " + priceaFavorites );
+           throw new Error();
+       }
+
     }
 }
