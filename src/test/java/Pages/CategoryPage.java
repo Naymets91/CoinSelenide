@@ -165,6 +165,7 @@ if (name == true){
 
     @Step("Удаления созданой категории")
     public void delCategory() {
+        System.out.println(nameEe);
         $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
         sleep(1000);
         $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light']")).click();
