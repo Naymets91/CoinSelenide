@@ -569,7 +569,7 @@ public class Coins extends Page {
     public void editMaterials() {        // Редактирование нового Материала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
+        adminPanelPg.materials();
         materialsPg.clickButtonEditMaterials();
         materialsPg.fillMaterials();
         materialsPg.clickButtonUpdateMaterials();
@@ -582,7 +582,7 @@ public class Coins extends Page {
     public void useMaterials() {     // Использвание нового Материала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
+        adminPanelPg.materials();
         materialsPg.usageNewMaterials();
         mainPg.gotoAdminPanel();
     }
@@ -594,7 +594,7 @@ public class Coins extends Page {
     public void delMaterials() {     // Удаление нового Материала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
+        adminPanelPg.materials();
         materialsPg.delMaterials();
         materialsPg.equalsMaterials();
     }
@@ -657,73 +657,7 @@ public class Coins extends Page {
         auctionsPg.delAddFavoritesPageFavorites();
         auctionsPg.equalsDellFavoritesPageFavorites();
     }
-//    @Test (priority = 50, enabled= false)
-//    @Epic(value = "Администратор")
-//    @Feature(value = "Админка => Пункт меню настройка")
-//    @Story(value = "Катигория")
-//    public void addEditDelCategory() {
-//        loginPg.loginAdmin();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.category();
-//        categoryPg.clickButtonAddCategoty();
-//        categoryPg.fillCategory();
-//        categoryPg.clickButtonSaveCategoty();
-//        categoryPg.equalsAddEditCategory();
-//        categoryPg.clickButtonEditCategoty();
-//        categoryPg.fillCategory();
-//        categoryPg.clickButtonUpdateCategoty();
-//        categoryPg.equalsAddEditCategory();
-//        categoryPg.usageNewCategory();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.category();
-//        categoryPg.delCategory();
-//        categoryPg.equalsDelCategory();
-//    }
 
-//    @Test (priority = 51, enabled= false)
-//    @Epic(value = "Администратор")
-//    @Feature(value = "Админка => Пункт меню настройка")
-//    @Story(value = "Период")
-//    public  void addEditUseDelPeriod() {
-//        loginPg.loginAdmin();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.period();
-//        periodPg.clickButtonAddPeriod();
-//        periodPg.fillPeriod();
-//        periodPg.clickButtonSavePeriod();
-//        periodPg.equalsAddEditPeriod();
-//        periodPg.clickButtonEditPeriod();
-//        periodPg.fillPeriod();
-//        periodPg.clickButtonUpdatePeriod();
-//        periodPg.equalsAddEditPeriod();
-//        periodPg.usageNewPeriod();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.period();
-//        periodPg.delPeriod();
-//        periodPg.equalsDelPeriod();
-//    }
-//    @Test (priority = 52, enabled= false)
-//    @Epic(value = "Администратор")
-//    @Feature(value = "Админка => Пункт меню настройка")
-//    @Story(value = "Номинал")
-//    public void addEditUseDelDenomination() {
-//        loginPg.loginAdmin();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.denomination();
-//        denominationPg.clickButtonAddDenomination();
-//        denominationPg.fillDenomination();
-//        denominationPg.clickButtonSaveDenomination();
-//        denominationPg.equalsAddEditDenomination();
-//        denominationPg.clickButtonEditDenomination();
-//        denominationPg.fillDenomination();
-//        denominationPg.clickButtonUpdateDenomination();
-//        denominationPg.equalsAddEditDenomination();
-//        denominationPg.usageNewDenomination();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.denomination();
-//        denominationPg.delDenomination();
-//        denominationPg.equalsDenomination();
-//    }
 
     @AfterMethod
     public void after() {
