@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Coins">
-    <test name="Coins" preserve-order="true">
-        <classes>
-            <class name="Coins"/>
-        </classes>
-    </test> <!-- Test -->
-</suite> <!-- Suite -->
+
+<suite name = "Coins">
+<test name = "Coins">
+
+    <groups>
+        <run>
+            <include name = "test" />
+        </run>
+    </groups>
+
+    <classes>
+        <class name = "Coins" />
+    </classes>
+
+</test>
+</suite>
