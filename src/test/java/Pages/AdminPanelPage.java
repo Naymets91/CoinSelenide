@@ -94,5 +94,10 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]")).should(visible).click(); // клик на меню фильтры
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]//li[3]")).should(visible).click(); // клик на меню материал
     }
+
+    public void news() {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).should(visible).click();      // клик на меню информация
+        $(By.xpath("//*[@id='main-menu-navigation']/li[5]//li[1]")).should(visible).click(); // клик на меню новости
+    }
 }
 

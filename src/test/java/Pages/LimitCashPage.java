@@ -87,11 +87,10 @@ public void goToHomePage(){
     public void equalsCashReject() {
         boolean size = find(By.xpath("//span[@class='limit-status text-warning']"));
         if (size == false) {
-            System.out.println("Ошибка изминения статуса или удаления кредитного запроса");
-            throw new Error();
+            System.out.println("Статус изминен на отклонено или заявка на лимит удалена");
         } else {
             System.out.println("Ошибка изминения статуса или удаления кредитного запроса");
-            System.out.println("Статус изминен на отклонено или заявка на лимит удалена");
+            throw new Error();
         }
 
         if (beafore.equals(after) != false) {

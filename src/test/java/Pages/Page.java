@@ -30,10 +30,11 @@ public class Page {
 }
 
     public boolean find(By locator) {
-        try {
-            $(locator);
+        if($$(locator).size() != 0){
+            System.out.println("true");
             return true;
-        } catch (NoSuchElementException e) {
+        } else{
+            System.out.println("false");
             return false;
         }
     }

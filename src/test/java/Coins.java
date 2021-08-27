@@ -36,6 +36,7 @@ public class Coins extends Page {
      PeriodPage periodPg = new PeriodPage();
      DenominationPage denominationPg = new DenominationPage();
      MaterialsPage materialsPg = new MaterialsPage();
+     NewsPage newsPg = new NewsPage();
      JsonRead jsonRead = new JsonRead();
 
      @BeforeClass
@@ -496,7 +497,7 @@ public class Coins extends Page {
         periodPg.equalsDelPeriod();
     }
 
-    @Test (priority = 25)
+@Test(priority = 25 , groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -510,7 +511,7 @@ public class Coins extends Page {
         denominationPg.equalsAddEditDenomination();
     }
 
-    @Test (priority = 26)
+   @Test (priority = 26, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -523,7 +524,7 @@ public class Coins extends Page {
         denominationPg.clickButtonUpdateDenomination();
         denominationPg.equalsAddEditDenomination();
     }
-    @Test (priority = 27)
+    @Test (priority = 27, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -535,7 +536,7 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
     }
 
-    @Test (priority = 28)
+    @Test (priority = 28, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -656,6 +657,44 @@ public class Coins extends Page {
         auctionsPg.equalsPriceFavoritesPage();
         auctionsPg.delAddFavoritesPageFavorites();
         auctionsPg.equalsDellFavoritesPageFavorites();
+    }
+    @Test (priority = 37)
+    @Epic(value = "Администратор")
+    @Feature(value = "Информация")
+    @Story(value ="Новости")   // Создание новости
+    public void addNews(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.clickButtonAddNews();
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
+    @Test (priority = 38)
+    @Epic(value = "Администратор")
+    @Feature(value = "Информация")
+    @Story(value ="Новости")   // Редактирование новости
+    public void editNews(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.clickButtonEditNews();
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
+
+    @Test (priority = 39)
+    @Epic(value = "Администратор")
+    @Feature(value = "Админка => Пункт меню настройка")
+    @Story(value = "Материалы")
+    public void delNews() {     // Удаление нового Материала
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.delNews();
+        newsPg.equalsDelNews();
     }
 
 

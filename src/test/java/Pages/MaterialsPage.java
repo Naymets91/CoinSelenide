@@ -80,7 +80,7 @@ public class MaterialsPage  extends Page{
     }
 
 
-    @Step("Проверка материала / редактирования материала")
+    @Step("Проверка создание/ редактирование материала ")
     public void equalsAddEditMaterials() {
         $(By.xpath("//div[@id='dataTable_filter']//input")).sendKeys(nameEe);
         sleep(1000);

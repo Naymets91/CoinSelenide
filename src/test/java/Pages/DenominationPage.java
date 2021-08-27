@@ -125,9 +125,11 @@ public class DenominationPage extends Page{
         System.out.println("NameEE =" + nameEe);
         if (tempName.equals(nameEe) != true) {
             Allure.attachment("Результат", ">>> Невозможно выбрать созданый период <<<");
+            System.out.println(">>> Невозможно выбрать созданый период <<<");
             throw new Error();
         } else {
             Allure.attachment("Результат", ">>> Новый период успешно добавленая в лот <<<");
+            System.out.println(">>> Новый период успешно добавленая в лот <<<");
         }
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();// клик по кнопке обновить
         $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
