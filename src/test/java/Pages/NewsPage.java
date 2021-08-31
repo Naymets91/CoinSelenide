@@ -12,8 +12,16 @@ public class NewsPage extends Page {
     Integer sizeRandom;
     String nameEe;
     String nameRu;
+    String nameEn;
+
+    String newsEe;
+    String newsRu;
+    String newsEn;
+
     String tempName;
     String rangomNameNews;
+
+    Boolean tempBool;
 
     public void clickButtonAddNews() {
         $(By.xpath("//a[@class='btn btn-primary navbar-btn waves-effect waves-light']")).click();
@@ -56,6 +64,7 @@ public class NewsPage extends Page {
         }
         if (langEn.equals(lang)) {
             rangomNameNews = String.valueOf(randomStringEN(8));
+            nameEn = String.valueOf(rangomNameNews);
             $(By.xpath("//ul[@class='dropdown-menu show']/li[" + temp + "]")).click();
             $(By.name(xPathName)).clear();
             $(By.name(xPathName)).sendKeys(rangomNameNews);
@@ -118,6 +127,54 @@ public class NewsPage extends Page {
         } else {
             System.out.println("Елемент не создан/не редактирован ");
             Allure.attachment("!!Результат!!", ">>> Елемент не удален  <<<");
+            throw new Error();
+        }
+    }
+    @Step("Переход на страницу созданой новости")
+    public void openLastAddNews() {
+        $(By.xpath("//*[contains(text(), '"+ nameRu +"')]/../..//div[@class='main-auction__btn btn-yel']")).click();
+    }
+
+    public void equalsInLanguages() {
+        readEquals(nameRu);
+        switchToLanguages("Ee");
+        readEquals(nameEe);
+        switchToLanguages("En");
+        readEquals(nameEn);
+    }
+
+    private void switchToLanguages(String lang) {
+        String langEe = "Ee";
+        String langEn = "En";
+        if (langEe.equals(lang)) {
+            $(By.className("flag")).click();
+            $(By.xpath("//div[@class='nav-lang__list']/a[2]")).click();
+        }
+        if (langEn.equals(lang)) {
+            $(By.className("flag")).click();
+            $(By.xpath("//div[@class='nav-lang__list']/a[2]")).click();
+        }
+    }
+
+    public void readEquals(String name){
+        tempName = $(By.xpath("//p[@class='title']")).getText();
+        tempBool = (name.equals(tempName));
+        if (tempBool = true){
+            System.out.println("Имя новости соответствует");
+            Allure.attachment("Имя новости", nameRu + " = " + tempName);
+        } else {
+            System.out.println("Елемент не создан/не редактирован ");
+            Allure.attachment("Имя новости", nameRu + " != " + tempName);
+            throw new Error();
+        }
+        tempName = $(By.xpath("//div[@id='static-page-text']/p[2]")).getText();
+        tempBool = (name.equals(tempName));
+        if (tempBool = true){
+            System.out.println("Имя новости соответствует");
+            Allure.attachment("Описания новости", nameRu + " = " + tempName);
+        } else {
+            System.out.println("Елемент не создан/не редактирован ");
+            Allure.attachment("Описания новости", nameRu + " != " + tempName);
             throw new Error();
         }
     }

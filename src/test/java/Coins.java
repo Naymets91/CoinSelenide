@@ -687,15 +687,32 @@ public class Coins extends Page {
 
     @Test (priority = 39)
     @Epic(value = "Администратор")
+    @Feature(value = "Информация")
+    @Story(value ="Новости")   // Отображения новости на всех языках
+    public void newsDisplayInLanguages(){
+        loginPg.loginUser(Values.user1_email,Values.user1_password);
+        mainPg.gotoNews();
+        newsPg.openLastAddNews();
+        newsPg.equalsInLanguages();
+
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
+
+    @Test (priority = 40)
+    @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Материалы")
-    public void delNews() {     // Удаление нового Материала
+    @Story(value = "Новости")
+    public void delNews() {     // Удаление новой новости
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.news();
         newsPg.delNews();
         newsPg.equalsDelNews();
     }
+
+
 
 
     @AfterMethod
