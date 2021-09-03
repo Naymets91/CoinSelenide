@@ -16,7 +16,6 @@ public class Page {
 
     @Step("Переход на сайт coins.dd-dev.club")
     public void openHomePage() {
-
         open(Values.homePage);
     }
 

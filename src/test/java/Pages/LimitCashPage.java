@@ -1,9 +1,6 @@
 package Pages;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -12,10 +9,9 @@ import static com.codeborne.selenide.Selenide.*;
 public class LimitCashPage extends Page {
     boolean tempBool;
 
-    String beafore;
-    String after;
-    String statysBeafore;
-    String statysAfter;
+    String yourLimitBeafore;
+    String yourLimitAfter;
+    String desiredLimit;
     String temp;
     String parsName;
 
@@ -32,10 +28,11 @@ public class LimitCashPage extends Page {
     }
 
     public void userEdit() {
-        $(byXpath("//*[contains(text(),'Serega')]/..//a[1]")).should(visible).click();
+        $(byXpath("//*[contains(text(),'Serega limit')]/..//a[1]")).should(visible).click();
     }
+
     public void userDel() {
-        $(byXpath("//*[contains(text(),'Serega')]/..//a[2]")).should(visible).click();
+        $(byXpath("//*[contains(text(),'Serega limit')]/..//a[2]")).should(visible).click();
         sleep(4000);
     }
 
@@ -58,25 +55,25 @@ public void goToHomePage(){
     }
 
     public void editLimitCash () {
-        beafore =  $(By.xpath("//div[@class='wrapp__col col-xs-12 col-sm-9 col-md-4'][3]//input")).getAttribute("value");
-        System.out.println("Було " + beafore);
+        yourLimitBeafore =  $(By.xpath("//div[@class='wrapp__col col-xs-12 col-sm-9 col-md-4'][3]//input")).getAttribute("value");
+        System.out.println("Було " + yourLimitBeafore);
         size = getRandomNumber(1000,5000);
         $(By.xpath("//input[@id='max_credit_limit']")).clear();
         $(By.xpath("//input[@id='max_credit_limit']")).sendKeys(Integer.toString(size));
-        beafore = $(By.xpath("//input[@id='max_credit_limit']")).getAttribute("value");
-        System.out.println("желаемый кредит  " + beafore);
+        desiredLimit = $(By.xpath("//input[@id='max_credit_limit']")).getAttribute("value");
+        System.out.println("желаемый кредит  " + desiredLimit);
         $(By.xpath("//button[@id='maxLimitBtn']")).click();
-        statysBeafore = $(By.xpath("//span[@class='limit-status text-warning']")).getAttribute("value");
+
     }
 
     public void parsCash() {
-        after =  $(By.xpath("//div[@class='wrapp__col col-xs-12 col-sm-9 col-md-4'][3]//input")).getAttribute("value");
-        System.out.println("После подтверждения " + after);
+        yourLimitAfter =  $(By.xpath("//div[@class='wrapp__col col-xs-12 col-sm-9 col-md-4'][3]//input")).getAttribute("value");
+        System.out.println("После подтверждения " + yourLimitAfter);
     }
 
     public void equalsCash(){
-        System.out.println(beafore.equals(after));
-        if (beafore.equals(after) == false) {
+        System.out.println(yourLimitAfter.equals(desiredLimit));
+        if (yourLimitAfter.equals(desiredLimit) == false) {
             System.out.println("Кредитный  лимит не равен желаемому");
             throw new Error();
         } else {
@@ -93,11 +90,11 @@ public void goToHomePage(){
             throw new Error();
         }
 
-        if (beafore.equals(after) != false) {
-            System.out.println("Кредитный  лимит изменен ");
-            throw new Error();
+        if (yourLimitAfter.equals(yourLimitBeafore) == true) {
+            System.out.println("Кредитный  лимит не изменен ");
         } else {
-            System.out.println("Кредитный  лимит не изменен");
+            System.out.println("Кредитный  лимит изменен");
+            throw new Error();
         }
 
     }

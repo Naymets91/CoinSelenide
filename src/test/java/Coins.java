@@ -70,8 +70,15 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
     }
+    @Test (priority = 2)                                           // Тест двойной аутентификации
+    @Epic(value = "Администратор")
+    @Feature(value = "Учетная запись")
+    public void incorrect2FALogin() {
+        loginPg.loginUser(Values.admin_email, Values.admin_password);
+        loginPg.incorrect2fa();
+    }
 
-    @Test  (priority=2)                                           // Добавить лот
+    @Test  (priority=3)                                           // Добавить лот
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -80,29 +87,14 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.loti();
-        lotiPg.createLot();
-        lotiPg.name(12, 15, 10);
-        lotiPg.descrintion(20, 30, 25);
-        lotiPg.sender();
-        lotiPg.country();
-        lotiPg.category();
-        lotiPg.year();
-        lotiPg.minPrice();
-        lotiPg.startPrice();
-        lotiPg.material();
-        lotiPg.denomination();
-        lotiPg.period();
-        lotiPg.topLot();
-        lotiPg.certification();
-        lotiPg.maxSafety();
-        lotiPg.reve();
-        lotiPg.safety();
+        lotiPg.buttonCreateLot();
+        lotiPg.fillLot();
         lotiPg.parsLotAfter();
         lotiPg.buttonSave();
     }
 
 
-    @Test  (priority=3)                              // Изменение лотав
+    @Test  (priority=4)                              // Изменение лотав
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -112,24 +104,9 @@ public class Coins extends Page {
         adminPanelPg.auctions();
         adminPanelPg.loti();
         lotiPg.randomEditLot();
-        lotiPg.editLot();
+        lotiPg.buttonEditLot();
         lotiPg.parsLotBefore();
-        lotiPg.name(5, 10, 8);
-        lotiPg.descrintion(15, 25, 15);
-        lotiPg.sender();
-        lotiPg.country();
-        lotiPg.category();
-        lotiPg.year();
-        lotiPg.minPrice();
-        lotiPg.startPrice();
-        lotiPg.material();
-        lotiPg.denomination();
-        lotiPg.period();
-        lotiPg.topLot();
-        lotiPg.certification();
-        lotiPg.maxSafety();
-        lotiPg.reve();
-        lotiPg.safety();
+        lotiPg.fillLot();
 //        lotiPg.buttonSave();
 //        lotiPg.editLot();
         lotiPg.parsLotAfter();
@@ -137,7 +114,7 @@ public class Coins extends Page {
 
     }
 
-    @Test (priority = 4)                                      // Удаление лотов
+    @Test (priority = 5)                                      // Удаление лотов
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -150,7 +127,7 @@ public class Coins extends Page {
         lotiPg.delete();
     }
 
-    @Test  (priority = 5)                                         // Создание аукциона
+    @Test  (priority = 6)                                         // Создание аукциона
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Аукцион")
@@ -159,20 +136,26 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         adminPanelPg.auctionAdd();
-        auctionsPg.create();
-        auctionsPg.number();
-        auctionsPg.name();
-//       auctionsPg.descrintion(20,30,25);
-        auctionsPg.dateStart("2021/06/22 20:00");
-        auctionsPg.dateFinish("2021/06/26 23:00");
-        auctionsPg.intervalEnd();
-        auctionsPg.prolongation();
-        auctionsPg.currency();
-        auctionsPg.statys();
+        auctionsPg.buttonCreateAuction();
+        auctionsPg.fillAuction();
         auctionsPg.buttonSave();
     }
 
-    @Test (priority = 6)                                      // Удаление аукциона
+    @Test  (priority = 7)                                         // Редактирование аукциона
+    @Epic(value = "Администратор")
+    @Feature(value = "Админка => Пункт меню Аукцион")
+    @Story(value = "Аукцион")
+    public void editAuctions() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        adminPanelPg.auctionAdd();
+        auctionsPg.buttonCreateAuction();
+        auctionsPg.fillAuction();
+        auctionsPg.buttonSave();
+    }
+
+    @Test (priority = 8)                                      // Удаление аукциона
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Аукцион")
@@ -185,7 +168,7 @@ public class Coins extends Page {
         auctionsPg.delete();
     }
 
-    @Test (priority = 7)                                      // Изменение кредитного лимита , статус одобрено
+    @Test (priority = 9)                                      // Изменение кредитного лимита , статус одобрено
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Кредитный лимит")
@@ -207,7 +190,7 @@ public class Coins extends Page {
         limitCashPg.equalsCash();
     }
 
-    @Test  (priority = 8)                                     // Изменение кредитного лимита , статус отменено
+    @Test  (priority = 10)                                     // Изменение кредитного лимита , статус отменено
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Кредитный лимит")
@@ -229,7 +212,7 @@ public class Coins extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test  (priority = 9)                                     // Изменение кредитного лимита , удаления запроса
+    @Test  (priority = 11)                                     // Изменение кредитного лимита , удаления запроса
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Кредитный лимит")
@@ -250,7 +233,7 @@ public class Coins extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test (priority = 10)      // Востановления пароля через запрос забили пароль.
+    @Test (priority = 12)      // Востановления пароля через запрос забили пароль.
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -265,7 +248,7 @@ public class Coins extends Page {
         loginPg.checkingUserAuthorization();
     }
 
-    @Test (priority = 11)                                  // Изминение пароля через панель администратора
+    @Test (priority = 13)                                  // Изминение пароля через панель администратора
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -281,7 +264,7 @@ public class Coins extends Page {
     }
 
 
-    @Test (priority = 12)                                  //  Добавить много лотов с помощу кнопки дублировать лот
+    @Test (priority = 14)                                  //  Добавить много лотов с помощу кнопки дублировать лот
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -294,7 +277,7 @@ public class Coins extends Page {
         lotiPg.addManyLoti(20);
     }
 
-    @Test (priority = 13,enabled= false)                                  //  Старт предварительного аукциона
+    @Test (priority = 15,enabled= false)                                  //  Старт предварительного аукциона
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Аукцион")
@@ -317,7 +300,7 @@ public class Coins extends Page {
         auctionsPg.stopAuction();
     }
 
-     @Test (priority = 14,enabled= false)  // ставки пользователей на предварительном аукционе
+     @Test (priority = 16,enabled= false)  // ставки пользователей на предварительном аукционе
      @Epic(value = "Администратор")
      @Feature(value = "Админка => Пункт меню Аукцион")
      @Story(value = "Аукцион")
@@ -347,7 +330,7 @@ public class Coins extends Page {
          auctionsPg.stopAuction();
      }
 
-    @Test (priority = 15)
+    @Test (priority = 17)
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -372,7 +355,7 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
 
-    @Test (priority = 16)
+    @Test (priority = 18)
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -397,7 +380,7 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
 
-    @Test (priority = 17)
+    @Test (priority = 19)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
@@ -411,7 +394,7 @@ public class Coins extends Page {
         categoryPg.equalsAddEditCategory();
     }
 
-    @Test (priority = 18)
+    @Test (priority = 20)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
@@ -425,7 +408,7 @@ public class Coins extends Page {
         categoryPg.equalsAddEditCategory();
     }
 
-    @Test (priority = 19)
+    @Test (priority = 21)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
@@ -435,7 +418,7 @@ public class Coins extends Page {
         categoryPg.usageNewCategory();
     }
 
-    @Test (priority = 20)
+    @Test (priority = 22)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
@@ -447,7 +430,7 @@ public class Coins extends Page {
         categoryPg.equalsDelCategory();
     }
 
-    @Test (priority = 21)
+    @Test (priority = 23)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
@@ -461,7 +444,7 @@ public class Coins extends Page {
         periodPg.equalsAddEditPeriod();
     }
 
-    @Test (priority = 22)
+    @Test (priority = 24)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
@@ -475,7 +458,7 @@ public class Coins extends Page {
         periodPg.equalsAddEditPeriod();
     }
 
-    @Test (priority = 23)
+    @Test (priority = 25)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
@@ -485,7 +468,7 @@ public class Coins extends Page {
         periodPg.usageNewPeriod();
     }
 
-    @Test (priority = 24)
+    @Test (priority = 26)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Период")
@@ -497,7 +480,7 @@ public class Coins extends Page {
         periodPg.equalsDelPeriod();
     }
 
-@Test(priority = 25 , groups={"test"})
+@Test(priority = 27 , groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -511,7 +494,7 @@ public class Coins extends Page {
         denominationPg.equalsAddEditDenomination();
     }
 
-   @Test (priority = 26, groups={"test"})
+   @Test (priority = 28, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -524,7 +507,7 @@ public class Coins extends Page {
         denominationPg.clickButtonUpdateDenomination();
         denominationPg.equalsAddEditDenomination();
     }
-    @Test (priority = 27, groups={"test"})
+    @Test (priority = 29, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -536,7 +519,7 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
     }
 
-    @Test (priority = 28, groups={"test"})
+    @Test (priority = 30, groups={"test"})
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Номинал")
@@ -549,7 +532,7 @@ public class Coins extends Page {
     }
 
 
-    @Test (priority = 29)
+    @Test (priority = 31)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Материалы")
@@ -563,7 +546,7 @@ public class Coins extends Page {
         materialsPg.equalsAddEditMaterials();
     }
 
-    @Test (priority = 30)
+    @Test (priority = 32)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Материалы")
@@ -576,7 +559,7 @@ public class Coins extends Page {
         materialsPg.clickButtonUpdateMaterials();
         materialsPg.equalsAddEditMaterials();
     }
-    @Test (priority = 31)
+    @Test (priority = 33)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Материалы")
@@ -588,7 +571,7 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
     }
 
-    @Test (priority = 32)
+    @Test (priority = 34)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Материалы")
@@ -601,7 +584,7 @@ public class Coins extends Page {
     }
 
 
-    @Test (priority = 33)
+    @Test (priority = 35)
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")   // Добавление, удаление лотов на странице аукциона
@@ -614,7 +597,7 @@ public class Coins extends Page {
     auctionsPg.equalsDellFavorites();
     }
 
-    @Test (priority = 34)
+    @Test (priority = 36)
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")
@@ -628,7 +611,8 @@ public class Coins extends Page {
     auctionsPg.delAddFavoritesPageFavorites();
     auctionsPg.equalsDellFavoritesPageFavorites();
     }
-    @Test (priority = 35)
+
+    @Test (priority = 37)
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")   // Добавление, удаление много лотов на странице аукциона
@@ -643,7 +627,7 @@ public class Coins extends Page {
         auctionsPg.equalsDellManyFavorites();
     }
 
-    @Test (priority = 36)
+    @Test (priority = 38)
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")   // Сравнение цен на странице аукциона и странице избранные лоты
@@ -658,7 +642,7 @@ public class Coins extends Page {
         auctionsPg.delAddFavoritesPageFavorites();
         auctionsPg.equalsDellFavoritesPageFavorites();
     }
-    @Test (priority = 37)
+    @Test (priority = 39)
     @Epic(value = "Администратор")
     @Feature(value = "Информация")
     @Story(value ="Новости")   // Создание новости
@@ -671,7 +655,7 @@ public class Coins extends Page {
         newsPg.clickButtonSaveNews();
         newsPg.equalsAddEditNews();
     }
-    @Test (priority = 38)
+    @Test (priority = 40)
     @Epic(value = "Администратор")
     @Feature(value = "Информация")
     @Story(value ="Новости")   // Редактирование новости
@@ -685,7 +669,7 @@ public class Coins extends Page {
         newsPg.equalsAddEditNews();
     }
 
-    @Test (priority = 39)
+    @Test (priority = 41)
     @Epic(value = "Администратор")
     @Feature(value = "Информация")
     @Story(value ="Новости")   // Отображения новости на всех языках
@@ -694,13 +678,9 @@ public class Coins extends Page {
         mainPg.gotoNews();
         newsPg.openLastAddNews();
         newsPg.equalsInLanguages();
-
-        newsPg.fillNews();
-        newsPg.clickButtonSaveNews();
-        newsPg.equalsAddEditNews();
     }
 
-    @Test (priority = 40)
+    @Test (priority = 42)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Новости")
@@ -711,8 +691,6 @@ public class Coins extends Page {
         newsPg.delNews();
         newsPg.equalsDelNews();
     }
-
-
 
 
     @AfterMethod

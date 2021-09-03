@@ -28,7 +28,7 @@ public class LotiPagePage extends Page {
 
 ////////////////////////////////////////// createLot ////////////////////////////////////
 
-    public void createLot() {
+    public void buttonCreateLot() {
         $(By.id("create_lot")).click(); //нажать кнопку создать лот
     }
 
@@ -138,7 +138,7 @@ public class LotiPagePage extends Page {
         size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
         System.out.println(size);
         if (size == 0) {
-            createLot();
+            buttonCreateLot();
             name(12, 10, 8);
             descrintion(20, 12, 10);
             sender();
@@ -168,7 +168,7 @@ public class LotiPagePage extends Page {
 
     }
 
-    public void editLot() {
+    public void buttonEditLot() {
         $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//a[2]")).click();
     }
 
@@ -259,7 +259,7 @@ public class LotiPagePage extends Page {
         size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
         System.out.println(size);
         if (size == 0) {
-            createLot();
+            buttonCreateLot();
             name(12, 10, 8);
             descrintion(20, 12, 10);
             sender();
@@ -321,5 +321,24 @@ for(int i=0; i==r; i++){
     $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
 }
 
+    }
+
+    public void fillLot() {
+        name(12, 15, 10);
+        descrintion(20, 30, 25);
+        sender();
+        country();
+        category();
+        year();
+        minPrice();
+        startPrice();
+        material();
+        denomination();
+        period();
+        topLot();
+        certification();
+        maxSafety();
+        reve();
+        safety();
     }
 }

@@ -37,7 +37,7 @@ public class AuctionsPage extends Page {
 
 ///////////////////////////////////////////////   AddAuction  ///////////////////////////////////
 
-    public void create() {
+    public void buttonCreateAuction() {
         $(By.xpath("//div[@class='card-body card-dashboard']//a")).click();
     }
 
@@ -108,7 +108,7 @@ public class AuctionsPage extends Page {
         size = $$(By.xpath("//table[@id='dataTable']//tbody/tr")).size();
         System.out.println(size);
         if (size == 0) {
-            create();
+            buttonCreateAuction();
             number();
             name();
 //       descrintion(20,30,25);
@@ -409,5 +409,17 @@ public class AuctionsPage extends Page {
            throw new Error();
        }
 
+    }
+
+    public void fillAuction() {
+        number();
+        name();
+//       descrintion(20,30,25);
+        dateStart("2021/06/22 20:00");
+        dateFinish("2021/06/26 23:00");
+        intervalEnd();
+        prolongation();
+        currency();
+        statys();
     }
 }

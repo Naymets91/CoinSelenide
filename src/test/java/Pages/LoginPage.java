@@ -78,6 +78,8 @@ public class LoginPage extends Page {
 
     @Step("Выход из учетной записи пользователя")
     public void logAutUser() {
+        System.out.println(Values.homePage);
+        open(Values.homePage);
         openHomePage(); // открить стартовую страницу
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
         $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();        // клик по пункту меню выход
@@ -239,5 +241,17 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();        // клик по пункту меню профиль
         tempStr = $(By.xpath("//*[@id='name']")).getAttribute("value"); // парсится и записуется значения имени и фамилии
         System.out.println(tempStr);
+    }
+
+    public void incorrect2fa() {
+        $(By.id("one_time_password")).sendKeys("111111");
+        $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
+        if ($$(By.name("email")).size() != 0) {
+            Allure.attachment("Результат", "Успешно");
+            System.out.println("успешно");
+        }else {
+            Allure.attachment("Результат", " !Не успешно");
+            throw new Error();
+        }
     }
 }
