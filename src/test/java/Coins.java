@@ -243,7 +243,6 @@ public class Coins extends Page {
         ukrnetPg.loginUkrnet(Values.ukrnet_email, Values.ukrnet_password);
         ukrnetPg.selectionLastLetterPassword();
         loginPg.recsetPassword();
-        loginPg.logAutUser();
         loginPg.loginUser(Values.ukrnet_email,loginPg.getMyPass());
         loginPg.checkingUserAuthorization();
     }
