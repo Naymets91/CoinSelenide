@@ -152,6 +152,7 @@ public class NewsPage extends Page {
         }
         if (langEn.equals(lang)) {
             $(By.className("flag")).click();
+            sleep(1000);
             $(By.xpath("//div[@class='nav-lang__list']/a[2]")).click();
         }
     }
@@ -167,10 +168,10 @@ public class NewsPage extends Page {
             Allure.attachment("Имя новости", nameRu + " != " + tempName);
             throw new Error();
         }
-        tempName = $(By.xpath("//div[@id='static-page-text']/p[2]")).getText();
+        tempName = $(By.xpath("//div[@id='static-page-text']/p")).getText();
         tempBool = (name.equals(tempName));
         if (tempBool = true){
-            System.out.println("Имя новости соответствует");
+            System.out.println("Описания новости соответствует");
             Allure.attachment("Описания новости", nameRu + " = " + tempName);
         } else {
             System.out.println("Елемент не создан/не редактирован ");

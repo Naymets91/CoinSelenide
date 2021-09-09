@@ -233,7 +233,7 @@ public class Coins extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test (priority = 12)      // Востановления пароля через запрос забили пароль.
+    @Test (priority = 12)      // Восстановления пароля через запрос забили пароль.
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -247,7 +247,7 @@ public class Coins extends Page {
         loginPg.checkingUserAuthorization();
     }
 
-    @Test (priority = 13)                                  // Изминение пароля через панель администратора
+    @Test (priority = 13)                                  // Изменение пароля через панель администратора
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -329,12 +329,12 @@ public class Coins extends Page {
          auctionsPg.stopAuction();
      }
 
-    @Test (priority = 17)
+    @Test (priority = 17)  // Регистрация пользователя и удаления через запрос в профиле клиента
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
     @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
-    public void RegisterDel(){ // Регистрация пользователя и удаления через запрос в профиле клиента
+    public void RegisterDel(){
         loginPg.register();
         // loginPg.pars
         openUkrnetPage();
@@ -682,8 +682,8 @@ public class Coins extends Page {
     @Test (priority = 42)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Новости")
-    public void delNews() {     // Удаление новой новости
+    @Story(value = "Новости")  // Удаление новой новости
+    public void delNews() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.news();
