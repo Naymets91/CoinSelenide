@@ -121,6 +121,9 @@ if (name == true){
 
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
+        $(By.xpath("//select[@id='auction_id']")).click();
+        $(By.xpath("//select[@id='auction_id']/option[@value='31']")).click();
+        sleep(8000);
         $(By.xpath("//*[@id='dataTablesLot']/tbody/tr//a[2]")).click(); //  редактировать
 
         $(By.name("category_id")).click();                                              // добавить в лот новую категорию
@@ -136,17 +139,16 @@ if (name == true){
             }
         else {Allure.attachment("Результат", ">>> Новая категория успешно добавленая в лот <<<" );}
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();// клик по кнопке обновить
-        $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
-        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
+        open("https://coins.dd-dev.club/auction/show/31");
         $(By.xpath("//div[@class='auction-filter__wrapp dash-filter__wrapp filter-mob']")).shouldBe(visible);
 
         Boolean visible = $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).isDisplayed();
-
+        System.out.println( "Кнопка найдена? = " + visible);
         if (visible == true){
             $(By.xpath("//a[@class='category__resset ng-binding ng-scope']/span")).click(); // показать все категории
             sleep(1000);
+            System.out.println( "Кнопка показать больше найдена " );
         }
-
 
         Boolean nameBool = $(By.xpath("//*[text()='"+nameRu+"']")).exists();
         System.out.println("NameRu = " + nameRu);

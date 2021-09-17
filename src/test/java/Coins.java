@@ -513,9 +513,7 @@ public class Coins extends Page {
     public void useDenomination() {     // Использвание нового номинала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
         denominationPg.usageNewDenomination();
-        mainPg.gotoAdminPanel();
     }
 
     @Test (priority = 30, groups={"test"})
@@ -558,6 +556,7 @@ public class Coins extends Page {
         materialsPg.clickButtonUpdateMaterials();
         materialsPg.equalsAddEditMaterials();
     }
+
     @Test (priority = 33)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
@@ -565,9 +564,7 @@ public class Coins extends Page {
     public void useMaterials() {     // Использвание нового Материала
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.materials();
         materialsPg.usageNewMaterials();
-        mainPg.gotoAdminPanel();
     }
 
     @Test (priority = 34)

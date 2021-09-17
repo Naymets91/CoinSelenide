@@ -115,6 +115,9 @@ public class PeriodPage extends Page {
 
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
+        $(By.xpath("//select[@id='auction_id']")).click();
+        $(By.xpath("//select[@id='auction_id']/option[@value='31']")).click();
+        sleep(8000);
         $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[2]//a[2]")).click(); //  редактировать
 
         $(By.name("period_id")).click();                                              // добавить в лот новую категорию
@@ -131,8 +134,8 @@ public class PeriodPage extends Page {
             Allure.attachment("Результат", ">>> Новый период успешно добавленая в лот <<<");
         }
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();// клик по кнопке обновить
-        $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
-        $(By.xpath("//div[@class='auction-ithem__desc']//a[2]")).click();
+//        $(By.xpath("//li[@class='nav-item d-none d-lg-block']/a")).click();  // Перейти на сайт
+        open("https://coins.dd-dev.club/auction/show/31");
         $(By.xpath("//div[@class='category__cont'][4]")).shouldBe(visible);
         Boolean visible = $(By.xpath("//div[@class='category__cont'][4]//span[@class='ng-binding']")).isDisplayed();
         if (visible == true){
