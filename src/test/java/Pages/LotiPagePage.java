@@ -18,6 +18,7 @@ public class LotiPagePage extends Page {
 
     String temp;
     String parsName;
+    String eeNameLot;
 
     Integer size;
     Integer sizeRandom;
@@ -124,7 +125,6 @@ public class LotiPagePage extends Page {
     public void buttonSave() {                // кнопка сохранить
         parsName = $(By.xpath("//input[@id='article']")).getAttribute("value");
         $(By.xpath("//button[@type='submit']")).click();
-        $(byText(parsName)).click();
     }
 
 
@@ -133,43 +133,11 @@ public class LotiPagePage extends Page {
 
 ///////////////////////////////////////////////             EditLot          /////////////////////////////////
 
-    public void randomEditLot() {
-        $(By.xpath("//tr[@class='odd']")).click();
-        size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
-        System.out.println(size);
-        if (size == 0) {
-            buttonCreateLot();
-            name(12, 10, 8);
-            descrintion(20, 12, 10);
-            sender();
-            country();
-            category();
-            year();
-            minPrice();
-            startPrice();
-            material();
-            denomination();
-            period();
-            topLot();
-            certification();
-            maxSafety();
-            reve();
-            safety();
-            buttonSave();
-            $(By.xpath("//tr[@class='odd']")).click();
-            size = $$(By.xpath("//td[@class='reorder sorting_1']")).size();
-            sizeRandom = getRandomNumber(1, size);
-            System.out.println("Вибрано лот " + sizeRandom);
-
-        } else {
-            sizeRandom = getRandomNumber(1, size);
-            System.out.println("Вибрано лот для редагування " + sizeRandom);
-        }
-
-    }
 
     public void buttonEditLot() {
-        $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//a[2]")).click();
+        $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
+        sleep(4000);
+        $(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']")).click();
     }
 
 
@@ -233,18 +201,18 @@ public class LotiPagePage extends Page {
 /////////////////////////////////////////// delete Lote///////////////////////////////////
 
     public void delete() {
-        temp = $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//td[4]")).getText();
-        System.out.println(temp);
-        $(By.xpath("//*[@id='dataTablesLot']/tbody/tr[" + sizeRandom + "]//a[4]")).click();
-        $(By.xpath("//div[@class='modal modal-admin confirm-delete']//button")).should(visible).click();
 
-        tempBool = finde(By.xpath("//*[text()='" + temp + "']"));
-        // $(By.xpath("//*[text()='"+ temp +"']")).should(visible);
-        if (tempBool != true) {
+        $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
+        $(By.xpath("//a[@class='btn table-btn_ico btn-danger waves-effect waves-light btn-delete']")).click();
+        $(By.xpath("//button[@class='btn btn-danger confirm-delete-btn waves-effect waves-light']")).click();
+        sleep(7000);
+        $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
+        size = $$(By.xpath("//*[text()='"+ eeNameLot +"']")).size();
+        if (size <= 0) {
             System.out.println("Лот удалился");
         } else {
             System.out.println("Лот не удалился");
-            $(By.xpath("//*[@id='t']/t")).click();  // чтоб тест упал когда найден удаляемый лот
+            throw new Error();  // чтоб тест упал когда найден удаляемый лот
         }
         System.out.println(tempBool);
     }
@@ -339,6 +307,8 @@ for(int i=0; i==r; i++){
         certification();
         maxSafety();
         reve();
+        eeNameLot = $(By.name("title")).getAttribute("value") ;
+        System.out.println("имя созданого/редактированного лота" + eeNameLot);
         safety();
     }
 }

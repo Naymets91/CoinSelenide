@@ -148,12 +148,11 @@ public class NewsPage extends Page {
         String langEn = "En";
         if (langEe.equals(lang)) {
             $(By.className("flag")).click();
-            $(By.xpath("//div[@class='nav-lang__list']/a[2]")).click();
+            $(By.xpath("//a[@href='https://coins.dd-dev.club/set-locale/ee']")).click();
         }
         if (langEn.equals(lang)) {
             $(By.className("flag")).click();
-            sleep(1000);
-            $(By.xpath("//div[@class='nav-lang__list']/a[2]")).click();
+            $(By.xpath("//a[@href='https://coins.dd-dev.club/set-locale/en']")).click();
         }
     }
 

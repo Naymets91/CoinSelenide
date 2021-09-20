@@ -85,7 +85,6 @@ public class Coins extends Page {
     public void addLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.auctions();
         adminPanelPg.loti();
         lotiPg.buttonCreateLot();
         lotiPg.fillLot();
@@ -101,15 +100,12 @@ public class Coins extends Page {
     public void editLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.auctions();
         adminPanelPg.loti();
-        lotiPg.randomEditLot();
         lotiPg.buttonEditLot();
         lotiPg.parsLotBefore();
         lotiPg.fillLot();
-//        lotiPg.buttonSave();
-//        lotiPg.editLot();
         lotiPg.parsLotAfter();
+        lotiPg.buttonSave();
         lotiPg.equalsLot();
 
     }
@@ -121,9 +117,7 @@ public class Coins extends Page {
     public void deleteLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
-        adminPanelPg.auctions();
         adminPanelPg.loti();
-        lotiPg.randomEditLot();
         lotiPg.delete();
     }
 
@@ -136,22 +130,22 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         auctionsPg.buttonCreateAuction();
-        auctionsPg.fillAuction();
+        auctionsPg.fillAuction(true);
         auctionsPg.buttonSave();
     }
 
-//    @Test  (priority = 7)                                         // Редактирование аукциона
-//    @Epic(value = "Администратор")
-//    @Feature(value = "Админка => Пункт меню Аукцион")
-//    @Story(value = "Аукцион")
-//    public void editAuctions() {
-//        loginPg.loginAdmin();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.auctions();
-//        auctionsPg.buttonCreateAuction();
-//        auctionsPg.fillAuction();
-//        auctionsPg.buttonSave();
-//    }
+    @Test  (priority = 7)                                         // Редактирование аукциона
+    @Epic(value = "Администратор")
+    @Feature(value = "Админка => Пункт меню Аукцион")
+    @Story(value = "Аукцион")
+    public void editAuctions() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.auctions();
+        auctionsPg.buttonEditAuction();
+        auctionsPg.fillAuction(false);
+        auctionsPg.buttonSave();
+    }
 
     @Test (priority = 8)                                      // Удаление аукциона
     @Epic(value = "Администратор")
@@ -644,19 +638,19 @@ public class Coins extends Page {
         newsPg.clickButtonSaveNews();
         newsPg.equalsAddEditNews();
     }
-    @Test (priority = 40)
-    @Epic(value = "Администратор")
-    @Feature(value = "Информация")
-    @Story(value ="Новости")   // Редактирование новости
-    public void editNews(){
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.news();
-        newsPg.clickButtonEditNews();
-        newsPg.fillNews();
-        newsPg.clickButtonSaveNews();
-        newsPg.equalsAddEditNews();
-    }
+//    @Test (priority = 40)
+//    @Epic(value = "Администратор")
+//    @Feature(value = "Информация")
+//    @Story(value ="Новости")   // Редактирование новости
+//    public void editNews(){
+//        loginPg.loginAdmin();
+//        mainPg.gotoAdminPanel();
+//        adminPanelPg.news();
+//        newsPg.clickButtonEditNews();
+//        newsPg.fillNews();
+//        newsPg.clickButtonSaveNews();
+//        newsPg.equalsAddEditNews();
+//    }
 
     @Test (priority = 41)
     @Epic(value = "Администратор")

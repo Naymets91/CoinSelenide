@@ -31,6 +31,7 @@ public void limitCahEdit () {
     }
 
     public void loti () {
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
     }
 

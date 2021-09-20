@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuctionsPage extends Page {
 
 
     boolean tempBool;
+    boolean numberBool;
 
     List<String> favoritesLot = new ArrayList<>();
 //    String[] favoritesLot ;
@@ -22,7 +22,7 @@ public class AuctionsPage extends Page {
     String temp;
     String templot;
     String parsName;
-    String nameEE;
+    String nameAuctionEE;
 
     String priceaAuction;
     String priceaFavorites;
@@ -41,6 +41,10 @@ public class AuctionsPage extends Page {
     public void buttonCreateAuction() {
         $(By.xpath("//div[@class='card-body card-dashboard']//a")).click();
     }
+    public void buttonEditAuction() {
+        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
+        $(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']")).click();
+    }
 
     public void number() {
         sizeRandom = getRandomNumber(1, 100);
@@ -48,8 +52,10 @@ public class AuctionsPage extends Page {
     }
 
     public void name() {
-        nameEE = String.valueOf(randomStringEE(6));
-        $(By.name("name")).sendKeys(nameEE);
+        nameAuctionEE = String.valueOf(randomStringEE(6));
+        System.out.println( "Название аукциона на ее = " + nameAuctionEE);
+        $(By.name("name")).clear();
+        $(By.name("name")).sendKeys(nameAuctionEE);
         $(By.name("___name[en]")).sendKeys("Auction № " + sizeRandom);
         $(By.name("___name[ru]")).sendKeys("Аукцион № " + sizeRandom);
         System.out.println();
@@ -95,9 +101,11 @@ public class AuctionsPage extends Page {
 
     public void buttonSave() {
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
-        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
-        size = $$(By.xpath("//*[text()='"+ nameEE +"']")).size();
-
+        sleep(2000);
+        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
+        size = $$(By.xpath("//*[text()='"+ nameAuctionEE +"']")).size();
+        sleep(2000);
+        System.out.println("Количество найденых аукционов по запросу " + size);
         if (size > 0) {
             System.out.println("Аукцион создан/редактирован");
         } else {
@@ -109,16 +117,17 @@ public class AuctionsPage extends Page {
 
 
     public void delete() {
-        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
+        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
         $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light btn-delete']")).click();
-
         $(By.xpath("//button[@class='btn btn-danger confirm-delete-btn waves-effect waves-light']")).click();
         sleep(5000);
-        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
-        size = $$(By.xpath("//*[text()='"+ nameEE +"']")).size();
+        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
+        sleep(2000);
+        size = $$(By.xpath("//*[text()='"+ nameAuctionEE +"']")).size();
 
         if (size <= 0) {
             System.out.println("Аукцион удалился");
+            System.out.println("Имя удаленного аукциона = " + nameAuctionEE);
         } else {
             System.out.println("Аукцион не удалился");
             throw new Error();  // чтоб тест упал когда найден удаляемый лот
@@ -393,8 +402,10 @@ public class AuctionsPage extends Page {
 
     }
 
-    public void fillAuction() {
+    public void fillAuction(boolean numberBool) {
+        if (numberBool == true) {
         number();
+        }
         name();
 //       descrintion(20,30,25);
         dateStart("2021/06/22 20:00");
@@ -404,4 +415,6 @@ public class AuctionsPage extends Page {
         currency();
         statys();
     }
+
+
 }
