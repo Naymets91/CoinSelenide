@@ -34,6 +34,8 @@ public class Values {
     public static  String fa2_secret_key = "";
 
 
+   public static String auctionsUseNominal = "31";
+
 }
 
 

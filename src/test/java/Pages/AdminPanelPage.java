@@ -27,15 +27,14 @@ public void limitCahEdit () {
 
     public void auctions() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
+        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
     }
 
     public void loti () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
     }
 
-    public void auctionAdd() {
-        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
-    }
+
 
 @Step ("Переход в пункт меню Клиенты")
     public void editPassUser() {

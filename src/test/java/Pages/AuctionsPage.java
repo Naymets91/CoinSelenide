@@ -22,6 +22,7 @@ public class AuctionsPage extends Page {
     String temp;
     String templot;
     String parsName;
+    String nameEE;
 
     String priceaAuction;
     String priceaFavorites;
@@ -43,11 +44,12 @@ public class AuctionsPage extends Page {
 
     public void number() {
         sizeRandom = getRandomNumber(1, 100);
-        $(By.id("number")).sendKeys("№ " + sizeRandom);
+        $(By.id("number")).sendKeys("№ " + sizeRandom + randomStringEE(2));
     }
 
     public void name() {
-        $(By.name("name")).sendKeys("Oksjon № " + sizeRandom);
+        nameEE = String.valueOf(randomStringEE(6));
+        $(By.name("name")).sendKeys(nameEE);
         $(By.name("___name[en]")).sendKeys("Auction № " + sizeRandom);
         $(By.name("___name[ru]")).sendKeys("Аукцион № " + sizeRandom);
         System.out.println();
@@ -92,50 +94,30 @@ public class AuctionsPage extends Page {
     }
 
     public void buttonSave() {
-        parsName = $(By.id("number")).getAttribute("value");
-        System.out.println(parsName);
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
-        $(By.xpath("//select[@name='dataTable_length']")).click();
-        $(By.xpath("//select[@name='dataTable_length']//option[4]")).click();
-        $(byText(parsName)).click();
-    }
+        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
+        size = $$(By.xpath("//*[text()='"+ nameEE +"']")).size();
 
-    public void randomEditorAuction() {
-        $(By.xpath("//select[@name='dataTable_length']")).click();
-        $(By.xpath("//select[@name='dataTable_length']//option[4]")).click();
-
-        $(By.xpath("//tr[@class='odd']")).click();
-        size = $$(By.xpath("//table[@id='dataTable']//tbody/tr")).size();
-        System.out.println(size);
-        if (size == 0) {
-            buttonCreateAuction();
-            number();
-            name();
-//       descrintion(20,30,25);
-            dateStart("2021/06/22 20:00");
-            dateFinish("2021/06/26 23:00");
-            intervalEnd();
-            prolongation();
-            currency();
-            statys();
-            buttonSave();
-            $(By.xpath("//tr[@class='odd']")).click();
-            size = $$(By.xpath("//table[@id='dataTable']//tbody/tr")).size();
+        if (size > 0) {
+            System.out.println("Аукцион создан/редактирован");
         } else {
-            System.out.println("Вибрано лот для редагування " + size);
+            System.out.println("!!!Аукцион НЕ создан/редактирован!!!");
+            throw new Error();  // чтоб тест упал когда найден удаляемый лот
         }
     }
 
+
+
     public void delete() {
-        temp = $(By.xpath("//table[@id='dataTable']//tbody/tr[" + size + "]//td[2]")).getText();
-        System.out.println(temp);
-        $(By.xpath("//table[@id='dataTable']//tbody/tr[" + size + "]//button")).click();
+        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
+        $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light btn-delete']")).click();
 
-        $(By.xpath("//div[@class='modal modal-admin confirm-delete']//button")).should(visible).click();
+        $(By.xpath("//button[@class='btn btn-danger confirm-delete-btn waves-effect waves-light']")).click();
+        sleep(5000);
+        $(By.xpath("//input[@type='search']")).sendKeys(nameEE);
+        size = $$(By.xpath("//*[text()='"+ nameEE +"']")).size();
 
-        tempBool = finde(By.xpath("//*[text()='" + temp + "']"));
-        // $(By.xpath("//*[text()='"+ temp +"']")).should(visible);
-        if (tempBool != true) {
+        if (size <= 0) {
             System.out.println("Аукцион удалился");
         } else {
             System.out.println("Аукцион не удалился");

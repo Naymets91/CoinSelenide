@@ -135,25 +135,23 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
-        adminPanelPg.auctionAdd();
         auctionsPg.buttonCreateAuction();
         auctionsPg.fillAuction();
         auctionsPg.buttonSave();
     }
 
-    @Test  (priority = 7)                                         // Редактирование аукциона
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Аукцион")
-    public void editAuctions() {
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.auctions();
-        adminPanelPg.auctionAdd();
-        auctionsPg.buttonCreateAuction();
-        auctionsPg.fillAuction();
-        auctionsPg.buttonSave();
-    }
+//    @Test  (priority = 7)                                         // Редактирование аукциона
+//    @Epic(value = "Администратор")
+//    @Feature(value = "Админка => Пункт меню Аукцион")
+//    @Story(value = "Аукцион")
+//    public void editAuctions() {
+//        loginPg.loginAdmin();
+//        mainPg.gotoAdminPanel();
+//        adminPanelPg.auctions();
+//        auctionsPg.buttonCreateAuction();
+//        auctionsPg.fillAuction();
+//        auctionsPg.buttonSave();
+//    }
 
     @Test (priority = 8)                                      // Удаление аукциона
     @Epic(value = "Администратор")
@@ -163,8 +161,6 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
-        adminPanelPg.auctionAdd();
-        auctionsPg.randomEditorAuction();
         auctionsPg.delete();
     }
 
@@ -284,7 +280,7 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
-        adminPanelPg.auctionAdd();
+
 //       auctionsPg.showMaxAuctions();
         auctionsPg.startAuctionDate();
         loginPg.logAutAdmin();
@@ -295,7 +291,6 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
-        adminPanelPg.auctionAdd();
         auctionsPg.stopAuction();
     }
 
@@ -307,7 +302,6 @@ public class Coins extends Page {
          loginPg.loginAdmin();
          mainPg.gotoAdminPanel();
          adminPanelPg.auctions();
-         adminPanelPg.auctionAdd();
          auctionsPg.startAuction();
          loginPg.logAutAdmin();
          loginPg.loginUser(Values.user1_email,Values.user1_password);
@@ -325,7 +319,6 @@ public class Coins extends Page {
          loginPg.loginAdmin();
          mainPg.gotoAdminPanel();
          adminPanelPg.auctions();
-         adminPanelPg.auctionAdd();
          auctionsPg.stopAuction();
      }
 

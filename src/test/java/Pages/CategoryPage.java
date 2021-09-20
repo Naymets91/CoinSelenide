@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.Values;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
@@ -122,7 +123,7 @@ if (name == true){
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
         $(By.xpath("//select[@id='auction_id']")).click();
-        $(By.xpath("//select[@id='auction_id']/option[@value='31']")).click();
+        $(By.xpath("//select[@id='auction_id']/option[@value='"+ Values.auctionsUseNominal +"']")).click();  // Выбор номера аукциона
         sleep(8000);
         $(By.xpath("//*[@id='dataTablesLot']/tbody/tr//a[2]")).click(); //  редактировать
 
