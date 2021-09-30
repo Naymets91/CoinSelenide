@@ -149,7 +149,9 @@ public class LoginPage extends Page {
         $(By.name("password")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
         $(By.name("password_confirmation")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
 
-        $(By.id("rules_policy_confirmation")).click(); // клик чекбокс подтверждения правил
+        $(By.xpath("//input[@id='is_confirmed_policy']")).click();// клик чекбокс подтверждения политики
+        $(By.xpath("//input[@id='is_confirmed_agreement']")).click();// клик чекбокс подтверждения правил
+
         parsReg();
         $(By.xpath("//div[@class='form__cont sing-form']//button")).click();
         $(By.xpath("//div[@class='alert alert-success']//p")).click();

@@ -638,19 +638,19 @@ public class Coins extends Page {
         newsPg.clickButtonSaveNews();
         newsPg.equalsAddEditNews();
     }
-//    @Test (priority = 40)
-//    @Epic(value = "Администратор")
-//    @Feature(value = "Информация")
-//    @Story(value ="Новости")   // Редактирование новости
-//    public void editNews(){
-//        loginPg.loginAdmin();
-//        mainPg.gotoAdminPanel();
-//        adminPanelPg.news();
-//        newsPg.clickButtonEditNews();
-//        newsPg.fillNews();
-//        newsPg.clickButtonSaveNews();
-//        newsPg.equalsAddEditNews();
-//    }
+    @Test (priority = 40)
+    @Epic(value = "Администратор")
+    @Feature(value = "Информация")
+    @Story(value ="Новости")   // Редактирование новости
+    public void editNews(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.clickButtonEditNews();
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
 
     @Test (priority = 41)
     @Epic(value = "Администратор")
