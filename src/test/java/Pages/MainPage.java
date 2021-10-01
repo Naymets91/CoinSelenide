@@ -1,10 +1,13 @@
 package Pages;
 
+import Config.Values;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class MainPage extends Page {
 
@@ -36,6 +39,11 @@ public class MainPage extends Page {
     @Step("Переход в аукцион")
     public void gotoAuction() {
         $(By.xpath("//div[@class='auction-ithem__desc']//a[@class='btn-yel']")).click();
+    }
+    @Step("Переход в аукцион 49")
+    public void gotoAuction49() {
+        open("https://coins.dd-dev.club/auction/show/31");
+        $(By.xpath("//div[@class='auction-one__content']")).waitUntil(visible, 30000); // ожидания появления елемента
     }
     @Step("Переход на страницу избраного")
     public void goFavoritesPage() {

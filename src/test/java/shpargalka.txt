@@ -75,7 +75,8 @@ public int getRandomNumber(int a1, int b1) {    // рандомний генер
 
   $(".loading_progress").should(disappear); // Само подождёт, пока элемент исчезнет
   $("#username").shouldHave(text("Hello, Johny!")); // Само подождёт, пока у элемента появится нужный текст
-
+  
+ $(By.xpath("//div[@class='auction-one__content']")).waitUntil(visible, 30000); // ожидания появления елемента
 $("#username").shouldBe(visible);   // ждёт, пока элемент появится
   $("#username").shouldHave(text("Hello, Johny!")); // ждёт, пока текст элемента изменится на "Hello, Johny!"
   $("#login-button").shouldHave(cssClass("green-button")); // ждёт, пока кнопка станет зелёной

@@ -601,7 +601,7 @@ public class Coins extends Page {
     @Story(value ="Избранне")   // Добавление, удаление много лотов на странице аукциона
     public void addDelManyFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction();
+        mainPg.gotoAuction49();
         auctionsPg.randomAddManyFavorites();
         auctionsPg.equalsAddManyFavorites();
         auctionsPg.refreshPage();
@@ -616,7 +616,7 @@ public class Coins extends Page {
     @Story(value ="Избранне")   // Сравнение цен на странице аукциона и странице избранные лоты
     public void equalsPricePageAuctionPageFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction();
+        mainPg.gotoAuction49();
         auctionsPg.randomAddFavorites();
         auctionsPg.equalsAddFavorites();
         mainPg.goFavoritesPage();
