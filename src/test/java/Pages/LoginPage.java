@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends Page {
@@ -85,7 +86,7 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();        // клик по пункту меню выход
     }
 
-@Step ("Pапроса для сброса пароля")
+@Step ("Запроса для сброса пароля")
     public void createRequestRecoveryPassword() {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();    // клик по кнопке вход
         $(By.xpath("//div[@class='form__ithem form_forgot']/a[2]")).click();    // клик по ссылке  Забыли пароль?
@@ -255,5 +256,64 @@ public class LoginPage extends Page {
             Allure.attachment("Результат", " !Не успешно");
             throw new Error();
         }
+    }
+    @Step("Клик по кнопке регистрация ")
+    public void goToPageRegisteration() {
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/auth/register']")).click();  // клик по кнопке регистрация
+    }
+
+    public void checkWithoutContractPolicy() {
+        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+                "Без активных чекбоксов <<Кнопка неактивна>>",
+                "!!!Кнопка активна без принятия договора и политики!!!");
+    }
+
+    public void clickPolicy() {
+        $(By.xpath("//input[@id='is_confirmed_policy']")).click();// клик чекбокс подтверждения политики
+    }
+    public void checkPoliticsClick() {
+        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+                "Только политика конфединциальности <<Кнопка неактивна>> ",
+                "!!!Кнопка активна без принятия договора!!!");
+    }
+    public void clickContract() {
+        $(By.xpath("//input[@id='is_confirmed_agreement']")).click();// клик чекбокс подтверждения правил
+    }
+    public void checkContractClick() {
+        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+                "Только правила <<Кнопка неактивна >>",
+                "!!!Кнопка активна без принятия политики!!!");
+    }
+    public void checkContractPolicyClick() {
+        finndSize(By.xpath("//button[@class='btn-yel btn-modal']"),
+                "Политика и Правила чекбокс активен <<Кнопка активна>>",
+                "!!!Кнопка неактивна с принятия договора и политики!!!");
+    }
+    public void clickButtonRegistration() {
+        $(By.xpath("//div[@class='form__cont sing-form']//button")).click();
+    }
+    public void checkFindTextEror(){
+        finndSize(By.xpath("//p[@class='form-helper-block']"),
+                "Присутствует Предупреждения что нужно заполнить поля",
+                "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
+    }
+
+    public void goToPageAutorization() {
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/auth/login']")).click();  // клик по кнопке авторизация
+    }
+
+    public void clickButtonLogin() {
+        $(By.xpath("//button[@class='btn-yel btn-modal']")).click();
+    }
+
+    public void checkAuthtTextEror() {
+        finndSize(By.xpath("..."),
+                "Присутствует Предупреждения что нужно заполнить поля",
+                "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
+    }
+
+    public void incorrectPassword() {
+        $(By.name("email")).sendKeys("testcoins179@ukr.net");    // ввод в поле емаил емаил юзера
+        $(By.name("password")).sendKeys("user_password");      // ввод в поле пароль пароль юзера
     }
 }

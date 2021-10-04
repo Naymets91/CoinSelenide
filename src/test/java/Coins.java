@@ -340,6 +340,38 @@ public class Coins extends Page {
         loginPg.logAutAdmin();
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
+    @Test (priority = 00)
+    @Epic(value = "Администратор")
+    @Feature(value = "Учетная запись")
+    @Story(value = "Пароль")  // Удаление новой новости
+    @Description(value = "Регистрация с пустыми данными")
+    public void registerEmptyData() {
+        loginPg.goToPageRegisteration();
+        loginPg.checkWithoutContractPolicy();
+        loginPg.clickPolicy();
+        loginPg.checkPoliticsClick();
+        loginPg.clickPolicy();
+        loginPg.clickContract();
+        loginPg.checkContractClick();
+        loginPg.clickPolicy();
+        loginPg.checkContractPolicyClick();
+        loginPg.clickButtonRegistration();
+        loginPg.checkFindTextEror();
+    }
+    @Test (priority = 00)
+    @Epic(value = "Администратор")
+    @Feature(value = "Учетная запись")
+    @Story(value = "Пароль")  // Удаление новой новости
+    @Description(value = "Регистрация с пустыми данными")
+    public void autorizationIvalidData() {
+        loginPg.goToPageAutorization();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+        loginPg.incorrectPassword();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+    }
+
 
     @Test (priority = 18)
     @Epic(value = "Администратор")

@@ -1,6 +1,7 @@
 package Pages;
 
 import Config.Values;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,10 +25,20 @@ public class Page {
         open(Values.ukrnetPage);
     }
 
-    public void setInput () {
+    public void setInput() {
 
+    }
+
+    public void finndSize(By locator, String textTrue, String textFalse ) {
+        if($$(locator).size() != 0) {
+        Allure.attachment("Результат", textTrue);
+        System.out.println(textTrue);
+    } else {
+        Allure.attachment("Результат", textFalse);
+        System.out.println(textFalse);
+        throw new Error();
+    }
 }
-
     public boolean find(By locator) {
         if($$(locator).size() != 0){
             System.out.println("true");
