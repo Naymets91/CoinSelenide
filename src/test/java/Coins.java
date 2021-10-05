@@ -232,7 +232,7 @@ public class Coins extends Page {
         openUkrnetPage();
         ukrnetPg.loginUkrnet(Values.ukrnet_email, Values.ukrnet_password);
         ukrnetPg.selectionLastLetterPassword();
-        loginPg.recsetPassword();
+        loginPg.resetPassword();
         loginPg.loginUser(Values.ukrnet_email,loginPg.getMyPass());
         loginPg.checkingUserAuthorization();
     }
@@ -322,7 +322,9 @@ public class Coins extends Page {
     @Story(value = "Пароль")
     @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
     public void RegisterDel(){
-        loginPg.register();
+        loginPg.goToPageRegisteration();
+        loginPg.fillRegistrateDate();
+        loginPg.clickButtonRegistration();
         // loginPg.pars
         openUkrnetPage();
         ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
@@ -340,37 +342,7 @@ public class Coins extends Page {
         loginPg.logAutAdmin();
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
-    @Test (priority = 00)
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")  // Удаление новой новости
-    @Description(value = "Регистрация с пустыми данными")
-    public void registerEmptyData() {
-        loginPg.goToPageRegisteration();
-        loginPg.checkWithoutContractPolicy();
-        loginPg.clickPolicy();
-        loginPg.checkPoliticsClick();
-        loginPg.clickPolicy();
-        loginPg.clickContract();
-        loginPg.checkContractClick();
-        loginPg.clickPolicy();
-        loginPg.checkContractPolicyClick();
-        loginPg.clickButtonRegistration();
-        loginPg.checkFindTextEror();
-    }
-    @Test (priority = 00)
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")  // Удаление новой новости
-    @Description(value = "Регистрация с пустыми данными")
-    public void autorizationIvalidData() {
-        loginPg.goToPageAutorization();
-        loginPg.clickButtonLogin();
-        loginPg.checkAuthtTextEror();
-        loginPg.incorrectPassword();
-        loginPg.clickButtonLogin();
-        loginPg.checkAuthtTextEror();
-    }
+
 
 
     @Test (priority = 18)
@@ -378,9 +350,12 @@ public class Coins extends Page {
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
     @Description(value = "Регистрация пользователя и удаления администратором")
-    public  void RegisterDelAdminDel (){ // Регистрация пользователя и удаления администратором
-        loginPg.register();
+    public  void RegisterAnotherAddressDelAdmin (){ // Регистрация пользователя и удаления администратором
+        loginPg.goToPageRegisteration();
+        loginPg.fillRegistrateDate();
+        loginPg.fillAnotherAdres();
         // loginPg.pars
+        loginPg.clickButtonRegistration();
         openUkrnetPage();
         ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
         ukrnetPg.selectionLastLetterRegister();
@@ -706,7 +681,37 @@ public class Coins extends Page {
         newsPg.delNews();
         newsPg.equalsDelNews();
     }
-
+    @Test (priority = 100)
+    @Epic(value = "Администратор")
+    @Feature(value = "Учетная запись")
+    @Story(value = "Пароль")  // Регистрация с пустыми данными
+    @Description(value = "Регистрация с пустыми данными")
+    public void registerEmptyData() {
+        loginPg.goToPageRegisteration();
+        loginPg.checkWithoutContractPolicy();
+        loginPg.clickPolicy();
+        loginPg.checkPoliticsClick();
+        loginPg.clickPolicy();
+        loginPg.clickContract();
+        loginPg.checkContractClick();
+        loginPg.clickPolicy();
+        loginPg.checkContractPolicyClick();
+        loginPg.clickButtonRegistration();
+        loginPg.checkFindTextEror();
+    }
+    @Test (priority = 101)
+    @Epic(value = "Администратор")
+    @Feature(value = "Учетная запись")
+    @Story(value = "Пароль")  // Авторизация с невалидными данными
+    @Description(value = "Авторизация с невалидными данными")
+    public void autorizationIvalidData() {
+        loginPg.goToPageAutorization();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+        loginPg.incorrectPassword();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+    }
 
     @AfterMethod
     public void after() {

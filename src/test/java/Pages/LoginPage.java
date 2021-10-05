@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends Page {
@@ -95,7 +94,7 @@ public class LoginPage extends Page {
     }
 
 @Step ("Генерация нового пароля ")
-    public String recsetPassword() {
+    public String resetPassword() {
         switchTo().window(1);       // переключения на 2 вкладку
         tempStr = "Df";
         tempInt = getRandomNumber(8000000, 8999999);
@@ -122,9 +121,9 @@ public class LoginPage extends Page {
         }
 
     }
-    @Step("Регистрация пользователя")
-    public void register() {        // регистрация нового пользователя
-        $(By.xpath("//div[@class='nav-lang']/../a[1]")).click();  // клик по кнопке регистрация
+
+    @Step("Регистрация пользователя ")
+    public void fillRegistrateDate() {        // регистрация нового пользователя
 
         setAllurStrRandom("first_name", "Имя = "); // ввод в поле имя
         setAllurStrRandom("last_name", "Фамилия = "); // ввод в поле фамилия
@@ -133,7 +132,6 @@ public class LoginPage extends Page {
         setAllurStrMail("email", "email = "); // ввод в поле email
         setAllurStrSave_IntRandom("phone", "телефон = ",10000000,999999999); // ввод в поле номер телефона
 
-        $(By.id("country_id-selectized")).click();
         randomSelect("country_id", 2);    // ввод в поле Страна
 
         setAllurStrSave("index","индекс =","22400");// ввод в поле индекс
@@ -141,10 +139,9 @@ public class LoginPage extends Page {
 
         $(By.name("city")).sendKeys("Vinnitsa");  // ввод в поле город
         $(By.name("address")).sendKeys("Vinnitsa");  // ввод в поле Адрес для выставления счетов
-
         randomSelect("delivery_id",  1);  // ввод в поле Способ доставки
-
         $(By.name("shipping_address")).sendKeys(randomStringEE(7) + " "+ "35");  // ввод в поле Адрес доставки
+
         $(By.name("recommendations")).sendKeys(randomStringEE(5) );  // ввод в поле рекомендации
         $(By.name("max_credit_limit")).sendKeys("555" );  // ввод в поле кредитный лимит
         $(By.name("password")).sendKeys(Values.userRegDelPassword);  // ввод в поле пароль
@@ -153,11 +150,19 @@ public class LoginPage extends Page {
         $(By.xpath("//input[@id='is_confirmed_policy']")).click();// клик чекбокс подтверждения политики
         $(By.xpath("//input[@id='is_confirmed_agreement']")).click();// клик чекбокс подтверждения правил
 
-        parsReg();
-        $(By.xpath("//div[@class='form__cont sing-form']//button")).click();
-        $(By.xpath("//div[@class='alert alert-success']//p")).click();
     }
-
+    @Step("Заполнения другой адрес доставки ")
+    public void fillAnotherAdres() {
+        $(By.xpath("//input[@id='use_shipping_address']")).click();// клик чекбокс другой адрес доставки
+        randomSelect("another_country_id", 2);    // ввод в поле Страна
+        randomSelect("another_delivery_id",  1);  // ввод в поле Способ доставки
+        setAllurStrRandom("other_address[first_name]", "Имя = "); // ввод в поле имя
+        setAllurStrRandom("other_address[last_name]", "Фамилия = "); // ввод в поле фамилия
+        setAllurStrSave("other_address[delivery_index]","индекс =","22402");// ввод в поле индекс
+        setAllurStrSave("other_address[region_name]","регион =","22Винницкий22");// ввод в поле регион
+        $(By.name("other_address[city_name]")).sendKeys("22Vinnitsa22");  // ввод в поле город
+        $(By.name("other_address[address]")).sendKeys(randomStringEE(7) + " "+ "100");  // ввод в поле Адрес доставки
+    }
 
     private void setAllurStr_IntRandom(String by_Name, String contentName, Integer a1, Integer a2 ) {
         tempStr = String.valueOf(randomStringEE(2)) + getRandomNumber(a1,a2);
@@ -190,9 +195,6 @@ public class LoginPage extends Page {
         tempStrB = randomStringEE(7);
         $(By.name(by_Name)).sendKeys(tempStrB);
         Allure.addAttachment("Результат", "application/json", contentName + String.valueOf(tempStrB));
-    }
-    private void parsReg() {
-
     }
 
     @Step("Создать запрос на удаления пользователя")
@@ -316,4 +318,6 @@ public class LoginPage extends Page {
         $(By.name("email")).sendKeys("testcoins179@ukr.net");    // ввод в поле емаил емаил юзера
         $(By.name("password")).sendKeys("user_password");      // ввод в поле пароль пароль юзера
     }
+
+
 }
