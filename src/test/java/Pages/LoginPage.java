@@ -49,27 +49,33 @@ public class LoginPage extends Page {
         $(By.className("btn-modal")).click();        // клик по кнопке
         GoogleAuthenticator gAuth = new GoogleAuthenticator();      // подключение  2 аутентификации
         int code = gAuth.getTotpPassword(Values.fa2_secret_key);    // считывания кода 2 аутентификации
-        System.out.println("Code = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        //System.out.println("Code = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
         $(By.id("one_time_password")).sendKeys(Integer.toString(code));  // ввод в нужное поле кода 2 аутентификации
 
         $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
-        if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку еподошол пробуем авторизоватся еще раз
-            sleep(25000);
-            $(By.name("email")).sendKeys(Values.admin_email);
-            $(By.name("password")).sendKeys(Values.admin_password);
-            $(By.className("btn-modal")).click();
-            code = gAuth.getTotpPassword(Values.fa2_secret_key);
-            System.out.println("Code2 = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-            $(By.id("one_time_password")).sendKeys(Integer.toString(code));
-            $(By.xpath("//form[@method='POST']//button")).click();
+        if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку не подошол пробуем авторизоватся еще раз
+            trueAgan2fa();
+        }
+        if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку не подошол пробуем авторизоватся еще раз
+            trueAgan2fa();
         }
         if ($$(By.name("email")).size() != 0) {        // если авторизация не удалась тест падает с выводом текста ошибки
-            System.out.println("2 раза введено неверно код провер двухфакторки");
+            System.out.println("3 раза введено неверно код провер двухфакторки");
             throw new Error();      // после етой команды тест падает
         }
     }
-
-
+public void trueAgan2fa () {
+    sleep(25000);
+    $(By.name("email")).sendKeys(Values.admin_email);
+    $(By.name("password")).sendKeys(Values.admin_password);
+    $(By.className("btn-modal")).click();
+    GoogleAuthenticator gAuth = new GoogleAuthenticator();
+    int code = gAuth.getTotpPassword(Values.fa2_secret_key);
+    System.out.println("Code2 = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+    $(By.id("one_time_password")).sendKeys(Integer.toString(code));
+    $(By.xpath("//form[@method='POST']//button")).click();
+}
+    @Step("Выход из учетной записи администратора")
     public void logAutAdmin() {
        openHomePage(); // открить стартовую страницу
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click(); // клик на личный кабинет
@@ -85,7 +91,7 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[6]/a")).click();        // клик по пункту меню выход
     }
 
-@Step ("Запроса для сброса пароля")
+@Step ("Запрос для сброса пароля")
     public void createRequestRecoveryPassword() {
         $(By.xpath("//div[@class='nav-lang']/../a[2]")).click();    // клик по кнопке вход
         $(By.xpath("//div[@class='form__ithem form_forgot']/a[2]")).click();    // клик по ссылке  Забыли пароль?
@@ -117,6 +123,7 @@ public class LoginPage extends Page {
         $(By.xpath("//ul[@class='-visible']//li[5]/a")).click();
         if ($$(By.name("phone")).size() == 0) {
             System.out.println("Невозможно авторизоваться используя новый пароль");
+            Allure.attachment("Результат", "Невозможно авторизоваться используя новый пароль" );
             throw new Error();
         }
 
@@ -231,11 +238,12 @@ public class LoginPage extends Page {
         $(By.name("password")).sendKeys(user_password);      // ввод в поле пароль пароль юзера
         $(By.className("btn-modal")).click();   // клик по кнопке
         tempBool = finde(By.xpath("//div[@class='alert alert-danger']//li"));
-
         if (tempBool == true) {
             System.out.println("Пользователь удалился");
+            Allure.attachment("Результат", "Пользователь удалился");
         } else {
             System.out.println("Пользователь не удалился");
+            Allure.attachment("Результат","!!!Пользователь не удалился");
             throw new Error();
         }
 
@@ -247,15 +255,16 @@ public class LoginPage extends Page {
         tempStr = $(By.xpath("//*[@id='name']")).getAttribute("value"); // парсится и записуется значения имени и фамилии
         System.out.println(tempStr);
     }
-
+    @Step("Проверка авторизации")
     public void incorrect2fa() {
         $(By.id("one_time_password")).sendKeys("111111");
         $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
         if ($$(By.name("email")).size() != 0) {
-            Allure.attachment("Результат", "Успешно");
-            System.out.println("успешно");
+            Allure.attachment("Результат", "Авторизация с неверным 2fa неудалась");
+            System.out.println("Авторизация с неверным 2fa неудалась");
         }else {
-            Allure.attachment("Результат", " !Не успешно");
+            Allure.attachment("Результат", "!!!Произошла авторизация з неверным кодом 2fa");
+            System.out.println("!!!Произошла авторизация з неверным кодом 2fa");
             throw new Error();
         }
     }
@@ -265,7 +274,7 @@ public class LoginPage extends Page {
     }
 
     public void checkWithoutContractPolicy() {
-        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+        finndSizeTrue(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
                 "Без активных чекбоксов <<Кнопка неактивна>>",
                 "!!!Кнопка активна без принятия договора и политики!!!");
     }
@@ -274,7 +283,7 @@ public class LoginPage extends Page {
         $(By.xpath("//input[@id='is_confirmed_policy']")).click();// клик чекбокс подтверждения политики
     }
     public void checkPoliticsClick() {
-        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+        finndSizeTrue(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
                 "Только политика конфединциальности <<Кнопка неактивна>> ",
                 "!!!Кнопка активна без принятия договора!!!");
     }
@@ -282,20 +291,21 @@ public class LoginPage extends Page {
         $(By.xpath("//input[@id='is_confirmed_agreement']")).click();// клик чекбокс подтверждения правил
     }
     public void checkContractClick() {
-        finndSize(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
+        finndSizeTrue(By.xpath("//button[@class='btn-yel btn-modal btn-modal__disabled']"),
                 "Только правила <<Кнопка неактивна >>",
                 "!!!Кнопка активна без принятия политики!!!");
     }
     public void checkContractPolicyClick() {
-        finndSize(By.xpath("//button[@class='btn-yel btn-modal']"),
+        finndSizeTrue(By.xpath("//button[@class='btn-yel btn-modal']"),
                 "Политика и Правила чекбокс активен <<Кнопка активна>>",
                 "!!!Кнопка неактивна с принятия договора и политики!!!");
     }
+    @Step ("Клик на кнопку регистрация")
     public void clickButtonRegistration() {
         $(By.xpath("//div[@class='form__cont sing-form']//button")).click();
     }
     public void checkFindTextEror(){
-        finndSize(By.xpath("//p[@class='form-helper-block']"),
+        finndSizeTrue(By.xpath("//p[@class='form-helper-block']"),
                 "Присутствует Предупреждения что нужно заполнить поля",
                 "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
     }
@@ -309,7 +319,7 @@ public class LoginPage extends Page {
     }
 
     public void checkAuthtTextEror() {
-        finndSize(By.xpath("..."),
+        finndSizeTrue(By.xpath("..."),
                 "Присутствует Предупреждения что нужно заполнить поля",
                 "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
     }

@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 
 
 public class AdminPanelPage extends Page {
-
+    @Step("Переход на страницу заявки на редактирования кредитного лимита ")
 public void limitCahEdit () {
     $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
     $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
@@ -24,12 +24,12 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
         $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[2]//span")).should(visible).click();
     }
-
+    @Step("Переход на страницу аукционов")
     public void auctions() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
     }
-
+    @Step("Переход на страницу лоты")
     public void loti () {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
         $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты

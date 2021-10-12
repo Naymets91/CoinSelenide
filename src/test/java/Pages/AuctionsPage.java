@@ -21,7 +21,7 @@ public class AuctionsPage extends Page {
 
     String temp;
     String templot;
-    String parsName;
+
     String nameAuctionEE;
 
     String priceaAuction;
@@ -37,10 +37,11 @@ public class AuctionsPage extends Page {
 
 
 ///////////////////////////////////////////////   AddAuction  ///////////////////////////////////
-
+@Step("Нажатия на кнопку создать")
     public void buttonCreateAuction() {
         $(By.xpath("//div[@class='card-body card-dashboard']//a")).click();
     }
+    @Step("Нажатия на кнопку редактирования")
     public void buttonEditAuction() {
         $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
         $(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']")).click();
@@ -98,41 +99,37 @@ public class AuctionsPage extends Page {
         $(By.xpath("//select[@id='status']")).click();
         $(By.xpath("//select[@id='status']/option[2]")).click();
     }
-
+    @Step("Нажатия на кнопку сохранить")
     public void buttonSave() {
         $(By.xpath("//button[@class='btn btn-info waves-input-wrapper waves-effect waves-light']")).click();
-        sleep(2000);
-        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
-        size = $$(By.xpath("//*[text()='"+ nameAuctionEE +"']")).size();
-        sleep(2000);
-        System.out.println("Количество найденых аукционов по запросу " + size);
-        if (size > 0) {
-            System.out.println("Аукцион создан/редактирован");
-        } else {
-            System.out.println("!!!Аукцион НЕ создан/редактирован!!!");
-            throw new Error();  // чтоб тест упал когда найден удаляемый лот
-        }
+    }
+    @Step("Поиск наличия аукциона")
+    public void findAuction() {
+        sleep(3000);
+        $(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys(nameAuctionEE);
+        sleep(3000);
+        finndSizeTrue(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']"),
+                "Аукцион найден",
+                "!!Аукцион не найден");
+
     }
 
 
-
+    @Step("Удаления созданого аукциона")
     public void delete() {
         $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
         $(By.xpath("//button[@class='btn table-btn_ico btn-danger waves-effect waves-light btn-delete']")).click();
         $(By.xpath("//button[@class='btn btn-danger confirm-delete-btn waves-effect waves-light']")).click();
-        sleep(5000);
-        $(By.xpath("//input[@type='search']")).sendKeys(nameAuctionEE);
-        sleep(2000);
-        size = $$(By.xpath("//*[text()='"+ nameAuctionEE +"']")).size();
+    }
+    @Step("Проверка на удаления аукциона")
+    public void findDelAuction() {
+        sleep(3000);
+        $(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys(nameAuctionEE);
+        sleep(3000);
+        finndSizeFalse(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']"),
+                "Аукцион не найден",
+                "!!Аукцион найден");
 
-        if (size <= 0) {
-            System.out.println("Аукцион удалился");
-            System.out.println("Имя удаленного аукциона = " + nameAuctionEE);
-        } else {
-            System.out.println("Аукцион не удалился");
-            throw new Error();  // чтоб тест упал когда найден удаляемый лот
-        }
-        System.out.println(tempBool);
     }
 
     ///////////////////////////////////////////// startAuctions ////////////////////////////////
@@ -242,6 +239,7 @@ public class AuctionsPage extends Page {
         templot = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//a[@class='auction-one__lots']/span")).getText();
         priceTemp = $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='ng-scope']//span")).getText();
         priceaAuction = priceTemp + " €";
+        System.out.println("Вибран лот  № " + templot);
         System.out.println("Имя вибранного лота = " + temp);
         System.out.println("цена = " + priceaAuction);
         $(By.xpath("//div[@class='col-xs-12 ng-scope col-sm-6'][" + sizeRandom + "]//div[@class='auction-one__favorite ng-scope']/img")).click();
@@ -386,8 +384,7 @@ public class AuctionsPage extends Page {
     }
 
     public void equalsPriceFavoritesPage() {
-        System.out.println("на странице аукциона =" + priceaAuction);
-        System.out.println("на странице избраное =" + priceaFavorites);
+        System.out.println("на странице аукциона = " + priceaAuction);
        tempBool = (priceaAuction.equals(priceaFavorites));
         System.out.println("temmpBool = " + tempBool);
        if (tempBool == true) {
@@ -401,7 +398,7 @@ public class AuctionsPage extends Page {
        }
 
     }
-
+    @Step("Заполнения данных о аукционе")
     public void fillAuction(boolean numberBool) {
         if (numberBool == true) {
         number();
@@ -415,6 +412,7 @@ public class AuctionsPage extends Page {
         currency();
         statys();
     }
+
 
 
 }

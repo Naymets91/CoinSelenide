@@ -2,19 +2,19 @@ package Pages;
 
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.visible;
 
 
 public class LotiPagePage extends Page {
     boolean tempBool;
+
 
     String temp;
     String parsName;
@@ -28,7 +28,7 @@ public class LotiPagePage extends Page {
 
 
 ////////////////////////////////////////// createLot ////////////////////////////////////
-
+@Step("Нажатия на кнопку создать лот")
     public void buttonCreateLot() {
         $(By.id("create_lot")).click(); //нажать кнопку создать лот
     }
@@ -121,26 +121,45 @@ public class LotiPagePage extends Page {
 //        System.out.println("Сохранность " + r);
     }
 
-
+    @Step("Нажатия на кнопку сохранить")
     public void buttonSave() {                // кнопка сохранить
         parsName = $(By.xpath("//input[@id='article']")).getAttribute("value");
         $(By.xpath("//button[@type='submit']")).click();
     }
+    @Step("Проверка создания лота")
+    public void findLot() {
+        sleep(6000);
+        $(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys(eeNameLot);
+        sleep(6000);
+        finndSizeTrue(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']"),
+                "Лот найден",
+                "!!Лот не найден");
 
+    }
+    @Step("Проверка на удаления лота")
+    public void findDelLot() {
+        sleep(7000);
+        $(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys(eeNameLot);
+        sleep(7000);
+        finndSizeFalse(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']"),
+                "Лот удален",
+                "!!Лот не удален");
+
+    }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////             EditLot          /////////////////////////////////
 
-
+    @Step("Нажатия на кнопку редактировать")
     public void buttonEditLot() {
         $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
         sleep(4000);
         $(By.xpath("//a[@class='btn table-btn_ico btn-warning waves-effect waves-light']")).click();
     }
 
-
+    @Step("Парсинг лотов до редактирования")
     public void parsLotBefore() {
         before.add($(By.name("title")).getAttribute("value"));
         before.add($(By.name("___title[en]")).getAttribute("value"));
@@ -169,29 +188,30 @@ public class LotiPagePage extends Page {
         }
         Allure.attachment("Результат", String.valueOf(before));
     }
-
+    @Step("Парсинг данных о лоте")
     public void parsLotAfter() {
-        after.add($(By.name("title")).getAttribute("value"));
-        after.add($(By.name("___title[en]")).getAttribute("value"));
-        after.add($(By.name("___title[ru]")).getAttribute("value"));
-        after.add($(By.xpath("//div[@class='col-12']/textarea[1]")).getAttribute("value"));
-        after.add($(By.name("___description[en]")).getAttribute("value"));
-        after.add($(By.name("___description[ru]")).getAttribute("value"));
-        after.add($(By.name("deliverer_id")).getSelectedText());
-        after.add($(By.name("country_id")).getSelectedText());
-        after.add($(By.name("category_id")).getSelectedText());
-        after.add($(By.id("year")).getAttribute("value"));
-        after.add($(By.name("min_price")).getAttribute("value"));
-        after.add($(By.name("start_price")).getAttribute("value"));
-        after.add($(By.name("material_id")).getSelectedText());
-        after.add($(By.name("nominal_id")).getSelectedText());
-        after.add($(By.name("period_id")).getSelectedText());
-        after.add($(By.id("top_lot")).getSelectedText());
-        after.add($(By.name("certification_id")).getSelectedText());
-        after.add($(By.id("is_max_safety")).getSelectedText());
-        after.add($(By.id("is_rare")).getSelectedText());
-        after.add($(By.name("safety")).getAttribute("value"));
+        after.add("Название [ee] = " + $(By.name("title")).getAttribute("value"));
+        after.add("Название [en] = " + $(By.name("___title[en]")).getAttribute("value"));
+        after.add("Название [ru] = " + $(By.name("___title[ru]")).getAttribute("value"));
+        after.add("Описание [ee] = " + $(By.xpath("//div[@class='col-12']/textarea[1]")).getAttribute("value"));
+        after.add("Описание [en] = " + $(By.name("___description[en]")).getAttribute("value"));
+        after.add("Описание [ru] = " + $(By.name("___description[ru]")).getAttribute("value"));
+        after.add("Сдатчик = " + $(By.name("deliverer_id")).getSelectedText());
+        after.add("Страна = " + $(By.name("country_id")).getSelectedText());
+        after.add("Категория = " + $(By.name("category_id")).getSelectedText());
+        after.add("Год выпуска = " + $(By.id("year")).getAttribute("value"));
+        after.add("Минимальная цена = " + $(By.name("min_price")).getAttribute("value"));
+        after.add("Стартовая цена = " + $(By.name("start_price")).getAttribute("value"));
+        after.add("Материал = " + $(By.name("material_id")).getSelectedText());
+        after.add("Номинал = " + $(By.name("nominal_id")).getSelectedText());
+        after.add("Период = " + $(By.name("period_id")).getSelectedText());
+        after.add("Топ-лот = " + $(By.id("top_lot")).getSelectedText());
+        after.add("Сертификация = " + $(By.name("certification_id")).getSelectedText());
+        after.add("Максимальная сохранность = " + $(By.id("is_max_safety")).getSelectedText());
+        after.add("Редкий = " + $(By.id("is_rare")).getSelectedText());
+        after.add("Сохранность = " + $(By.name("safety")).getAttribute("value"));
         System.out.println(after.size());
+        Allure.attachment("Результат", String.valueOf(after));
         for (String s : after) {
             System.out.println(s);
         }
@@ -199,22 +219,11 @@ public class LotiPagePage extends Page {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////// delete Lote///////////////////////////////////
-
+@Step("Удаления созданного лота")
     public void delete() {
-
         $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
         $(By.xpath("//a[@class='btn table-btn_ico btn-danger waves-effect waves-light btn-delete']")).click();
         $(By.xpath("//button[@class='btn btn-danger confirm-delete-btn waves-effect waves-light']")).click();
-        sleep(7000);
-        $(By.xpath("//input[@type='search']")).sendKeys(eeNameLot);
-        size = $$(By.xpath("//*[text()='"+ eeNameLot +"']")).size();
-        if (size <= 0) {
-            System.out.println("Лот удалился");
-        } else {
-            System.out.println("Лот не удалился");
-            throw new Error();  // чтоб тест упал когда найден удаляемый лот
-        }
-        System.out.println(tempBool);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,7 +261,7 @@ public class LotiPagePage extends Page {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    @Step("сравнения данных о лоте до редактирования и после")
     public void equalsLot() {
         System.out.println(before.size());
         for (int i = 0; i < before.size(); i++) {
@@ -290,7 +299,7 @@ for(int i=0; i==r; i++){
 }
 
     }
-
+    @Step("Заполнения данных о лоте")
     public void fillLot() {
         name(12, 15, 10);
         descrintion(20, 30, 25);
@@ -311,4 +320,6 @@ for(int i=0; i==r; i++){
         System.out.println("имя созданого/редактированного лота" + eeNameLot);
         safety();
     }
+
+
 }

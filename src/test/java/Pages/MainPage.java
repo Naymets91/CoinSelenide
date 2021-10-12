@@ -2,6 +2,7 @@ package Pages;
 
 import Config.Values;
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
@@ -24,17 +25,25 @@ public class MainPage extends Page {
         $(By.xpath("//div[@class='nav-lang__list']/a[3]")).click();
     }
 
+    @Step("Проверка авторизации")
+    public void equals2fa() {
+        $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();     // Нажать на кнопку меню ЛИЧНЫЙ КАБИНЕТ
+        $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();     // клик по разделу выпадающего меню АДМИНКА
+        System.out.println("Произошла авторизация с верным кодом 2fa");
+        Allure.attachment("Результат", "Произошла авторизация с верным кодом 2fa");
+    }
 
     @Step("Переход в админ панель")
     public void gotoAdminPanel() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();     // Нажать на кнопку меню ЛИЧНЫЙ КАБИНЕТ
         $(By.xpath("//ul[@class='-visible']/li[1]/a")).click();     // клик по разделу выпадающего меню АДМИНКА
     }
-
+    @Step("Переход на страницу мой профиль")
     public void gotoProfile() {
         $(By.xpath("//div[@class='header-nav__col col-lg-4']/ul")).click();
         $(By.xpath("//ul[@class='-visible']/li[5]/a")).click();
     }
+
 
     @Step("Переход в аукцион")
     public void gotoAuction() {

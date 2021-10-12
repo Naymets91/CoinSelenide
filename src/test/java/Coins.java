@@ -68,9 +68,9 @@ public class Coins extends Page {
     @Feature(value = "Учетная запись")
     public void correct2FALogin() {
         loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
+        mainPg.equals2fa();
     }
-    @Test (priority = 2)                                           // Тест двойной аутентификации
+    @Test (priority = 2)                                           // некоректный Тест двойной аутентификации
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     public void incorrect2FALogin() {
@@ -90,10 +90,11 @@ public class Coins extends Page {
         lotiPg.fillLot();
         lotiPg.parsLotAfter();
         lotiPg.buttonSave();
+        lotiPg.findLot();
     }
 
 
-    @Test  (priority=4)                              // Изменение лотав
+    @Test  (priority=4)                              // Изменение лотав  ПЕРЕРОБИТИ
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -107,7 +108,6 @@ public class Coins extends Page {
         lotiPg.parsLotAfter();
         lotiPg.buttonSave();
         lotiPg.equalsLot();
-
     }
 
     @Test (priority = 5)                                      // Удаление лотов
@@ -119,6 +119,7 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.loti();
         lotiPg.delete();
+        lotiPg.findDelLot();
     }
 
     @Test  (priority = 6)                                         // Создание аукциона
@@ -132,6 +133,7 @@ public class Coins extends Page {
         auctionsPg.buttonCreateAuction();
         auctionsPg.fillAuction(true);
         auctionsPg.buttonSave();
+        auctionsPg.findAuction();
     }
 
     @Test  (priority = 7)                                         // Редактирование аукциона
@@ -145,6 +147,7 @@ public class Coins extends Page {
         auctionsPg.buttonEditAuction();
         auctionsPg.fillAuction(false);
         auctionsPg.buttonSave();
+        auctionsPg.findAuction();
     }
 
     @Test (priority = 8)                                      // Удаление аукциона
@@ -156,6 +159,7 @@ public class Coins extends Page {
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
         auctionsPg.delete();
+        auctionsPg.findDelAuction();
     }
 
     @Test (priority = 9)                                      // Изменение кредитного лимита , статус одобрено
@@ -253,7 +257,7 @@ public class Coins extends Page {
     }
 
 
-    @Test (priority = 14)                                  //  Добавить много лотов с помощу кнопки дублировать лот
+    @Test (priority = 14,enabled= false)                                  //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Лоты")
@@ -266,7 +270,7 @@ public class Coins extends Page {
         lotiPg.addManyLoti(20);
     }
 
-    @Test (priority = 15,enabled= false)                                  //  Старт предварительного аукциона
+    @Test (priority = 15,enabled= false)                                  //  Старт предварительного аукциона  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
     @Story(value = "Аукцион")
@@ -274,7 +278,6 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
         adminPanelPg.auctions();
-
 //       auctionsPg.showMaxAuctions();
         auctionsPg.startAuctionDate();
         loginPg.logAutAdmin();
@@ -288,7 +291,7 @@ public class Coins extends Page {
         auctionsPg.stopAuction();
     }
 
-     @Test (priority = 16,enabled= false)  // ставки пользователей на предварительном аукционе
+     @Test (priority = 16,enabled= false)  // ставки пользователей на предварительном аукционе  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
      @Epic(value = "Администратор")
      @Feature(value = "Админка => Пункт меню Аукцион")
      @Story(value = "Аукцион")
@@ -316,7 +319,7 @@ public class Coins extends Page {
          auctionsPg.stopAuction();
      }
 
-    @Test (priority = 17)  // Регистрация пользователя и удаления через запрос в профиле клиента
+    @Test (priority = 17)  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
@@ -343,14 +346,12 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
 
-
-
     @Test (priority = 18)
     @Epic(value = "Администратор")
     @Feature(value = "Учетная запись")
     @Story(value = "Пароль")
-    @Description(value = "Регистрация пользователя и удаления администратором")
-    public  void RegisterAnotherAddressDelAdmin (){ // Регистрация пользователя и удаления администратором
+    @Description(value = "Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором")
+    public  void RegisterAnotherAddressDelAdmin (){ // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
         loginPg.goToPageRegisteration();
         loginPg.fillRegistrateDate();
         loginPg.fillAnotherAdres();
@@ -580,7 +581,7 @@ public class Coins extends Page {
     @Story(value ="Избранне")   // Добавление, удаление лотов на странице аукциона
     public void addDelFavoritesPageAuctions(){
     loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-    mainPg.gotoAuction();
+    mainPg.gotoAuction49();
     auctionsPg.randomAddFavorites();
     auctionsPg.equalsAddFavorites();
     auctionsPg.delAddFavorites();
@@ -591,9 +592,9 @@ public class Coins extends Page {
     @Epic(value = "Пользователь")
     @Feature(value = "Лоты")
     @Story(value ="Избранне")
-    public void addDelFavoritesPageFavorites(){     // Добавление, удаление лотов на странице Избранные лоты
+    public void addDelFavoritesPageFavorites(){     // Добавление, удаление лота на странице Избранные лоты
     loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-    mainPg.gotoAuction();
+    mainPg.gotoAuction49();
     auctionsPg.randomAddFavorites();
     auctionsPg.equalsAddFavorites();
     mainPg.goFavoritesPage();
@@ -616,6 +617,7 @@ public class Coins extends Page {
         auctionsPg.delAddManyFavorites();
         auctionsPg.equalsDellManyFavorites();
     }
+
 
     @Test (priority = 38)
     @Epic(value = "Пользователь")
