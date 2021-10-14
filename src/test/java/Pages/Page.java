@@ -24,12 +24,16 @@ public class Page {
     public void openUkrnetPage() {
         open(Values.ukrnetPage);
     }
-
+public void print(String text){
+    Allure.attachment("Результат", text);
+    System.out.println(text);
+}
     public void setInput() {
 
     }
 
-    public void finndSize(By locator, String textTrue, String textFalse ) {
+    public void finndSizeTrue(By locator, String textTrue, String textFalse ) {
+
         if($$(locator).size() != 0) {
         Allure.attachment("Результат", textTrue);
         System.out.println(textTrue);
@@ -39,6 +43,19 @@ public class Page {
         throw new Error();
     }
 }
+    public void finndSizeFalse(By locator, String textFalse, String textTrue ) {
+
+        if($$(locator).size() == 0) {
+            Allure.attachment("Результат", textFalse);
+            System.out.println(textFalse);
+        } else {
+            Allure.attachment("Результат", textTrue);
+            System.out.println(textTrue);
+            throw new Error();
+        }
+    }
+
+
     public boolean find(By locator) {
         if($$(locator).size() != 0){
             System.out.println("true");
@@ -144,7 +161,26 @@ public String datePlus(int rtime) {
 //    System.out.println(rx);
 }
 
-
-
+    public static String substr(String string, Integer chars){
+        Integer index = 0;
+        String finish = "";
+        while (index < chars){
+            char currentChar = string.charAt(index);
+            finish = finish + currentChar;
+            index = index + 1 ;
+        }
+        return finish;
+    }
+    public static String substr2(String string){
+        Integer index = 0;
+        String finish = "";
+        String finish = "";
+        while (simvol.equals(" ")){
+            char currentChar = string.charAt(index);
+            finish = finish + currentChar;
+            index = index + 1 ;
+        }
+        return finish;
+    }
 
 }

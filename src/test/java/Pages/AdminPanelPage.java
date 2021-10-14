@@ -99,5 +99,10 @@ public void limitCahEdit () {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).should(visible).click();      // клик на меню информация
         $(By.xpath("//*[@id='main-menu-navigation']/li[5]//li[1]")).should(visible).click(); // клик на меню новости
     }
+@Step ("Переход на страницу счета ")
+    public void goToPageInvoices() {
+    $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).should(visible).click();      // клик на меню Аукционы
+    $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[7]")).should(visible).click(); // клик на меню счета
+    }
 }
 

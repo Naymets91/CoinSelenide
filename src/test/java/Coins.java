@@ -37,6 +37,7 @@ public class Coins extends Page {
      DenominationPage denominationPg = new DenominationPage();
      MaterialsPage materialsPg = new MaterialsPage();
      NewsPage newsPg = new NewsPage();
+     InvoicePage invoicePg = new InvoicePage();
      JsonRead jsonRead = new JsonRead();
 
      @BeforeClass
@@ -714,6 +715,19 @@ public class Coins extends Page {
         loginPg.clickButtonLogin();
         loginPg.checkAuthtTextEror();
     }
+
+    @Test (priority = 102)
+    @Description(value = "")
+    public void invoicesAdmincaCustomer() {
+     loginPg.loginAdmin();
+     mainPg.gotoAdminPanel();
+     adminPanelPg.goToPageInvoices();
+//     invoicePg.selectCustomer();
+//     invoicePg.search("111");
+     invoicePg.clickButtonEdit();
+     invoicePg.checkFinalPriceHammer();
+     }
+
 
     @AfterMethod
     public void after() {
