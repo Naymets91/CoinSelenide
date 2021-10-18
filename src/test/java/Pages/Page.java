@@ -171,12 +171,15 @@ public String datePlus(int rtime) {
         }
         return finish;
     }
-    public static String substr2(String string){
+    public static String substr2(String string, String stop){
         Integer index = 0;
         String finish = "";
-        String finish = "";
-        while (simvol.equals(" ")){
-            char currentChar = string.charAt(index);
+        char currentChar = string.charAt(index);
+        String simvol = String.valueOf(currentChar);
+        while (!simvol.equals(stop)){
+            System.out.println(index + currentChar );
+            currentChar = string.charAt(index);
+            simvol = String.valueOf(currentChar);
             finish = finish + currentChar;
             index = index + 1 ;
         }

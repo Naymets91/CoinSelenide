@@ -726,6 +726,9 @@ public class Coins extends Page {
 //     invoicePg.search("111");
      invoicePg.clickButtonEdit();
      invoicePg.checkFinalPriceHammer();
+     invoicePg.checkFinalCommissionNotNDS();
+     invoicePg.checkFinalCommission20NDS();
+     invoicePg.checkFinalDelivery();
      }
 
 
