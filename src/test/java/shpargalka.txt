@@ -1,6 +1,10 @@
 public class Shpargalka { }
 
   /*
+-Dfile.encoding=UTF8
+https://github.com/Naymets91/CoinSelenide.git
+clean test
+
 
   import org.openqa.selenium.chrome.ChromeOptions;
 
