@@ -15,7 +15,7 @@ public class JsonRead {
 public void read () {
     Object obj = null; // Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
     try {
-        obj = new JSONParser().parse(new FileReader("src/test/resources/values.json"));
+        obj = new JSONParser().parse(new FileReader("src/test/resources/valueslocal.json"));
         JSONObject jo = (JSONObject) obj;
 // Достаём
         Values.homePage = (String) jo.get("homePage");
