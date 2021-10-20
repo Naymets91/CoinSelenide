@@ -30,11 +30,11 @@ public class LimitCashPage extends Page {
     }
     @Step("Нажатия на кнопку редактировать")
     public void userEdit() {
-        $(byXpath("//*[contains(text(),'Serega limit')]/..//a[1]")).should(visible).click();
+        $(byXpath("//*[contains(text(),'Serega Limit Edit')]/..//a[1]")).should(visible).click();
     }
 
     public void userDel() {
-        $(byXpath("//*[contains(text(),'Serega limit')]/..//a[2]")).should(visible).click();
+        $(byXpath("//*[contains(text(),'Serega Limit Edit')]/..//a[2]")).should(visible).click();
         sleep(4000);
     }
     @Step("Соглашения с выбраным кредитным лимитом")
