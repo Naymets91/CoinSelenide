@@ -64,20 +64,235 @@ public class Coins extends Page {
         mainPg.SwitchLanguageRu();
     }
 
-    @Test (priority = 1)                                           // Тест двойной аутентификации
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
+    @Test (priority = 1, groups = "regress")                                           // Тест двойной аутентификации
+    @Epic(value = "Регрес")
     public void correct2FALogin() {
         loginPg.loginAdmin();
         mainPg.equals2fa();
     }
-    @Test (priority = 2)                                           // некоректный Тест двойной аутентификации
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
+    @Test (priority = 2, groups = "regress")                                           // некоректный Тест двойной аутентификации
+    @Epic(value = "Регрес")
     public void incorrect2FALogin() {
         loginPg.loginUser(Values.admin_email, Values.admin_password);
         loginPg.incorrect2fa();
     }
+    @Test (priority = 3, groups = "regress")                    // Регистрация с пустыми данными
+    @Epic(value = "Регрес")
+    @Description(value = "Регистрация с пустыми данными")
+    public void registerEmptyData() {
+        loginPg.goToPageRegisteration();
+        loginPg.checkWithoutContractPolicy();
+        loginPg.clickPolicy();
+        loginPg.checkPoliticsClick();
+        loginPg.clickPolicy();
+        loginPg.clickContract();
+        loginPg.checkContractClick();
+        loginPg.clickPolicy();
+        loginPg.checkContractPolicyClick();
+        loginPg.clickButtonRegistration();
+        loginPg.checkFindTextEror();
+    }
+    @Test (priority = 4, groups = "regress")  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
+    @Epic(value = "Регрес")
+    @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
+    public void RegisterDel(){
+        loginPg.goToPageRegisteration();
+        loginPg.fillRegistrateDate();
+        loginPg.clickButtonRegistration();
+        // loginPg.pars
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
+        ukrnetPg.selectionLastLetterRegister();
+        switcToWindowsTab(1);
+        loginPg.logAutUser();
+        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
+        loginPg.createDelet();
+        // loginPg.pars
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.requestDelUser();
+        adminPanelPg.delUser(loginPg.parsName());
+        loginPg.logAutAdmin();
+        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
+    }
+
+    @Test (priority = 5, groups = "regress")           // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
+    @Epic(value = "Регрес")
+    @Description(value = "Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором")
+    public  void RegisterAnotherAddressDelAdmin (){
+        loginPg.goToPageRegisteration();
+        loginPg.fillRegistrateDate();
+        loginPg.fillAnotherAdres();
+        // loginPg.pars
+        loginPg.clickButtonRegistration();
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
+        ukrnetPg.selectionLastLetterRegister();
+        switcToWindowsTab(1);
+        loginPg.logAutUser();
+        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
+        // loginPg.pars
+        loginPg.goToProfile();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.User();
+        adminPanelPg.DelUserAdmin(loginPg.parsName());
+        loginPg.logAutAdmin();
+        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
+    }
+    @Test (priority = 6, groups = "regress")      // Восстановления пароля через запрос забили пароль.
+    @Epic(value = "Регрес")
+    public void recoveryPassword() {
+        loginPg.createRequestRecoveryPassword();
+        openUkrnetPage();
+        ukrnetPg.loginUkrnet(Values.ukrnet_email, Values.ukrnet_password);
+        ukrnetPg.selectionLastLetterPassword();
+        loginPg.resetPassword();
+        loginPg.loginUser(Values.ukrnet_email,loginPg.getMyPass());
+        loginPg.checkingUserAuthorization();
+    }
+
+    @Test (priority = 7, groups = "regress")                   // Изменение пароля через панель администратора
+    @Epic(value = "Регрес")
+    public void editPasswordUser() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.editPassUser();
+        adminPanelPg.searchUser();
+        editUserPg.editPassword();
+        loginPg.logAutAdmin();
+        loginPg.loginUserUkrnet();
+        loginPg.checkingUserAuthorization();
+    }
+
+    @Test (priority = 8, groups = "regress")      // Авторизация с невалидными данными
+    @Epic(value = "Регрес")
+    @Description(value = "Авторизация с невалидными данными")
+    public void autorizationIvalidData() {
+        loginPg.goToPageAutorization();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+        loginPg.incorrectPassword();
+        loginPg.clickButtonLogin();
+        loginPg.checkAuthtTextEror();
+    }
+
+    @Test (priority = 9, groups = "regress")                                      // Изменение кредитного лимита , статус одобрено
+    @Epic(value = "Регрес")
+    public void editLimitStatusApproved() {
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.userEdit();
+        limitCashPg.acceptNewCash();
+        loginPg.logAutAdmin();
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCash();
+    }
+
+    @Test  (priority = 10, groups = "regress")                                     // Изменение кредитного лимита , статус отменено
+    @Epic(value = "Регрес")
+    public void editLimitStatusReject() {
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.userEdit();
+        limitCashPg.rejectNewCash();
+        loginPg.logAutAdmin();
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCashReject();
+    }
+
+    @Test  (priority = 11, groups = "regress")                                     // Изменение кредитного лимита , удаления запроса
+    @Epic(value = "Регрес")
+    public void editLimitDel() {
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.editLimitCash();
+        loginPg.logAutUser();
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.limitCahEdit();
+        limitCashPg.searchUser();
+        limitCashPg.userDel();
+        loginPg.logAutAdmin();
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoProfile();
+        limitCashPg.parsCash();
+        limitCashPg.equalsCashReject();
+    }
+
+    @Test (priority = 12, groups = "regress")                   // Избранное  Добавление, удаление лотов на странице аукциона
+    @Epic(value = "Регрес")
+    public void addDelFavoritesPageAuctions(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction49();
+        auctionsPg.randomAddFavorites();
+        auctionsPg.equalsAddFavorites();
+        auctionsPg.delAddFavorites();
+        auctionsPg.equalsDellFavorites();
+    }
+
+    @Test (priority = 13, groups = "regress")           // Избранное Добавление, удаление лота на странице Избранные лоты
+    @Epic(value = "Регрес")
+    public void addDelFavoritesPageFavorites(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction49();
+        auctionsPg.randomAddFavorites();
+        auctionsPg.equalsAddFavorites();
+        mainPg.goFavoritesPage();
+        auctionsPg.equalsAddFavoritesPage();
+        auctionsPg.delAddFavoritesPageFavorites();
+        auctionsPg.equalsDellFavoritesPageFavorites();
+    }
+
+    @Test (priority = 14, groups = "regress")           // Избранное Добавление, удаление много лотов на странице аукциона
+    @Epic(value = "Регрес")
+    public void addDelManyFavorites(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction49();
+        auctionsPg.randomAddManyFavorites();
+        auctionsPg.equalsAddManyFavorites();
+        auctionsPg.refreshPage();
+        auctionsPg.equalsAddManyFavorites();
+        auctionsPg.delAddManyFavorites();
+        auctionsPg.equalsDellManyFavorites();
+    }
+
+    @Test (priority = 15, groups = "regress")           // Сравнение цен на странице аукциона и странице избранные лоты
+    @Epic(value = "Регрес")
+    public void equalsPricePageAuctionPageFavorites(){
+        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
+        mainPg.gotoAuction49();
+        auctionsPg.randomAddFavorites();
+        auctionsPg.equalsAddFavorites();
+        mainPg.goFavoritesPage();
+        auctionsPg.equalsAddFavoritesPage();
+        auctionsPg.equalsPriceFavoritesPage();
+        auctionsPg.delAddFavoritesPageFavorites();
+        auctionsPg.equalsDellFavoritesPageFavorites();
+    }
+    
+
+
+
+
 
     @Test  (priority=3)                                           // Добавить лот
     @Epic(value = "Администратор")
@@ -163,101 +378,6 @@ public class Coins extends Page {
         auctionsPg.findDelAuction();
     }
 
-    @Test (priority = 9)                                      // Изменение кредитного лимита , статус одобрено
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Кредитный лимит")
-    public void editLimitStatusApproved() {
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.editLimitCash();
-        loginPg.logAutUser();
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.limitCahEdit();
-        limitCashPg.searchUser();
-        limitCashPg.userEdit();
-        limitCashPg.acceptNewCash();
-        loginPg.logAutAdmin();
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.parsCash();
-        limitCashPg.equalsCash();
-    }
-
-    @Test  (priority = 10)                                     // Изменение кредитного лимита , статус отменено
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Кредитный лимит")
-    public void editLimitStatusReject() {
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.editLimitCash();
-        loginPg.logAutUser();
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.limitCahEdit();
-        limitCashPg.searchUser();
-        limitCashPg.userEdit();
-        limitCashPg.rejectNewCash();
-        loginPg.logAutAdmin();
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.parsCash();
-        limitCashPg.equalsCashReject();
-    }
-
-    @Test  (priority = 11)                                     // Изменение кредитного лимита , удаления запроса
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Кредитный лимит")
-    public void editLimitDel() {
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.editLimitCash();
-        loginPg.logAutUser();
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.limitCahEdit();
-        limitCashPg.searchUser();
-        limitCashPg.userDel();
-        loginPg.logAutAdmin();
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoProfile();
-        limitCashPg.parsCash();
-        limitCashPg.equalsCashReject();
-    }
-
-    @Test (priority = 12)      // Восстановления пароля через запрос забили пароль.
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")
-    public void recoveryPassword() {
-        loginPg.createRequestRecoveryPassword();
-        openUkrnetPage();
-        ukrnetPg.loginUkrnet(Values.ukrnet_email, Values.ukrnet_password);
-        ukrnetPg.selectionLastLetterPassword();
-        loginPg.resetPassword();
-        loginPg.loginUser(Values.ukrnet_email,loginPg.getMyPass());
-        loginPg.checkingUserAuthorization();
-    }
-
-    @Test (priority = 13)                                  // Изменение пароля через панель администратора
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")
-    public void editPasswordUser() {
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.editPassUser();
-        adminPanelPg.searchUser();
-        editUserPg.editPassword();
-        loginPg.logAutAdmin();
-        loginPg.loginUserUkrnet();
-        loginPg.checkingUserAuthorization();
-    }
-
-
     @Test (priority = 14,enabled= false)                                  //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню Аукцион")
@@ -320,62 +440,7 @@ public class Coins extends Page {
          auctionsPg.stopAuction();
      }
 
-    @Test (priority = 17)  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")
-    @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
-    public void RegisterDel(){
-        loginPg.goToPageRegisteration();
-        loginPg.fillRegistrateDate();
-        loginPg.clickButtonRegistration();
-        // loginPg.pars
-        openUkrnetPage();
-        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
-        ukrnetPg.selectionLastLetterRegister();
-        switcToWindowsTab(1);
-        loginPg.logAutUser();
-        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
-        loginPg.createDelet();
-        // loginPg.pars
-        loginPg.logAutUser();
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.requestDelUser();
-        adminPanelPg.delUser(loginPg.parsName());
-        loginPg.logAutAdmin();
-        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
-    }
-
-    @Test (priority = 18)
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")
-    @Description(value = "Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором")
-    public  void RegisterAnotherAddressDelAdmin (){ // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
-        loginPg.goToPageRegisteration();
-        loginPg.fillRegistrateDate();
-        loginPg.fillAnotherAdres();
-        // loginPg.pars
-        loginPg.clickButtonRegistration();
-        openUkrnetPage();
-        ukrnetPg.loginUkrnet(Values.userRegDelMail, Values.userRegDelPassword);
-        ukrnetPg.selectionLastLetterRegister();
-        switcToWindowsTab(1);
-        loginPg.logAutUser();
-        loginPg.loginUser(Values.userRegDelMail, Values.userRegDelPassword);
-        // loginPg.pars
-        loginPg.goToProfile();
-        loginPg.logAutUser();
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.User();
-        adminPanelPg.DelUserAdmin(loginPg.parsName());
-        loginPg.logAutAdmin();
-        loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
-    }
-
-    @Test (priority = 19)
+   @Test (priority = 19)
     @Epic(value = "Администратор")
     @Feature(value = "Админка => Пункт меню настройка")
     @Story(value = "Категория")
@@ -576,65 +641,7 @@ public class Coins extends Page {
     }
 
 
-    @Test (priority = 35)
-    @Epic(value = "Пользователь")
-    @Feature(value = "Лоты")
-    @Story(value ="Избранне")   // Добавление, удаление лотов на странице аукциона
-    public void addDelFavoritesPageAuctions(){
-    loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-    mainPg.gotoAuction49();
-    auctionsPg.randomAddFavorites();
-    auctionsPg.equalsAddFavorites();
-    auctionsPg.delAddFavorites();
-    auctionsPg.equalsDellFavorites();
-    }
 
-    @Test (priority = 36)
-    @Epic(value = "Пользователь")
-    @Feature(value = "Лоты")
-    @Story(value ="Избранне")
-    public void addDelFavoritesPageFavorites(){     // Добавление, удаление лота на странице Избранные лоты
-    loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-    mainPg.gotoAuction49();
-    auctionsPg.randomAddFavorites();
-    auctionsPg.equalsAddFavorites();
-    mainPg.goFavoritesPage();
-    auctionsPg.equalsAddFavoritesPage();
-    auctionsPg.delAddFavoritesPageFavorites();
-    auctionsPg.equalsDellFavoritesPageFavorites();
-    }
-
-    @Test (priority = 37)
-    @Epic(value = "Пользователь")
-    @Feature(value = "Лоты")
-    @Story(value ="Избранне")   // Добавление, удаление много лотов на странице аукциона
-    public void addDelManyFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddManyFavorites();
-        auctionsPg.equalsAddManyFavorites();
-        auctionsPg.refreshPage();
-        auctionsPg.equalsAddManyFavorites();
-        auctionsPg.delAddManyFavorites();
-        auctionsPg.equalsDellManyFavorites();
-    }
-
-
-    @Test (priority = 38)
-    @Epic(value = "Пользователь")
-    @Feature(value = "Лоты")
-    @Story(value ="Избранне")   // Сравнение цен на странице аукциона и странице избранные лоты
-    public void equalsPricePageAuctionPageFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddFavorites();
-        auctionsPg.equalsAddFavorites();
-        mainPg.goFavoritesPage();
-        auctionsPg.equalsAddFavoritesPage();
-        auctionsPg.equalsPriceFavoritesPage();
-        auctionsPg.delAddFavoritesPageFavorites();
-        auctionsPg.equalsDellFavoritesPageFavorites();
-    }
     @Test (priority = 39)
     @Epic(value = "Администратор")
     @Feature(value = "Информация")
@@ -684,37 +691,7 @@ public class Coins extends Page {
         newsPg.delNews();
         newsPg.equalsDelNews();
     }
-    @Test (priority = 100)
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")  // Регистрация с пустыми данными
-    @Description(value = "Регистрация с пустыми данными")
-    public void registerEmptyData() {
-        loginPg.goToPageRegisteration();
-        loginPg.checkWithoutContractPolicy();
-        loginPg.clickPolicy();
-        loginPg.checkPoliticsClick();
-        loginPg.clickPolicy();
-        loginPg.clickContract();
-        loginPg.checkContractClick();
-        loginPg.clickPolicy();
-        loginPg.checkContractPolicyClick();
-        loginPg.clickButtonRegistration();
-        loginPg.checkFindTextEror();
-    }
-    @Test (priority = 101)
-    @Epic(value = "Администратор")
-    @Feature(value = "Учетная запись")
-    @Story(value = "Пароль")  // Авторизация с невалидными данными
-    @Description(value = "Авторизация с невалидными данными")
-    public void autorizationIvalidData() {
-        loginPg.goToPageAutorization();
-        loginPg.clickButtonLogin();
-        loginPg.checkAuthtTextEror();
-        loginPg.incorrectPassword();
-        loginPg.clickButtonLogin();
-        loginPg.checkAuthtTextEror();
-    }
+
 
     @Test (priority = 102)
     @Description(value = "")
