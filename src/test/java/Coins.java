@@ -63,21 +63,24 @@ public class Coins extends Page {
         openHomePage();
         mainPg.SwitchLanguageRu();
     }
+    //***********************************************//
+    //                 REGRESS                       //
+    //***********************************************//
 
-    @Test (priority = 1, groups = "regress")                                           // Тест двойной аутентификации
-    @Epic(value = "Регрес")
+    @Test (priority = 1, groups = {"regress"})                                           // Тест двойной аутентификации
+    @Epic(value = "Регресс")
     public void correct2FALogin() {
         loginPg.loginAdmin();
         mainPg.equals2fa();
     }
     @Test (priority = 2, groups = "regress")                                           // некоректный Тест двойной аутентификации
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void incorrect2FALogin() {
         loginPg.loginUser(Values.admin_email, Values.admin_password);
         loginPg.incorrect2fa();
     }
     @Test (priority = 3, groups = "regress")                    // Регистрация с пустыми данными
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     @Description(value = "Регистрация с пустыми данными")
     public void registerEmptyData() {
         loginPg.goToPageRegisteration();
@@ -93,7 +96,7 @@ public class Coins extends Page {
         loginPg.checkFindTextEror();
     }
     @Test (priority = 4, groups = "regress")  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
     public void RegisterDel(){
         loginPg.goToPageRegisteration();
@@ -118,7 +121,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 5, groups = "regress")           // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     @Description(value = "Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором")
     public  void RegisterAnotherAddressDelAdmin (){
         loginPg.goToPageRegisteration();
@@ -143,7 +146,7 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
     @Test (priority = 6, groups = "regress")      // Восстановления пароля через запрос забили пароль.
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void recoveryPassword() {
         loginPg.createRequestRecoveryPassword();
         openUkrnetPage();
@@ -155,7 +158,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 7, groups = "regress")                   // Изменение пароля через панель администратора
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void editPasswordUser() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -168,7 +171,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 8, groups = "regress")      // Авторизация с невалидными данными
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     @Description(value = "Авторизация с невалидными данными")
     public void autorizationIvalidData() {
         loginPg.goToPageAutorization();
@@ -180,7 +183,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 9, groups = "regress")                                      // Изменение кредитного лимита , статус одобрено
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void editLimitStatusApproved() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoProfile();
@@ -200,7 +203,7 @@ public class Coins extends Page {
     }
 
     @Test  (priority = 10, groups = "regress")                                     // Изменение кредитного лимита , статус отменено
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void editLimitStatusReject() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoProfile();
@@ -220,7 +223,7 @@ public class Coins extends Page {
     }
 
     @Test  (priority = 11, groups = "regress")                                     // Изменение кредитного лимита , удаления запроса
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void editLimitDel() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoProfile();
@@ -239,7 +242,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 12, groups = "regress")                   // Избранное  Добавление, удаление лотов на странице аукциона
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void addDelFavoritesPageAuctions(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoAuction49();
@@ -250,7 +253,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 13, groups = "regress")           // Избранное Добавление, удаление лота на странице Избранные лоты
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void addDelFavoritesPageFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoAuction49();
@@ -263,7 +266,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 14, groups = "regress")           // Избранное Добавление, удаление много лотов на странице аукциона
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void addDelManyFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoAuction49();
@@ -276,7 +279,7 @@ public class Coins extends Page {
     }
 
     @Test (priority = 15, groups = "regress")           // Сравнение цен на странице аукциона и странице избранные лоты
-    @Epic(value = "Регрес")
+    @Epic(value = "Регресс")
     public void equalsPricePageAuctionPageFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
         mainPg.gotoAuction49();
@@ -288,16 +291,227 @@ public class Coins extends Page {
         auctionsPg.delAddFavoritesPageFavorites();
         auctionsPg.equalsDellFavoritesPageFavorites();
     }
-    
 
+    //***********************************************//
+    //                 SETTING                       //
+    //***********************************************//
 
+    @Test (priority = 16, groups = "settings")      // Создание новой катеории
+    @Epic(value = "Настройки")
+    public void addCategory() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.category();
+        categoryPg.clickButtonAddCategoty();
+        categoryPg.fillCategory();
+        categoryPg.clickButtonSaveCategoty();
+        categoryPg.equalsAddEditCategory();
+    }
 
+    @Test (priority = 17, groups = "settings")      // Редактирование новой катеории
+    @Epic(value = "Настройки")
+    public void editCategory() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.category();
+        categoryPg.clickButtonEditCategoty();
+        categoryPg.fillCategory();
+        categoryPg.clickButtonUpdateCategoty();
+        categoryPg.equalsAddEditCategory();
+    }
 
+    @Test (priority = 18, groups = "settings")      // Проверка использования новой категории
+    @Epic(value = "Настройки")
+    public void usageNewCategor() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        categoryPg.usageNewCategory();
+    }
 
-    @Test  (priority=3)                                           // Добавить лот
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Лоты")
+    @Test (priority = 19, groups = "settings")      // Удаление новой категории
+    @Epic(value = "Настройки")
+    public void delCategor() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.category();
+        categoryPg.delCategory();
+        categoryPg.equalsDelCategory();
+    }
+
+    @Test (priority = 20 , groups = "settings")     // Создание нового периода
+    @Epic(value = "Настройки")
+    public  void addPeriod() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.period();
+        periodPg.clickButtonAddPeriod();
+        periodPg.fillPeriod();
+        periodPg.clickButtonSavePeriod();
+        periodPg.equalsAddEditPeriod();
+    }
+
+    @Test (priority = 21, groups = "settings")      // Редактирование нового периода
+    @Epic(value = "Настройки")
+    public  void editPeriod() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.period();
+        periodPg.clickButtonEditPeriod();
+        periodPg.fillPeriod();
+        periodPg.clickButtonUpdatePeriod();
+        periodPg.equalsAddEditPeriod();
+    }
+
+    @Test (priority = 22, groups = "settings")      // Использование нового периода
+    @Epic(value = "Настройки")
+    public void usageNewPeriod() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        periodPg.usageNewPeriod();
+    }
+
+    @Test (priority = 23, groups = "settings")      // Удаление нового периода
+    @Epic(value = "Настройки")
+    public void delPeriod() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.period();
+        periodPg.delPeriod();
+        periodPg.equalsDelPeriod();
+    }
+
+    @Test(priority = 24, groups = "settings")       // Создание нового номинала
+    @Epic(value = "Настройки")
+    public void addDenomination() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.denomination();
+        denominationPg.clickButtonAddDenomination();
+        denominationPg.fillDenomination();
+        denominationPg.clickButtonSaveDenomination();
+        denominationPg.equalsAddEditDenomination();
+    }
+
+    @Test (priority = 25, groups = "settings")      // Редактирование нового номинала
+    @Epic(value = "Настройки")
+    public void editDenomination() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.denomination();
+        denominationPg.clickButtonEditDenomination();
+        denominationPg.fillDenomination();
+        denominationPg.clickButtonUpdateDenomination();
+        denominationPg.equalsAddEditDenomination();
+    }
+
+    @Test (priority = 26, groups = "settings")      // Использвание нового номинала
+    @Epic(value = "Настройки")
+    public void useDenomination() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        denominationPg.usageNewDenomination();
+    }
+
+    @Test (priority = 27, groups = "settings")      // Удаление нового номинала
+    @Epic(value = "Настройки")
+    public void delDenomination() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.denomination();
+        denominationPg.delDenomination();
+        denominationPg.equalsDenomination();
+    }
+
+    @Test (priority = 28, groups = "settings")      // Создание нового Материала
+    @Epic(value = "Настройки")
+    public void addMaterials() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.materials();
+        materialsPg.clickButtonAddMaterials();
+        materialsPg.fillMaterials();
+        materialsPg.clickButtonSaveMaterials();
+        materialsPg.equalsAddEditMaterials();
+    }
+
+    @Test (priority = 29, groups = "settings")      // Редактирование нового Материала
+    @Epic(value = "Настройки")
+    public void editMaterials() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.materials();
+        materialsPg.clickButtonEditMaterials();
+        materialsPg.fillMaterials();
+        materialsPg.clickButtonUpdateMaterials();
+        materialsPg.equalsAddEditMaterials();
+    }
+
+    @Test (priority = 30, groups = "settings")      // Использвание нового Материала
+    @Epic(value = "Настройки")
+    public void useMaterials() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        materialsPg.usageNewMaterials();
+    }
+
+    @Test (priority = 31, groups = "settings")      // Удаление нового Материала
+    @Epic(value = "Настройки")
+    public void delMaterials() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.materials();
+        materialsPg.delMaterials();
+        materialsPg.equalsMaterials();
+    }
+
+    @Test (priority = 32, groups = "settings")      // Создание новости
+    @Epic(value = "Настройки")
+    public void addNews(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.clickButtonAddNews();
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
+    @Test (priority = 33, groups = "settings")      // Редактирование новости
+    @Epic(value = "Настройки")
+    public void editNews(){
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.clickButtonEditNews();
+        newsPg.fillNews();
+        newsPg.clickButtonSaveNews();
+        newsPg.equalsAddEditNews();
+    }
+
+    @Test (priority = 34, groups = "settings")      // Отображения новости на всех языках
+    @Epic(value = "Настройки")
+    public void newsDisplayInLanguages(){
+        loginPg.loginUser(Values.user1_email,Values.user1_password);
+        mainPg.gotoNews();
+        newsPg.openLastAddNews();
+        newsPg.equalsInLanguages();
+    }
+
+    @Test (priority = 35, groups = "settings")      // Удаление новой новости
+    @Epic(value = "Настройки")
+    public void delNews() {
+        loginPg.loginAdmin();
+        mainPg.gotoAdminPanel();
+        adminPanelPg.news();
+        newsPg.delNews();
+        newsPg.equalsDelNews();
+    }
+
+    //***********************************************//
+    //                 AUCTION                       //
+    //***********************************************//
+
+    @Test  (priority=36, groups = "auction")                                          // Добавить лот
+    @Epic(value = "Аукцион")
     public void addLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -309,11 +523,8 @@ public class Coins extends Page {
         lotiPg.findLot();
     }
 
-
-    @Test  (priority=4)                              // Изменение лотав  ПЕРЕРОБИТИ
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Лоты")
+    @Test  (priority=37, groups = "auction")                                  // Изменение лотав  ПЕРЕРОБИТИ
+    @Epic(value = "Аукцион")
     public void editLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -326,10 +537,8 @@ public class Coins extends Page {
         lotiPg.equalsLot();
     }
 
-    @Test (priority = 5)                                      // Удаление лотов
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Лоты")
+    @Test (priority = 38, groups = "auction")                                 // Удаление лотов
+    @Epic(value = "Аукцион")
     public void deleteLot() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -338,10 +547,8 @@ public class Coins extends Page {
         lotiPg.findDelLot();
     }
 
-    @Test  (priority = 6)                                         // Создание аукциона
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Аукцион")
+    @Test  (priority = 39, groups = "auction")                                 // Создание аукциона
+    @Epic(value = "Аукцион")
     public void createAuctions() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -352,10 +559,8 @@ public class Coins extends Page {
         auctionsPg.findAuction();
     }
 
-    @Test  (priority = 7)                                         // Редактирование аукциона
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Аукцион")
+    @Test  (priority = 49, groups = "auction")                                 // Редактирование аукциона
+    @Epic(value = "Аукцион")
     public void editAuctions() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -366,10 +571,8 @@ public class Coins extends Page {
         auctionsPg.findAuction();
     }
 
-    @Test (priority = 8)                                      // Удаление аукциона
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Аукцион")
+    @Test (priority = 50, groups = "auction")                                  // Удаление аукциона
+    @Epic(value = "Аукцион")
     public void deleteAuctions() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -378,10 +581,8 @@ public class Coins extends Page {
         auctionsPg.findDelAuction();
     }
 
-    @Test (priority = 14,enabled= false)                                  //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Лоты")
+    @Test (priority = 51, groups = "auction", enabled= false)                   //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
+    @Epic(value = "Аукцион")
     public void  addManyLots(){
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -391,10 +592,8 @@ public class Coins extends Page {
         lotiPg.addManyLoti(20);
     }
 
-    @Test (priority = 15,enabled= false)                                  //  Старт предварительного аукциона  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню Аукцион")
-    @Story(value = "Аукцион")
+    @Test (priority = 52, groups = "auction", enabled= false)                   //  Старт предварительного аукциона  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
+    @Epic(value = "Аукцион")
     public  void startAuctions() {
         loginPg.loginAdmin();
         mainPg.gotoAdminPanel();
@@ -412,10 +611,8 @@ public class Coins extends Page {
         auctionsPg.stopAuction();
     }
 
-     @Test (priority = 16,enabled= false)  // ставки пользователей на предварительном аукционе  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
-     @Epic(value = "Администратор")
-     @Feature(value = "Админка => Пункт меню Аукцион")
-     @Story(value = "Аукцион")
+     @Test (priority = 53, groups = "auction", enabled= false)  // ставки пользователей на предварительном аукционе  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
+     @Epic(value = "Аукцион")
     public void BidsUsersPreliminaryAuction (){
          loginPg.loginAdmin();
          mainPg.gotoAdminPanel();
@@ -440,257 +637,7 @@ public class Coins extends Page {
          auctionsPg.stopAuction();
      }
 
-   @Test (priority = 19)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Категория")
-    public void addCategory() {     // Создание новой катеории
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.category();
-        categoryPg.clickButtonAddCategoty();
-        categoryPg.fillCategory();
-        categoryPg.clickButtonSaveCategoty();
-        categoryPg.equalsAddEditCategory();
-    }
 
-    @Test (priority = 20)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Категория")
-    public void editCategory() {            // Редактирование новой катеории
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.category();
-        categoryPg.clickButtonEditCategoty();
-        categoryPg.fillCategory();
-        categoryPg.clickButtonUpdateCategoty();
-        categoryPg.equalsAddEditCategory();
-    }
-
-    @Test (priority = 21)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Категория")
-    public void usageNewCategor() {     // Проверка использования новой категории
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        categoryPg.usageNewCategory();
-    }
-
-    @Test (priority = 22)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Категория")
-    public void delCategor() {      // Удаление новой категории
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.category();
-        categoryPg.delCategory();
-        categoryPg.equalsDelCategory();
-    }
-
-    @Test (priority = 23)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Период")
-    public  void addPeriod() {      // Создание нового периода
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.period();
-        periodPg.clickButtonAddPeriod();
-        periodPg.fillPeriod();
-        periodPg.clickButtonSavePeriod();
-        periodPg.equalsAddEditPeriod();
-    }
-
-    @Test (priority = 24)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Период")
-    public  void editPeriod() {         // Редактирование нового периода
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.period();
-        periodPg.clickButtonEditPeriod();
-        periodPg.fillPeriod();
-        periodPg.clickButtonUpdatePeriod();
-        periodPg.equalsAddEditPeriod();
-    }
-
-    @Test (priority = 25)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Период")
-    public void usageNewPeriod() {      // Использование нового периода
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        periodPg.usageNewPeriod();
-    }
-
-    @Test (priority = 26)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Период")
-    public void delPeriod() {       // Удаление нового периода
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.period();
-        periodPg.delPeriod();
-        periodPg.equalsDelPeriod();
-    }
-
-@Test(priority = 27 , groups={"test"})
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Номинал")
-    public void addDenomination() {         // Создание нового номинала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
-        denominationPg.clickButtonAddDenomination();
-        denominationPg.fillDenomination();
-        denominationPg.clickButtonSaveDenomination();
-        denominationPg.equalsAddEditDenomination();
-    }
-
-   @Test (priority = 28, groups={"test"})
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Номинал")
-    public void editDenomination() {        // Редактирование нового номинала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
-        denominationPg.clickButtonEditDenomination();
-        denominationPg.fillDenomination();
-        denominationPg.clickButtonUpdateDenomination();
-        denominationPg.equalsAddEditDenomination();
-    }
-    @Test (priority = 29, groups={"test"})
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Номинал")
-    public void useDenomination() {     // Использвание нового номинала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        denominationPg.usageNewDenomination();
-    }
-
-    @Test (priority = 30, groups={"test"})
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Номинал")
-    public void delDenomination() {     // Удаление нового номинала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.denomination();
-        denominationPg.delDenomination();
-        denominationPg.equalsDenomination();
-    }
-
-
-    @Test (priority = 31)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Материалы")
-    public void addMaterials() {         // Создание нового Материала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.materials();
-        materialsPg.clickButtonAddMaterials();
-        materialsPg.fillMaterials();
-        materialsPg.clickButtonSaveMaterials();
-        materialsPg.equalsAddEditMaterials();
-    }
-
-    @Test (priority = 32)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Материалы")
-    public void editMaterials() {        // Редактирование нового Материала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.materials();
-        materialsPg.clickButtonEditMaterials();
-        materialsPg.fillMaterials();
-        materialsPg.clickButtonUpdateMaterials();
-        materialsPg.equalsAddEditMaterials();
-    }
-
-    @Test (priority = 33)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Материалы")
-    public void useMaterials() {     // Использвание нового Материала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        materialsPg.usageNewMaterials();
-    }
-
-    @Test (priority = 34)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Материалы")
-    public void delMaterials() {     // Удаление нового Материала
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.materials();
-        materialsPg.delMaterials();
-        materialsPg.equalsMaterials();
-    }
-
-
-
-    @Test (priority = 39)
-    @Epic(value = "Администратор")
-    @Feature(value = "Информация")
-    @Story(value ="Новости")   // Создание новости
-    public void addNews(){
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.news();
-        newsPg.clickButtonAddNews();
-        newsPg.fillNews();
-        newsPg.clickButtonSaveNews();
-        newsPg.equalsAddEditNews();
-    }
-    @Test (priority = 40)
-    @Epic(value = "Администратор")
-    @Feature(value = "Информация")
-    @Story(value ="Новости")   // Редактирование новости
-    public void editNews(){
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.news();
-        newsPg.clickButtonEditNews();
-        newsPg.fillNews();
-        newsPg.clickButtonSaveNews();
-        newsPg.equalsAddEditNews();
-    }
-
-    @Test (priority = 41)
-    @Epic(value = "Администратор")
-    @Feature(value = "Информация")
-    @Story(value ="Новости")   // Отображения новости на всех языках
-    public void newsDisplayInLanguages(){
-        loginPg.loginUser(Values.user1_email,Values.user1_password);
-        mainPg.gotoNews();
-        newsPg.openLastAddNews();
-        newsPg.equalsInLanguages();
-    }
-
-    @Test (priority = 42)
-    @Epic(value = "Администратор")
-    @Feature(value = "Админка => Пункт меню настройка")
-    @Story(value = "Новости")  // Удаление новой новости
-    public void delNews() {
-        loginPg.loginAdmin();
-        mainPg.gotoAdminPanel();
-        adminPanelPg.news();
-        newsPg.delNews();
-        newsPg.equalsDelNews();
-    }
 
 
     @Test (priority = 102)
