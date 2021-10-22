@@ -6,6 +6,10 @@ https://github.com/Naymets91/CoinSelenide.git
 clean test
 
 
+int n = 1000;
+int length = (int)(Math.log10(n)+1); узнать количество цыфр
+
+
   import org.openqa.selenium.chrome.ChromeOptions;
 
         Configuration.timeout = 20000;              // таймаут ожидание времени

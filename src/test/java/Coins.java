@@ -73,13 +73,13 @@ public class Coins extends Page {
         loginPg.loginAdmin();
         mainPg.equals2fa();
     }
-    @Test (priority = 2, groups = "regress")                                           // некоректный Тест двойной аутентификации
+    @Test (priority = 2, groups = {"regress"})                                           // некоректный Тест двойной аутентификации
     @Epic(value = "Регресс")
     public void incorrect2FALogin() {
         loginPg.loginUser(Values.admin_email, Values.admin_password);
         loginPg.incorrect2fa();
     }
-    @Test (priority = 3, groups = "regress")                    // Регистрация с пустыми данными
+    @Test (priority = 3, groups = {"regress"})                    // Регистрация с пустыми данными
     @Epic(value = "Регресс")
     @Description(value = "Регистрация с пустыми данными")
     public void registerEmptyData() {
@@ -95,7 +95,7 @@ public class Coins extends Page {
         loginPg.clickButtonRegistration();
         loginPg.checkFindTextEror();
     }
-    @Test (priority = 4, groups = "regress")  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
+    @Test (priority = 4, groups = {"regress"})  // Регистрация пользователя и удаления через запрос в профиле клиента добавить !!!!!!!!!!!!!!!проверку ввведеного при регистрации и кабинете!!!!!!!!!
     @Epic(value = "Регресс")
     @Description(value = "Регистрация пользователя и удаления через запрос в профиле клиента")
     public void RegisterDel(){
@@ -120,7 +120,7 @@ public class Coins extends Page {
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
 
-    @Test (priority = 5, groups = "regress")           // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
+    @Test (priority = 5, groups = {"regress"})           // Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором
     @Epic(value = "Регресс")
     @Description(value = "Регистрация пользователя с заполнениям другого адреса доставки и удаления администратором")
     public  void RegisterAnotherAddressDelAdmin (){
@@ -145,7 +145,7 @@ public class Coins extends Page {
         loginPg.logAutAdmin();
         loginPg.checkLogin(Values.userRegDelMail,Values.userRegDelPassword);
     }
-    @Test (priority = 6, groups = "regress")      // Восстановления пароля через запрос забили пароль.
+    @Test (priority = 6, groups = {"regress"})      // Восстановления пароля через запрос забили пароль.
     @Epic(value = "Регресс")
     public void recoveryPassword() {
         loginPg.createRequestRecoveryPassword();
@@ -157,7 +157,7 @@ public class Coins extends Page {
         loginPg.checkingUserAuthorization();
     }
 
-    @Test (priority = 7, groups = "regress")                   // Изменение пароля через панель администратора
+    @Test (priority = 7, groups = {"regress"})                   // Изменение пароля через панель администратора
     @Epic(value = "Регресс")
     public void editPasswordUser() {
         loginPg.loginAdmin();
@@ -170,7 +170,7 @@ public class Coins extends Page {
         loginPg.checkingUserAuthorization();
     }
 
-    @Test (priority = 8, groups = "regress")      // Авторизация с невалидными данными
+    @Test (priority = 8, groups = {"regress"})      // Авторизация с невалидными данными
     @Epic(value = "Регресс")
     @Description(value = "Авторизация с невалидными данными")
     public void autorizationIvalidData() {
@@ -182,7 +182,7 @@ public class Coins extends Page {
         loginPg.checkAuthtTextEror();
     }
 
-    @Test (priority = 9, groups = "regress")                                      // Изменение кредитного лимита , статус одобрено
+    @Test (priority = 9, groups = {"regress"})                                      // Изменение кредитного лимита , статус одобрено
     @Epic(value = "Регресс")
     public void editLimitStatusApproved() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -202,7 +202,7 @@ public class Coins extends Page {
         limitCashPg.equalsCash();
     }
 
-    @Test  (priority = 10, groups = "regress")                                     // Изменение кредитного лимита , статус отменено
+    @Test  (priority = 10, groups = {"regress"})                                     // Изменение кредитного лимита , статус отменено
     @Epic(value = "Регресс")
     public void editLimitStatusReject() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -222,7 +222,7 @@ public class Coins extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test  (priority = 11, groups = "regress")                                     // Изменение кредитного лимита , удаления запроса
+    @Test  (priority = 11, groups = {"regress"})                                     // Изменение кредитного лимита , удаления запроса
     @Epic(value = "Регресс")
     public void editLimitDel() {
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -241,7 +241,7 @@ public class Coins extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test (priority = 12, groups = "regress")                   // Избранное  Добавление, удаление лотов на странице аукциона
+    @Test (priority = 12, groups = {"regress"})                   // Избранное  Добавление, удаление лотов на странице аукциона
     @Epic(value = "Регресс")
     public void addDelFavoritesPageAuctions(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -252,7 +252,7 @@ public class Coins extends Page {
         auctionsPg.equalsDellFavorites();
     }
 
-    @Test (priority = 13, groups = "regress")           // Избранное Добавление, удаление лота на странице Избранные лоты
+    @Test (priority = 13, groups = {"regress"})           // Избранное Добавление, удаление лота на странице Избранные лоты
     @Epic(value = "Регресс")
     public void addDelFavoritesPageFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -265,7 +265,7 @@ public class Coins extends Page {
         auctionsPg.equalsDellFavoritesPageFavorites();
     }
 
-    @Test (priority = 14, groups = "regress")           // Избранное Добавление, удаление много лотов на странице аукциона
+    @Test (priority = 14, groups = {"regress"})           // Избранное Добавление, удаление много лотов на странице аукциона
     @Epic(value = "Регресс")
     public void addDelManyFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -278,7 +278,7 @@ public class Coins extends Page {
         auctionsPg.equalsDellManyFavorites();
     }
 
-    @Test (priority = 15, groups = "regress")           // Сравнение цен на странице аукциона и странице избранные лоты
+    @Test (priority = 15, groups = {"regress"})           // Сравнение цен на странице аукциона и странице избранные лоты
     @Epic(value = "Регресс")
     public void equalsPricePageAuctionPageFavorites(){
         loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
@@ -296,7 +296,7 @@ public class Coins extends Page {
     //                 SETTING                       //
     //***********************************************//
 
-    @Test (priority = 16, groups = "settings")      // Создание новой катеории
+    @Test (priority = 16, groups = {"settings"})      // Создание новой катеории
     @Epic(value = "Настройки")
     public void addCategory() {
         loginPg.loginAdmin();
@@ -308,7 +308,7 @@ public class Coins extends Page {
         categoryPg.equalsAddEditCategory();
     }
 
-    @Test (priority = 17, groups = "settings")      // Редактирование новой катеории
+    @Test (priority = 17, groups = {"settings"})      // Редактирование новой катеории
     @Epic(value = "Настройки")
     public void editCategory() {
         loginPg.loginAdmin();
@@ -328,7 +328,7 @@ public class Coins extends Page {
         categoryPg.usageNewCategory();
     }
 
-    @Test (priority = 19, groups = "settings")      // Удаление новой категории
+    @Test (priority = 19, groups = {"settings"})      // Удаление новой категории
     @Epic(value = "Настройки")
     public void delCategor() {
         loginPg.loginAdmin();
@@ -338,7 +338,7 @@ public class Coins extends Page {
         categoryPg.equalsDelCategory();
     }
 
-    @Test (priority = 20 , groups = "settings")     // Создание нового периода
+    @Test (priority = 20 , groups = {"settings"})     // Создание нового периода
     @Epic(value = "Настройки")
     public  void addPeriod() {
         loginPg.loginAdmin();
@@ -350,7 +350,7 @@ public class Coins extends Page {
         periodPg.equalsAddEditPeriod();
     }
 
-    @Test (priority = 21, groups = "settings")      // Редактирование нового периода
+    @Test (priority = 21, groups = {"settings"})      // Редактирование нового периода
     @Epic(value = "Настройки")
     public  void editPeriod() {
         loginPg.loginAdmin();
@@ -362,7 +362,7 @@ public class Coins extends Page {
         periodPg.equalsAddEditPeriod();
     }
 
-    @Test (priority = 22, groups = "settings")      // Использование нового периода
+    @Test (priority = 22, groups = {"settings"})      // Использование нового периода
     @Epic(value = "Настройки")
     public void usageNewPeriod() {
         loginPg.loginAdmin();
@@ -370,7 +370,7 @@ public class Coins extends Page {
         periodPg.usageNewPeriod();
     }
 
-    @Test (priority = 23, groups = "settings")      // Удаление нового периода
+    @Test (priority = 23, groups = {"settings"})      // Удаление нового периода
     @Epic(value = "Настройки")
     public void delPeriod() {
         loginPg.loginAdmin();
@@ -380,7 +380,7 @@ public class Coins extends Page {
         periodPg.equalsDelPeriod();
     }
 
-    @Test(priority = 24, groups = "settings")       // Создание нового номинала
+    @Test(priority = 24, groups = {"settings"})       // Создание нового номинала
     @Epic(value = "Настройки")
     public void addDenomination() {
         loginPg.loginAdmin();
@@ -392,7 +392,7 @@ public class Coins extends Page {
         denominationPg.equalsAddEditDenomination();
     }
 
-    @Test (priority = 25, groups = "settings")      // Редактирование нового номинала
+    @Test (priority = 25, groups = {"settings"})      // Редактирование нового номинала
     @Epic(value = "Настройки")
     public void editDenomination() {
         loginPg.loginAdmin();
@@ -404,7 +404,7 @@ public class Coins extends Page {
         denominationPg.equalsAddEditDenomination();
     }
 
-    @Test (priority = 26, groups = "settings")      // Использвание нового номинала
+    @Test (priority = 26, groups = {"settings"})      // Использвание нового номинала
     @Epic(value = "Настройки")
     public void useDenomination() {
         loginPg.loginAdmin();
@@ -412,7 +412,7 @@ public class Coins extends Page {
         denominationPg.usageNewDenomination();
     }
 
-    @Test (priority = 27, groups = "settings")      // Удаление нового номинала
+    @Test (priority = 27, groups = {"settings"})      // Удаление нового номинала
     @Epic(value = "Настройки")
     public void delDenomination() {
         loginPg.loginAdmin();
@@ -422,7 +422,7 @@ public class Coins extends Page {
         denominationPg.equalsDenomination();
     }
 
-    @Test (priority = 28, groups = "settings")      // Создание нового Материала
+    @Test (priority = 28, groups = {"settings"})      // Создание нового Материала
     @Epic(value = "Настройки")
     public void addMaterials() {
         loginPg.loginAdmin();
@@ -434,7 +434,7 @@ public class Coins extends Page {
         materialsPg.equalsAddEditMaterials();
     }
 
-    @Test (priority = 29, groups = "settings")      // Редактирование нового Материала
+    @Test (priority = 29, groups = {"settings"})      // Редактирование нового Материала
     @Epic(value = "Настройки")
     public void editMaterials() {
         loginPg.loginAdmin();
@@ -446,7 +446,7 @@ public class Coins extends Page {
         materialsPg.equalsAddEditMaterials();
     }
 
-    @Test (priority = 30, groups = "settings")      // Использвание нового Материала
+    @Test (priority = 30, groups = {"settings"})      // Использвание нового Материала
     @Epic(value = "Настройки")
     public void useMaterials() {
         loginPg.loginAdmin();
@@ -454,7 +454,7 @@ public class Coins extends Page {
         materialsPg.usageNewMaterials();
     }
 
-    @Test (priority = 31, groups = "settings")      // Удаление нового Материала
+    @Test (priority = 31, groups = {"settings"})      // Удаление нового Материала
     @Epic(value = "Настройки")
     public void delMaterials() {
         loginPg.loginAdmin();
@@ -464,7 +464,7 @@ public class Coins extends Page {
         materialsPg.equalsMaterials();
     }
 
-    @Test (priority = 32, groups = "settings")      // Создание новости
+    @Test (priority = 32, groups = {"settings"})      // Создание новости
     @Epic(value = "Настройки")
     public void addNews(){
         loginPg.loginAdmin();
@@ -475,7 +475,7 @@ public class Coins extends Page {
         newsPg.clickButtonSaveNews();
         newsPg.equalsAddEditNews();
     }
-    @Test (priority = 33, groups = "settings")      // Редактирование новости
+    @Test (priority = 33, groups = {"settings"})      // Редактирование новости
     @Epic(value = "Настройки")
     public void editNews(){
         loginPg.loginAdmin();
@@ -487,7 +487,7 @@ public class Coins extends Page {
         newsPg.equalsAddEditNews();
     }
 
-    @Test (priority = 34, groups = "settings")      // Отображения новости на всех языках
+    @Test (priority = 34, groups = {"settings"})      // Отображения новости на всех языках
     @Epic(value = "Настройки")
     public void newsDisplayInLanguages(){
         loginPg.loginUser(Values.user1_email,Values.user1_password);
@@ -496,7 +496,7 @@ public class Coins extends Page {
         newsPg.equalsInLanguages();
     }
 
-    @Test (priority = 35, groups = "settings")      // Удаление новой новости
+    @Test (priority = 35, groups = {"settings"})      // Удаление новой новости
     @Epic(value = "Настройки")
     public void delNews() {
         loginPg.loginAdmin();
@@ -510,7 +510,7 @@ public class Coins extends Page {
     //                 AUCTION                       //
     //***********************************************//
 
-    @Test  (priority=36, groups = "auction")                                          // Добавить лот
+    @Test  (priority=36, groups = {"auction"})                                          // Добавить лот
     @Epic(value = "Аукцион")
     public void addLot() {
         loginPg.loginAdmin();
@@ -523,7 +523,7 @@ public class Coins extends Page {
         lotiPg.findLot();
     }
 
-    @Test  (priority=37, groups = "auction")                                  // Изменение лотав  ПЕРЕРОБИТИ
+    @Test  (priority=37, groups = {"auction"})                                  // Изменение лотав  ПЕРЕРОБИТИ
     @Epic(value = "Аукцион")
     public void editLot() {
         loginPg.loginAdmin();
@@ -537,7 +537,7 @@ public class Coins extends Page {
         lotiPg.equalsLot();
     }
 
-    @Test (priority = 38, groups = "auction")                                 // Удаление лотов
+    @Test (priority = 38, groups = {"auction"})                                 // Удаление лотов
     @Epic(value = "Аукцион")
     public void deleteLot() {
         loginPg.loginAdmin();
@@ -547,7 +547,7 @@ public class Coins extends Page {
         lotiPg.findDelLot();
     }
 
-    @Test  (priority = 39, groups = "auction")                                 // Создание аукциона
+    @Test  (priority = 39, groups = {"auction"})                                 // Создание аукциона
     @Epic(value = "Аукцион")
     public void createAuctions() {
         loginPg.loginAdmin();
@@ -559,7 +559,7 @@ public class Coins extends Page {
         auctionsPg.findAuction();
     }
 
-    @Test  (priority = 49, groups = "auction")                                 // Редактирование аукциона
+    @Test  (priority = 49, groups = {"auction"})                                 // Редактирование аукциона
     @Epic(value = "Аукцион")
     public void editAuctions() {
         loginPg.loginAdmin();
@@ -571,7 +571,7 @@ public class Coins extends Page {
         auctionsPg.findAuction();
     }
 
-    @Test (priority = 50, groups = "auction")                                  // Удаление аукциона
+    @Test (priority = 50, groups = {"auction"})                                  // Удаление аукциона
     @Epic(value = "Аукцион")
     public void deleteAuctions() {
         loginPg.loginAdmin();
@@ -581,7 +581,7 @@ public class Coins extends Page {
         auctionsPg.findDelAuction();
     }
 
-    @Test (priority = 51, groups = "auction", enabled= false)                   //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
+    @Test (priority = 51, groups = {"auction"}, enabled= false)                   //  Добавить много лотов с помощу кнопки дублировать лот  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ1!!!!!
     @Epic(value = "Аукцион")
     public void  addManyLots(){
         loginPg.loginAdmin();
@@ -592,7 +592,7 @@ public class Coins extends Page {
         lotiPg.addManyLoti(20);
     }
 
-    @Test (priority = 52, groups = "auction", enabled= false)                   //  Старт предварительного аукциона  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
+    @Test (priority = 52, groups = {"auction"}, enabled= false)                   //  Старт предварительного аукциона  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
     @Epic(value = "Аукцион")
     public  void startAuctions() {
         loginPg.loginAdmin();
@@ -611,7 +611,7 @@ public class Coins extends Page {
         auctionsPg.stopAuction();
     }
 
-     @Test (priority = 53, groups = "auction", enabled= false)  // ставки пользователей на предварительном аукционе  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
+     @Test (priority = 53, groups = {"auction"}, enabled= false)  // ставки пользователей на предварительном аукционе  !!!!!АЛЮРА НЕТ ПЕРЕРАБОТАТЬ и добавить!!!!!
      @Epic(value = "Аукцион")
     public void BidsUsersPreliminaryAuction (){
          loginPg.loginAdmin();
@@ -636,11 +636,8 @@ public class Coins extends Page {
          adminPanelPg.auctions();
          auctionsPg.stopAuction();
      }
-
-
-
-
-    @Test (priority = 102)
+     
+    @Test (priority = 102, groups = {"auction"})
     @Description(value = "")
     public void invoicesAdmincaCustomer() {
      loginPg.loginAdmin();
