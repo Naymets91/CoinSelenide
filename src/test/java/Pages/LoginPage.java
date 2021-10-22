@@ -49,13 +49,19 @@ public class LoginPage extends Page {
         $(By.className("btn-modal")).click();        // клик по кнопке
         GoogleAuthenticator gAuth = new GoogleAuthenticator();      // подключение  2 аутентификации
         int code = gAuth.getTotpPassword(Values.fa2_secret_key);    // считывания кода 2 аутентификации
+        String codefinish = String.valueOf(code);
         //System.out.println("Code = " + code + ", Time = " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-        $(By.id("one_time_password")).sendKeys(Integer.toString(code));  // ввод в нужное поле кода 2 аутентификации
-
-        $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
-        if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку не подошол пробуем авторизоватся еще раз
-            trueAgan2fa();
+        int length = (int)(Math.log10(code)+1);
+        System.out.println("количество цифр изначально = " + length);
+        if (length < 6 ){
+            if (length == 5){codefinish = "0" + String.valueOf(code);}
+                else if (length == 4){codefinish = "00" + String.valueOf(code);}
+                    else if (length == 3){codefinish = "000" + String.valueOf(code);}
+                        else if (length == 2){codefinish = "0000" + String.valueOf(code);}
+                            else if (length == 1){codefinish = "00000" + String.valueOf(code);}
         }
+        $(By.id("one_time_password")).sendKeys(codefinish);  // ввод в нужное поле кода 2 аутентификации
+        $(By.xpath("//form[@method='POST']//button")).click();      // клик по кнопке отправить
         if ($$(By.name("email")).size() != 0) {    // если код на двухфакторку не подошол пробуем авторизоватся еще раз
             trueAgan2fa();
         }
