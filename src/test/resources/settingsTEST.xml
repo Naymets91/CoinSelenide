@@ -3,7 +3,7 @@
 <suite name="Coins">
     <test name="Coins" preserve-order="true">
         <classes>
-            <class name="Regress"/>
+            <class name="Settings"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

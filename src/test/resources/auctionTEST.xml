@@ -2,12 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Coins">
     <test name="Coins" preserve-order="true">
-       <groups>
-           <run>
-               <include name="settings"/>
-               <include name="auction"/>
-           </run>
-       </groups>
+        <classes>
+            <class name="Auction"/>
+        </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
 
