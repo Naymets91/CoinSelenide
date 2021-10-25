@@ -241,56 +241,7 @@ public class Regress extends Page {
         limitCashPg.equalsCashReject();
     }
 
-    @Test (priority = 12, groups = {"regress"})                   // Избранное  Добавление, удаление лотов на странице аукциона
-    @Epic(value = "Регресс")
-    public void addDelFavoritesPageAuctions(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddFavorites();
-        auctionsPg.equalsAddFavorites();
-        auctionsPg.delAddFavorites();
-        auctionsPg.equalsDellFavorites();
-    }
 
-    @Test (priority = 13, groups = {"regress"})           // Избранное Добавление, удаление лота на странице Избранные лоты
-    @Epic(value = "Регресс")
-    public void addDelFavoritesPageFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddFavorites();
-        auctionsPg.equalsAddFavorites();
-        mainPg.goFavoritesPage();
-        auctionsPg.equalsAddFavoritesPage();
-        auctionsPg.delAddFavoritesPageFavorites();
-        auctionsPg.equalsDellFavoritesPageFavorites();
-    }
-
-    @Test (priority = 14, groups = {"regress"})           // Избранное Добавление, удаление много лотов на странице аукциона
-    @Epic(value = "Регресс")
-    public void addDelManyFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddManyFavorites();
-        auctionsPg.equalsAddManyFavorites();
-        auctionsPg.refreshPage();
-        auctionsPg.equalsAddManyFavorites();
-        auctionsPg.delAddManyFavorites();
-        auctionsPg.equalsDellManyFavorites();
-    }
-
-    @Test (priority = 15, groups = {"regress"})           // Сравнение цен на странице аукциона и странице избранные лоты
-    @Epic(value = "Регресс")
-    public void equalsPricePageAuctionPageFavorites(){
-        loginPg.loginUser(Values.user3_Limit_email, Values.user3_Limit_password);
-        mainPg.gotoAuction49();
-        auctionsPg.randomAddFavorites();
-        auctionsPg.equalsAddFavorites();
-        mainPg.goFavoritesPage();
-        auctionsPg.equalsAddFavoritesPage();
-        auctionsPg.equalsPriceFavoritesPage();
-        auctionsPg.delAddFavoritesPageFavorites();
-        auctionsPg.equalsDellFavoritesPageFavorites();
-    }
 
 
 
