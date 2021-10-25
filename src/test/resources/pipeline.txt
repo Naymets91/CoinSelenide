@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {maven 'Maven'}
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                git credentialsId: 'Naymets91',
+                    branch: 'main',
+                    url: 'https://github.com/Naymets91/CoinSelenide.git'
+            }
+        }
+
+	
+	stage('Chrome') {
+            steps {
+		sh 'mvn clean test "-Dsurefire.suiteXmlFiles=src/test/resources/regressTEST.xml" "-Dtestng.dtd.http=true" "-Dfile.encoding=UTF-8"'
+            }
+        }
+}
+
+    
+    post {
+        always { 
+            script {
+                
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+                    ])
+            }
+        }
+    }
+	
+}
