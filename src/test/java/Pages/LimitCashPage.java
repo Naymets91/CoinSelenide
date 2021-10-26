@@ -22,6 +22,7 @@ public class LimitCashPage extends Page {
 
     @Step("Поиск нужногого пользователя")
     public void searchUser() {
+        sleep(2000);
         $(By.xpath("//select[@id='status']")).should(visible).click();
         $(By.xpath("//select[@id='status']/option[2]")).should(visible).click();
         sleep(2000);

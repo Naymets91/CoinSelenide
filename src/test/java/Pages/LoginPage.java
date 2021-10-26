@@ -315,21 +315,21 @@ public void trueAgan2fa () {
                 "Присутствует Предупреждения что нужно заполнить поля",
                 "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
     }
-
+    @Step ("Клик по кнопке авторизация")
     public void goToPageAutorization() {
         $(By.xpath("//a[@href='https://coins.dd-dev.club/auth/login']")).click();  // клик по кнопке авторизация
     }
-
+    @Step ("Клик по кнопке войти")
     public void clickButtonLogin() {
         $(By.xpath("//button[@class='btn-yel btn-modal']")).click();
     }
-
+    @Step ("Проверка на появления предуприждения")
     public void checkAuthtTextEror() {
-        finndSizeTrue(By.xpath("..."),
-                "Присутствует Предупреждения что нужно заполнить поля",
+        finndSizeTrue(By.xpath("//input[@class='form__input']"),
+                "Авторизация не удалась, присутствует Предупреждения что нужно заполнить поля",
                 "!!!НЕТ Предупреждения что нужно заполнить поля !!!");
     }
-
+    @Step ("Ввод невалидных данных")
     public void incorrectPassword() {
         $(By.name("email")).sendKeys("testcoins179@ukr.net");    // ввод в поле емаил емаил юзера
         $(By.name("password")).sendKeys("user_password");      // ввод в поле пароль пароль юзера
