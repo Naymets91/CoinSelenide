@@ -48,6 +48,7 @@ public class Coins extends Page {
     @BeforeMethod
     public void setUp() {
         com.codeborne.selenide.Configuration.browser = "chrome";      //браузер для тестов
+        System.setProperty("webdriver.chrome.driver", "chromedriver\\win\\chromedriver.exe");
         com.codeborne.selenide.Configuration.timeout = 15000;   //максимальный интервал ожидания вебэлементов в милисекундах
         ChromeOptions options = new ChromeOptions();  //создать обьект для установки опций браузера хром
         Map<String, Object> prefs = new HashMap<>();
