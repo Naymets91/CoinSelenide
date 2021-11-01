@@ -16,6 +16,7 @@ import org.testng.annotations.*;
 import ru.yandex.qatools.allure.annotations.Description;
 import ru.yandex.qatools.allure.annotations.Title;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -639,7 +640,7 @@ public class Coins extends Page {
      }
      
     @Test (priority = 102, groups = {"auction"})
-    @Description(value = "")
+    @Description(value = "Проверка подсчетов в админке")
     public void invoicesAdmincaCustomer() {
      loginPg.loginAdmin();
      mainPg.gotoAdminPanel();
@@ -647,10 +648,16 @@ public class Coins extends Page {
 //     invoicePg.selectCustomer();
 //     invoicePg.search("111");
      invoicePg.clickButtonEdit();
+     invoicePg.checkStatus();
      invoicePg.checkFinalPriceHammer();
      invoicePg.checkFinalCommissionNotNDS();
      invoicePg.checkFinalCommission20NDS();
      invoicePg.checkFinalDelivery();
+     }
+
+     @Test
+    public void bdtest(){
+
      }
 
 

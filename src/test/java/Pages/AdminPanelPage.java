@@ -13,35 +13,35 @@ import static com.codeborne.selenide.Condition.visible;
 public class AdminPanelPage extends Page {
     @Step("Переход на страницу заявки на редактирования кредитного лимита ")
 public void limitCahEdit () {
-    $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
-    $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
-    $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[3]//span")).should(visible).click();
+    $(By.xpath("//ul[@id='main-menu-navigation']/li[3]")).should(visible).click();
+    $(By.xpath("//*[@id='main-menu-navigation']/li[3]//li[3]")).should(visible).click();
+    $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/customer-limit-request']")).should(visible).click();
 }
 
     @Step("Перейти в раздел Заявки на удаление аккаунта")
     public void requestDelUser () {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[2]//span")).should(visible).click();
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[3]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[3]//li[3]")).should(visible).click();
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/customer-deletion-requests']")).should(visible).click();
     }
     @Step("Переход на страницу аукционов")
     public void auctions() {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
-        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[1]//span")).click(); //  клик и переход на страницу аукционов
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).click();  //  клик по меню аукционы
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/auctions']")).click(); //  клик и переход на страницу аукционов
     }
     @Step("Переход на страницу лоты")
     public void loti () {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).click();  //  клик по меню аукционы
-        $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[2]//span")).click();      //  клик по меню лоты
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).click();  //  клик по меню аукционы
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/lots']")).click();      //  клик по меню лоты
     }
 
 
 
 @Step ("Переход в пункт меню Клиенты")
     public void editPassUser() {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();      // клик на меню пользователи
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click(); // клик на меню клиенты
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click(); // клик на меню клиенты
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[3]")).should(visible).click();      // клик на меню пользователи
+        $(By.xpath("//*[@id='main-menu-navigation']/li[3]//li[3]")).should(visible).click(); // клик на меню клиенты
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/customers']")).should(visible).click(); // клик на меню клиенты
     }
     @Step ("Поиск нужного пользователя")
     public void searchUser(){
@@ -64,9 +64,9 @@ public void limitCahEdit () {
 
     @Step("Переход на вкладку пользователи")
     public void User() {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[2]")).should(visible).click();
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]")).should(visible).click();
-        $(By.xpath("//*[@id='main-menu-navigation']/li[2]//li[3]//li[1]//span")).should(visible).click();
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[3]")).should(visible).click();
+        $(By.xpath("//*[@id='main-menu-navigation']/li[3]//li[3]")).should(visible).click();
+        $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/users']")).should(visible).click();
     }
 ////////////////////////////////////////////////////////////настройка
     ///////////////////////////////////////////////// Категории
@@ -88,21 +88,21 @@ public void limitCahEdit () {
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]")).should(visible).click(); // клик на меню фильтры
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]//li[2]")).should(visible).click(); // клик на меню номинал
     }
-
+    @Step("Переход на вкладку новости")
     public void materials() {
         $(By.xpath("//ul[@id='main-menu-navigation']/li[7]")).should(visible).click();      // клик на меню настройкм
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]")).should(visible).click(); // клик на меню фильтры
         $(By.xpath("//*[@id='main-menu-navigation']/li[7]//li[4]//li[3]")).should(visible).click(); // клик на меню материал
     }
-
+    @Step("Переход на вкладку новости")
     public void news() {
-        $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).should(visible).click();      // клик на меню информация
-        $(By.xpath("//*[@id='main-menu-navigation']/li[5]//li[1]")).should(visible).click(); // клик на меню новости
+        $(By.xpath("//ul[@id='main-menu-navigation']/li[6]")).should(visible).click();      // клик на меню информация
+        $(By.xpath("//*[@id='main-menu-navigation']/li[6]//li[1]")).should(visible).click(); // клик на меню новости
     }
 @Step ("Переход на страницу счета ")
     public void goToPageInvoices() {
-    $(By.xpath("//ul[@id='main-menu-navigation']/li[4]")).should(visible).click();      // клик на меню Аукционы
-    $(By.xpath("//*[@id='main-menu-navigation']/li[4]//li[7]")).should(visible).click(); // клик на меню счета
+    $(By.xpath("//ul[@id='main-menu-navigation']/li[5]")).should(visible).click();      // клик на меню Аукционы
+    $(By.xpath("//a[@href='https://coins.dd-dev.club/admin/invoices']")).should(visible).click(); // клик на меню счета
     }
 }
 

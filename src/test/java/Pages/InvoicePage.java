@@ -7,6 +7,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class InvoicePage extends Page {
 
+  Boolean processingFee;
+  Boolean insurance;
+  Boolean nds;
+
+  Double deliveryDooble;
   Integer delivery ;
   Integer tempInteger = 0;
   Double tempDooble = 0.0;
@@ -66,7 +71,8 @@ public class InvoicePage extends Page {
 
     @Step ("Комиссионные без НДС")
     public void checkFinalCommissionNotNDS() {
-        System.out.println("<<<Комиссионные без НДС>>>");
+
+           System.out.println("<<<Комиссионные без НДС>>>");
         Integer sizeLots = $$(By.xpath("//table[@class='table dataTable']//tbody/tr")).size();
         print("Количество лотов = " + sizeLots);
         System.out.println();
@@ -79,12 +85,14 @@ public class InvoicePage extends Page {
             Double intPriceHammer = Double.valueOf(priceHammer);
             tempDooble = tempDooble + intPriceHammer;
         }
+
         soumCommissionNDS = tempDooble;
         tempDooble = tempDooble / 1.20 ;
         soumCommissionNotNDS = String.format("%.2f", tempDooble).replace(',', '.');
         System.out.println();
         print("Комиссионные без НДС = " + soumCommissionNotNDS);
-        String siteSoumCommissionNotNDS = $(By.xpath("//tr[@id='commission_without_vat']/th[2]")).getText();
+        if (nds == true){
+        String siteSoumCommissionNotNDS = $(By.xpath("//tr[@id='commission_without_vat']/th[@class='commission']")).getText();
         siteSoumCommissionNotNDS = siteSoumCommissionNotNDS.substring(0, siteSoumCommissionNotNDS.indexOf(" €"));
         print("Комиссионные без НДС указана на сайте = " + siteSoumCommissionNotNDS);
         if (soumCommissionNotNDS.equals(siteSoumCommissionNotNDS)){
@@ -94,13 +102,23 @@ public class InvoicePage extends Page {
             print("!!!!!!Комиссионные без НДС на сайте не верно подсчитаны!!!!!!!");
             throw new Error();
         }
+       } else if (nds ==false){
+            String siteSoumCommissionNotNDS = $(By.xpath("//tr[@id='only_commission']/th[@class='commission']")).getText();
+            siteSoumCommissionNotNDS = siteSoumCommissionNotNDS.substring(0, siteSoumCommissionNotNDS.indexOf(" €"));
+            print("Комиссионные указана на сайте = " + siteSoumCommissionNotNDS);
+            if (soumCommissionNotNDS.equals(siteSoumCommissionNotNDS)){
+                print("Комиссионные на сайте верно подсчитаны");
+                System.out.println();
+            }else {
+                print("!!!!!!Комиссионные на сайте не верно подсчитаны!!!!!!!");
+                throw new Error();
+            }
+       }
     }
     @Step ("20% НДС на Комиссионные ")
     public void checkFinalCommission20NDS() {
+        if (nds == true) {
         System.out.println("<<<20% НДС на Комиссионные>>>");
-        boolean nds = findIfXpath("//th[@id='commission_VAT']");
-        System.out.println("NDS = " + nds);
-        if (nds = true) {
         tempDooble = soumCommissionNDS - Double.valueOf(soumCommissionNotNDS);
         soumCommission20NDS = String.format("%.2f", tempDooble).replace(',', '.');
         print("20% НДС на Комиссионные = " + soumCommission20NDS);
@@ -120,25 +138,72 @@ public class InvoicePage extends Page {
     public void checkFinalDelivery() {
         System.out.println("<<<Цена доставки>>>");
         String temp = $(By.xpath("//input[@id='invoice_delivery']")).getAttribute("value");
-        if (temp.equals("SmartPost Itella")) {delivery = 7;}
-        if (temp.equals("Omniva (Läti, Leedu)")) {delivery = 15;}
-        if (temp.equals("Omniva")) {delivery = 7;}
-        if (temp.equals("Tähitult postisaadetis")) {delivery = 7;}
-        if (temp.equals("Rahvusvaheline postisaadetis")) {delivery = 15;}
-        if (temp.equals("FedEx kullersaadetis")) {delivery = 40;}
-
-        print("Цена доставки = " + delivery);
-        String siteDelivery = $(By.xpath("//th[@id='delivery_cost']")).getText();
-        siteDelivery = siteDelivery.substring(0, siteDelivery.indexOf("."));
-        print("Цена доставки указана на сайте = " + siteDelivery);
-        if (String.valueOf(delivery).equals(siteDelivery)){
-            print("Цена доставки указана на сайте верно указаны");
-            System.out.println();
-        }else {
-            print("!!!!!!Цена доставки указана на сайте верно указаны не верно подсчитана!!!!!!!");
-            throw new Error();
+       if (nds == true) {
+           if (temp.equals("SmartPost Itella")) {delivery = 7;}
+           if (temp.equals("Omniva (Läti, Leedu)")) {delivery = 15;}
+           if (temp.equals("Omniva")) {delivery = 7;}
+           if (temp.equals("Tähitult postisaadetis")) {delivery = 7;}
+           if (temp.equals("Rahvusvaheline postisaadetis")) {delivery = 15;}
+           if (temp.equals("FedEx kullersaadetis")) {delivery = 40;}
+           print("Цена доставки = " + delivery);
+           String siteDelivery = $(By.xpath("//th[@id='delivery_cost']")).getText();
+           siteDelivery = siteDelivery.substring(0, siteDelivery.indexOf("."));
+           print("Цена доставки указана на сайте = " + siteDelivery);
+           if (String.valueOf(delivery).equals(siteDelivery)) {
+               print("Цена доставки указана на сайте верно указаны");
+               System.out.println();
+           } else {
+               print("!!!!!!Цена доставки указана на сайте не верно подсчитана!!!!!!!");
+               throw new Error();
+           }
+       }
+         if (nds == false) {
+            }
+            if (temp.equals("Omniva (Läti, Leedu)")) {deliveryDooble = 12.50;}
+            if (temp.equals("Omniva")) {deliveryDooble = 5.83;}
+            if (temp.equals("Tähitult postisaadetis")) {deliveryDooble = 5.83;}
+            if (temp.equals("Rahvusvaheline postisaadetis")) {deliveryDooble = 12.50;}
+            if (temp.equals("FedEx kullersaadetis")) {deliveryDooble = 33.33;}
+            print("Цена доставки = " + deliveryDooble);
+            String siteDelivery = $(By.xpath("//th[@id='delivery_cost']")).getText();
+            siteDelivery = siteDelivery.substring(0, siteDelivery.indexOf(" €"));
+            print("Цена доставки указана на сайте = " + siteDelivery);
+            if (String.valueOf(deliveryDooble).equals(siteDelivery)) {
+                print("Цена доставки указана на сайте верно указаны");
+                System.out.println();
+            } else {
+                print("!!!!!!Цена доставки указана на сайте не верно подсчитана!!!!!!!");
+                throw new Error();
+            }
         }
+
+
+    @Step("Проверка статуса счета")
+    public void checkStatus() {
+        System.out.println("");
+       String processiongFeString;
+       processiongFeString = $(By.xpath("//th[@id='handing_fee']")).getText();
+       processiongFeString = processiongFeString.substring(0, processiongFeString.indexOf(" €"));
+       if (processiongFeString.equals("0.00"))
+       {
+           processingFee = false ;
+           print("Чекбокс \"Плата за обработку\" не активный ");
+       } else {processingFee = true ;
+           print("Чекбокс \"Плата за обработку\"  активный ");}
+
+            nds = $(By.xpath("//th[@id='commission_VAT']")).isDisplayed();
+             if ( nds == true ) {print("Чекбокс \"НДС\" активный ");}
+             else if (nds == false) {print("Чекбокс \"НДС\" не активный ");}
+             String insuranceString ;
+             insuranceString= $(By.xpath("//th[@id='handing_fee']")).getText();
+             insuranceString = insuranceString.substring(0, insuranceString.indexOf(" €"));
+            if (insuranceString.equals("0.00"))
+            {insurance = false ;
+            print("Чекбокс \"Страховка\" не активный ");
+            } else {insurance = true ;
+            print("Чекбокс \"Страховка\" активный ");}
+        System.out.println("");
+       }
+
     }
 
-
-}
